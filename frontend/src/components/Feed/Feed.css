@@ -1,0 +1,39 @@
+.post-card-container {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 12px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+}
+
+.post-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.post-content {
+  font-size: 15px;
+  color: #444444;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.post-likes-icon {
+  font-size: 13px;
+  color: #888888;
+  padding-top: 10px;
+}
+
+.post-icon-container {
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  /* gap: 4px; */
+}
+.comments-icon {
+}
