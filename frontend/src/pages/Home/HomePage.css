@@ -1,4 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
 .home {
+  font-family: "Montserrat", sans-serif;
   display: flex;
-  flex-direction: column;
+  height: 100vh;
+  width: 100%;
 }
+
+.left-container {
+  width: 60%;
+  background-color: brown;
+}
+
+.right-container {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-content {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.home-content h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* To remove below if new button component works */
+
+/* .btn {
+  display: inline-block;
+  width: 220px; 
+  padding: 1rem 0;
+
+  background-color: transparent;
+  color: black;
+
+  border: 2px solid black;
+  border-radius: 999px; 
+
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background-color: black;
+  color: white;
+  transform: translateY(-2px);
+} */
