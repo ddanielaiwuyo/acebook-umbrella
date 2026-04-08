@@ -1,0 +1,28 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+  height: 60px;
+  background-color: #fff;
+  border-bottom: 1px solid gray;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.placeholder-image{
+    height:50px;
+
+}
+.placeholder-notification-image{
+    height:25px;
+
+}
+
+.logo{
+    height:30px;
+}

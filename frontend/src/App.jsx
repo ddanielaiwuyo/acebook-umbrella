@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import { HomePage } from "./pages/Home/HomePage";
@@ -6,23 +6,26 @@ import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
 import { FeedPage } from "./pages/Feed/FeedPage";
 
+import NavBar from "./components/NavBar/NavBar"
+import Layout from "./components/NavBar/Layout"
+
 // docs: https://reactrouter.com/en/main/start/overview
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: <Layout><HomePage /></Layout>,
   },
   {
     path: "/login",
-    element: <LoginPage />,
+    element: <Layout><LoginPage /></Layout>,
   },
   {
     path: "/signup",
-    element: <SignupPage />,
+    element: <Layout><SignupPage /></Layout>,
   },
   {
     path: "/posts",
-    element: <FeedPage />,
+    element: <Layout><FeedPage /></Layout>,
   },
 ]);
 
@@ -35,3 +38,5 @@ function App() {
 }
 
 export default App;
+
+
