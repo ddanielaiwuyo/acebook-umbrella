@@ -35,16 +35,18 @@
   justify-content: center;
 }
 
-.btn {
+/* To remove below if new button component works */
+
+/* .btn {
   display: inline-block;
-  width: 220px; /* makes buttons longer */
+  width: 220px; 
   padding: 1rem 0;
 
   background-color: transparent;
   color: black;
 
   border: 2px solid black;
-  border-radius: 999px; /* fully rounded (pill shape) */
+  border-radius: 999px; 
 
   text-align: center;
   text-decoration: none;
@@ -57,4 +59,4 @@
   background-color: black;
   color: white;
   transform: translateY(-2px);
-}
+} */

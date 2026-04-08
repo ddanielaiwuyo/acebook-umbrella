@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PreLoginButton } from "../../components/PreLoginButton";
 
 import "./HomePage.css";
 
@@ -13,12 +14,12 @@ export function HomePage() {
         <div className="home-content">
           <h1>Welcome to Acebook</h1>
           <div className="buttons">
-            <Link to="/signup" className="btn">
+            <PreLoginButton to="/signup" className="btn">
               Sign Up
-            </Link>
-            <Link to="/login" className="btn">
+            </PreLoginButton>
+            <PreLoginButton to="/login" className="btn">
               Log In
-            </Link>
+            </PreLoginButton>
           </div>
         </div>
       </div>
