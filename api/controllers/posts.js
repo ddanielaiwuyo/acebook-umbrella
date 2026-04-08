@@ -9,20 +9,24 @@ const getAllPosts = async (req, res) => {
     const token = generateToken(req.user_id);
     res.status(200).json({ posts: posts, token: token });
   } catch (error) {
-    res.status(500).json({ message: "Error fetching posts!", error: error.message});
+    res
+      .status(500)
+      .json({ message: "Error fetching posts!", error: error.message });
   }
 };
 
 // create a post (refactored for errors)
 const createPost = async (req, res) => {
   try {
-    const post = new Post(req.body)
+    const post = new Post(req.body);
     await post.save();
 
     const newToken = generateToken(req.user_id);
     res.status(201).json({ message: "Post created", token: newToken });
   } catch (error) {
-    res.status(400).json({ message: "Error creating post!", error: error.message});
+    res
+      .status(400)
+      .json({ message: "Error creating post!", error: error.message });
   }
 };
 
@@ -38,12 +42,14 @@ const createComment = async (req, res) => {
     });
     await comment.save();
 
-  // Idk if we need a new token like in createPost ?? commented below
-  // const newToken = generateToken(req.user_id);
+    // Idk if we need a new token like in createPost ?? commented below
+    // const newToken = generateToken(req.user_id);
 
-    res.status(201).json({ message: "Comment added!", comment});
+    res.status(201).json({ message: "Comment added!", comment });
   } catch (error) {
-    res.status(400).json({ message: "Error adding comment!", error: error.message });
+    res
+      .status(400)
+      .json({ message: "Error adding comment!", error: error.message });
   }
 };
 
