@@ -71,7 +71,6 @@ The backend api currently uses four environment variables:
   This is the URL that describes the location of the mongodb database, also
   known as a _connection string_. The default value is
   `mongodb://0.0.0.0/acebook`. It consists of three parts:
-
   - `mongodb://` is the _protocol_ of the url, similar to `http://` for http
     requests.
   - `0.0.0.0` is the _host ip_. All 0s means localhost, your local machine.

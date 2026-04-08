@@ -1,71 +1,75 @@
 .post-card-container {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin: 12px 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    max-width: 600px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 12px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
 }
 
 .post-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
 }
 
 .post-content {
-    font-size: 15px;
-    color: #444444;
-    line-height: 1.5;
-    margin-bottom: 12px;
+  font-size: 15px;
+  color: #444444;
+  line-height: 1.5;
+  margin-bottom: 12px;
 }
 
 .post-icon-container {
-    border-top: 1px solid #f0f0f0;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding-top: 8px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 8px;
 }
 
 .post-likes-icon {
-    font-size: 13px;
-    color: #888888;
+  font-size: 13px;
+  color: #888888;
 }
 
 .like-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 13px;
-    color: #888888;
-    padding: 6px 10px;
-    border-radius: 6px;
-    transition: background-color 0.2s, color 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: #888888;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 .like-button:hover {
-    background-color: #fff0f0;
-    color: #e05555;
+  background-color: #fff0f0;
+  color: #e05555;
 }
 
 .like-button:active {
-    background-color: #ffe0e0;
+  background-color: #ffe0e0;
 }
 
 .comments-icon {
-    cursor: pointer;
-    padding: 6px 10px;
-    border-radius: 6px;
-    transition: background-color 0.2s, color 0.2s;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 .comments-icon:hover {
-    background-color: #f0f4ff;
-    color: #4a6cf7;
+  background-color: #f0f4ff;
+  color: #4a6cf7;
 }
 /* .post-card-container { */
 /*   background-color: #ffffff; */
@@ -102,7 +106,7 @@
 /*   display: flex; */
 /*   flex-direction: row; */
 /*   justify-content: space-around; */
-/*   /* gap: 4px; */ 
+/*   /* gap: 4px; */
 /* } */
 /* .comments-icon { */
 /* } */
