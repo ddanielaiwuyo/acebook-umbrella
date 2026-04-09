@@ -10,7 +10,7 @@ async function create(req, res) {
 		const { firstName, lastName, email, password, } = req.body
 		const user = new User({ email, password });
 		if (!email || !password) {
-			res.status(400).json({ message: "Invalid credentails, email and password must not be empty" })
+			res.status(400).json({ message: "Invalid credentials, must contain email and password " })
 			return
 		}
 
@@ -28,7 +28,7 @@ async function create(req, res) {
 		// Now check if user with that email already exists
 		const userExists = await User.findOne({ email: email })
 		if (userExists) {
-			console.info(`User with email: ${email} already exists `)
+			console.log(`User with email: ${email} already exists `)
 			res.status(409).json({ message: `User with email ${email} already exists` })
 			return
 		}
