@@ -2,8 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { signup } from "../../services/authentication";
+import { PreLoginButton } from "../../components/PreLoginButton";
+
+import "./SignupPage.css";
 
 export function SignupPage() {
+  const [firstName, setFirstName] = useState("");
+  const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -28,26 +33,54 @@ export function SignupPage() {
   }
 
   return (
-    <>
-      <h2>Signup</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email:</label>
-        <input
-          id="email"
-          type="text"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          placeholder="Password"
-          id="password"
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        <input role="submit-button" id="submit" type="submit" value="Submit" />
-      </form>
-    </>
+    <div className="signup-page">
+      <div className="left-container">
+        <div className="signup-form">
+          <h1>Create your account</h1>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
+            <input
+              type="text"
+              placeholder="Surname"
+              value={surname}
+              onChange={(e) => setSurname(e.target.value)}
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </form>
+          <div className="btn">
+            <PreLoginButton type="submit">Sign Up</PreLoginButton>
+          </div>
+        </div>
+      </div>
+
+      <div className="right-container">
+        <div className="greeter">
+          <h1>Start your Acebook journey today</h1>
+          <h2>Sign up in seconds and get connected.</h2>
+
+          <h3>Already registered? Log in and continue your journey.</h3>
+        </div>
+      </div>
+    </div>
   );
 }

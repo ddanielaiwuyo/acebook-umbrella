@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 import { login } from "../../services/authentication";
 
+import { PreLoginButton } from "../../components/PreLoginButton";
+import { InputField } from "../../components/InputField";
+
+import "./LoginPage.css";
+
 export function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,34 +25,40 @@ export function LoginPage() {
     }
   }
 
-  function handleEmailChange(event) {
-    setEmail(event.target.value);
-  }
+  // function handleEmailChange(event) {
+  //   setEmail(event.target.value);
+  // }
 
-  function handlePasswordChange(event) {
-    setPassword(event.target.value);
-  }
+  // function handlePasswordChange(event) {
+  //   setPassword(event.target.value);
+  // }
 
   return (
-    <>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email:</label>
-        <input
-          id="email"
-          type="text"
-          value={email}
-          onChange={handleEmailChange}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        <input role="submit-button" id="submit" type="submit" value="Submit" />
-      </form>
-    </>
+    <div className="login-page">
+      <div className="left-container">
+        <div className="login-form">
+          <h1>Welcome back</h1>
+          <form onSubmit={handleSubmit}>
+            <InputField
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <InputField
+              type="password"
+              placeholder="PAssword"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </form>
+          <div className="btn">
+            <PreLoginButton>Log In</PreLoginButton>
+          </div>
+        </div>
+      </div>
+      <div className="right-container"></div>
+    </div>
   );
 }
