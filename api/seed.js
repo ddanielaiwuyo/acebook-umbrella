@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const User = require("./models/user.js");
 const Comment = require("./models/comment.js");
 const Post = require("./models/post.js");
+const bcrypt = require("bcrypt");
 // const { Post, Comment } = require("./models/new_post_schema.js");
 
 dotenv.config();
@@ -22,8 +23,11 @@ if (!CONNECTION_STRING) {
  * 	john@example.com, password123
  * 	nadia@example.com, password123
  */
+
 async function seedDatabase() {
+  const hashedPassword = await bcrypt.hash("password1234", 10);
   await mongoose.connect(CONNECTION_STRING);
+
   // Clear all documents before reseeding
   await User.deleteMany({});
   await Post.deleteMany({});
@@ -33,32 +37,32 @@ async function seedDatabase() {
   const sam = await User.create({
     name: "Sam Lavin",
     email: "sam@example.com",
-    password: "password123",
+    password: hashedPassword,
   });
   const john = await User.create({
     name: "John Gjenset",
     email: "john@example.com",
-    password: "password123",
+    password: hashedPassword,
   });
   const tom = await User.create({
     name: "Tom Delande",
     email: "tom@example.com",
-    password: "password123",
+    password: hashedPassword,
   });
   const paul = await User.create({
     name: "Paul Mcpherson",
     email: "paul@example.com",
-    password: "password123",
+    password: hashedPassword,
   });
   const nadia = await User.create({
     name: "Nadia Neuwman",
     email: "nadia@example.com",
-    password: "password123",
+    password: hashedPassword,
   });
   const billy = await User.create({
     name: "Billy Campbell",
     email: "billy@example.com",
-    password: "password123",
+    password: hashedPassword,
   });
 
   // // Post 1

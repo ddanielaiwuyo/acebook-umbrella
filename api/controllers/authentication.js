@@ -23,7 +23,7 @@ async function createToken(req, res) {
     }
 
     console.log(
-      `Invalid credentials. Got ${password}, Expected: ${user.password}`,
+      `Invalid credentials. Got ${password}, Expected hash to match: ${user.password}`,
     );
     res.status(401).json({ message: "Incorrect email or password" });
   } catch (err) {
