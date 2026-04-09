@@ -6,6 +6,8 @@ import { login } from "../../services/authentication";
 import { PreLoginButton } from "../../components/PreLoginButton";
 import { InputField } from "../../components/InputField";
 
+import { FaEnvelope, FaLock } from "react-icons/fa";
+
 import "./LoginPage.css";
 
 export function LoginPage() {
@@ -47,6 +49,7 @@ export function LoginPage() {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              icon={FaEnvelope}
             />
 
             <InputField
@@ -54,6 +57,7 @@ export function LoginPage() {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              icon={FaLock}
             />
             <div className="btn">
               <PreLoginButton type="submit">Log in</PreLoginButton>

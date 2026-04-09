@@ -43,3 +43,7 @@
   justify-content: center; /* centers button horizontally */
   margin-top: 1rem; /* optional spacing above button */
 }
+
+.not-registered a {
+  color: brown;
+}

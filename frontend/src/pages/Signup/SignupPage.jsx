@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-// import {Link} from "react-router-dom";
 
 import { signup } from "../../services/authentication";
 
 import { PreLoginButton } from "../../components/PreLoginButton";
 import { InputField } from "../../components/InputField";
+
+import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 
 import "./SignupPage.css";
 
@@ -49,6 +50,7 @@ export function SignupPage() {
               placeholder="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
+              icon={FaUser}
               required
             />
             <InputField
@@ -56,6 +58,7 @@ export function SignupPage() {
               placeholder="Surname"
               value={surname}
               onChange={(e) => setSurname(e.target.value)}
+              icon={FaUser}
               required
             />
             <InputField
@@ -63,6 +66,7 @@ export function SignupPage() {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              icon={FaEnvelope}
               required
             />
             <InputField
@@ -70,6 +74,7 @@ export function SignupPage() {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              icon={FaLock}
               required
             />
             <div className="btn">
