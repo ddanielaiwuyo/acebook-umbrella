@@ -19,8 +19,11 @@ export function SignupPage() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      await signup(email, password);
-      navigate("/login", { replace: true }); // To prevent user to go to signup page again if pressing bckspace;
+      await signup(email, password); // do we need names here too?
+      navigate("/login", {
+        replace: true, // To prevent user to go to signup page again if pressing bckspace;
+        state: { message: "You can now log in." },
+      });
     } catch (err) {
       console.error(err);
       navigate("/signup");
