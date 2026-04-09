@@ -10,8 +10,7 @@ const FriendList = ({ friends }) => {
           <div key={friend._id} className="friend-item">
             <img
               src={
-                friend.profilePic ||
-                `https://i.pravatar.cc/60?u=${friend._id}` // unique avatar per friend
+                friend.profilePic || `https://i.pravatar.cc/60?u=${friend._id}` // unique avatar per friend
               }
               alt={friend.name}
               width={60}

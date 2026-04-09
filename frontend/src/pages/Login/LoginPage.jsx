@@ -11,12 +11,19 @@ import "./LoginPage.css";
 export function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const token = await login(email, password);
+      const { token, message, status } = await login(email, password);
+      if (status != 200) {
+        setError(message);
+        return;
+      }
+
+      setError("");
       localStorage.setItem("token", token);
       navigate("/feed", { replace: true }); // To prevent user to go to login page again if pressing bckspace;
     } catch (err) {
@@ -25,19 +32,12 @@ export function LoginPage() {
     }
   }
 
-  // function handleEmailChange(event) {
-  //   setEmail(event.target.value);
-  // }
-
-  // function handlePasswordChange(event) {
-  //   setPassword(event.target.value);
-  // }
-
   return (
     <div className="login-page">
       <div className="left-container">
         <div className="login-form">
           <h1>Welcome back</h1>
+          <p className="errors">{error}</p>
           <form onSubmit={handleSubmit}>
             <InputField
               type="email"
@@ -48,7 +48,7 @@ export function LoginPage() {
 
             <InputField
               type="password"
-              placeholder="PAssword"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
