@@ -19,9 +19,9 @@ if (!CONNECTION_STRING) {
  * All posts are saved in the 'posts' collection in mongo to use for
  * dev and testing.
  * Test-Users:
- * 	sam@example.com, password123
- * 	john@example.com, password123
- * 	nadia@example.com, password123
+ * 	sam@example.com, password1234
+ * 	john@example.com, password1234
+ * 	nadia@example.com, password1234
  */
 
 async function seedDatabase() {
