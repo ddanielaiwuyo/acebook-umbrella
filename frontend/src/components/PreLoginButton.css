@@ -11,10 +11,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  text-transform: uppercase;
+  font-size: 16px;
 }
 
 .prelogin-btn:hover {
   background-color: black;
   color: white;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }

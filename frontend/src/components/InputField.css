@@ -1,0 +1,17 @@
+.input-field {
+  width: 100%;
+  padding: 0.9rem 1rem;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: black;
+}
