@@ -8,14 +8,14 @@ export const ProfilePage = () => {
   const [profileInfo] = useState({
     name: "Alpha One",
     profilePic: "", // optional placeholder image
-    bio: "This is my placeholder bio.",
-    location: "New York, USA",
-    work: "Frontend Developer at ABC Corp",
+    bio: "Incoming",
+    location: "London, UK",
+    work: "Frontend Developer at ACEBOOK",
     birthday: "January 1, 1990",
-    joined: "2023",
+    joined: "2026",
     friends: [
-      { _id: "1", name: "Alpha Two", profilePic: "" },
-      { _id: "2", name: "Beta One", profilePic: "" },
+      { _id: "1", name: "Beta One", profilePic: "" },
+      { _id: "2", name: "Charlie One", profilePic: "" },
     ],
   });
 

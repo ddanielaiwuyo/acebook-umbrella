@@ -6,7 +6,7 @@ const ProfileHeader = ({ name, profilePic, isOwner }) => {
     <div className="profile-header">
       <div className="avatar-container">
         <img
-          src={profilePic || "https://via.placeholder.com/130"}
+          src={profilePic || "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d"}
           alt={name}
           className="profile-avatar"
         />
