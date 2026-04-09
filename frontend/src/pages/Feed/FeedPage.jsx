@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { getPosts } from "../../services/posts";
 import Post from "../../components/Post";
-import Feed from "../../components/Feed/Feed";
+// import Feed from "../../components/Feed/Feed";
 import LogoutButton from "../../components/LogoutButton";
 
 export function FeedPage() {
@@ -18,7 +18,7 @@ export function FeedPage() {
 			getPosts(token)
 				.then((data) => {
 					setPosts(data.posts);
-					localStorage.setItem("token", data.token);
+					// localStorage.setItem("token", data.token);
 				})
 				.catch((err) => {
 					console.error(err);

@@ -104,7 +104,7 @@ export function FriendsPage() {
 		<div>
 			<div>
 				<h1>Friend requests</h1>
-				{friendRequests.map((friendRequest) => {
+				{friendRequests?.map((friendRequest) => {
 					return (
 						<FriendProfile
 							key={friendRequest.user._id}
@@ -123,7 +123,7 @@ export function FriendsPage() {
 			</div>
 			<div>
 				<h1>People You may know</h1>
-				{otherUsers.map((otherUser) => {
+				{otherUsers?.map((otherUser) => {
 					return (
 						<FriendProfile
 							key={otherUser._id}
@@ -138,7 +138,7 @@ export function FriendsPage() {
 			</div>
 			<div>
 				<h1>Your friends</h1>
-				{friends.map((friend) => {
+				{friends?.map((friend) => {
 					return (
 						<FriendProfile
 							key={friend._id}

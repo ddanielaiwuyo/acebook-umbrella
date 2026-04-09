@@ -23,7 +23,7 @@ export async function addFriend(userId) {
 }
 
 export async function getFriends() {
-	const token = localStorage.getItem("token");
+	const token = localStorage.getItem("token"); 
 	const requestOptions = {
 		method: "GET",
 		headers: {
@@ -32,6 +32,11 @@ export async function getFriends() {
 	};
 
 	const response = await fetch(`${BACKEND_URL}/friends/`, requestOptions);
+
+
+	if (response.status !== 200) {
+		throw new Error("Unable to get friend");
+	}
 
 	const data = await response.json();
 	return data;
@@ -52,6 +57,11 @@ export async function getOtherUsers() {
 		requestOptions,
 	);
 
+
+	if (response.status !== 200) {
+		throw new Error("Unable to get other users");
+	}
+
 	const data = await response.json();
 	return data;
 }
@@ -70,6 +80,11 @@ export async function getFriendRequests() {
 		`${BACKEND_URL}/friends/friend-requests`,
 		requestOptions,
 	);
+
+
+	if (response.status !== 200) {
+		throw new Error("Unable to get friend requests");
+	}
 
 	const data = await response.json();
 	return data;
@@ -90,6 +105,11 @@ export async function acceptFriendRequest(userId) {
 		requestOptions,
 	);
 
+
+	if (response.status !== 200) {
+		throw new Error("Unable to accept friend request");
+	}
+
 	const data = await response.json();
 	return data;
 }
@@ -109,6 +129,11 @@ export async function deleteFriendRequest(userId) {
 		requestOptions,
 	);
 
+
+	if (response.status !== 200) {
+		throw new Error("Unable to delete friend request");
+	}
+
 	const data = await response.json();
 	return data;
 }
@@ -127,6 +152,11 @@ export async function removeFriend(userId) {
 		`${BACKEND_URL}/friends/${userId}/remove`,
 		requestOptions,
 	);
+
+
+	if (response.status !== 200) {
+		throw new Error("Unable to remove friend");
+	}
 
 	const data = await response.json();
 	return data;

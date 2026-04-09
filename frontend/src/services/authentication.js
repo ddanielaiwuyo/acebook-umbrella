@@ -27,7 +27,7 @@ export async function login(email, password) {
   // docs: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201
   if (response.status === 201) {
     let data = await response.json();
-    console.log("Login response -> ", data);
+    // console.log("Login response -> ", data,);
     return data.token;
   } else {
     throw new Error(
