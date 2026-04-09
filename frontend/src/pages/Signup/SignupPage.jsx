@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+// import {Link} from "react-router-dom";
 
 import { signup } from "../../services/authentication";
 
@@ -19,7 +20,7 @@ export function SignupPage() {
     event.preventDefault();
     try {
       await signup(email, password);
-      navigate("/login");
+      navigate("/login", { replace: true }); // To prevent user to go to signup page again if pressing bckspace;
     } catch (err) {
       console.error(err);
       navigate("/signup");
@@ -68,10 +69,19 @@ export function SignupPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            <div className="btn">
+              <PreLoginButton type="submit">Sign Up</PreLoginButton>
+            </div>
+            <div className="already-registered">
+              <p>
+                Already registered?{" "}
+                <Link to="/login">
+                  <strong>Log in</strong>
+                </Link>{" "}
+                and continue your journey.
+              </p>
+            </div>
           </form>
-          <div className="btn">
-            <PreLoginButton type="submit">Sign Up</PreLoginButton>
-          </div>
         </div>
       </div>
 
@@ -79,8 +89,6 @@ export function SignupPage() {
         <div className="greeter">
           <h1>Start your Acebook journey today</h1>
           <h2>Sign up in seconds and get connected.</h2>
-
-          <h3>Already registered? Log in and continue your journey.</h3>
         </div>
       </div>
     </div>

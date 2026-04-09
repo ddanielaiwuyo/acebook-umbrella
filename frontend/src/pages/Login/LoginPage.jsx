@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { login } from "../../services/authentication";
 
@@ -18,7 +18,7 @@ export function LoginPage() {
     try {
       const token = await login(email, password);
       localStorage.setItem("token", token);
-      navigate("/feed");
+      navigate("/feed", { replace: true }); // To prevent user to go to login page again if pressing bckspace;
     } catch (err) {
       console.error(err);
       navigate("/login");
@@ -52,10 +52,19 @@ export function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <div className="btn">
+              <PreLoginButton type="submit">Log in</PreLoginButton>
+            </div>
+            <div className="not-registered">
+              <p>
+                Don't have an account yet?{" "}
+                <Link to="/signup">
+                  <strong>Sign up</strong>
+                </Link>{" "}
+                and start your journey.
+              </p>
+            </div>
           </form>
-          <div className="btn">
-            <PreLoginButton>Log In</PreLoginButton>
-          </div>
         </div>
       </div>
       <div className="right-container"></div>
