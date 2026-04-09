@@ -1,0 +1,72 @@
+/* Top section: profile photo + name + bio */
+.profile-top {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-avatar img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ddd;
+}
+
+.profile-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+/* Bio card */
+.profile-bio {
+  background: #fff;
+  width: 90%;
+  max-width: 500px;
+  margin: 10px auto; /* center under top section */
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-align: left;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.profile-bio p {
+  margin: 6px 0;
+}
+
+.profile-bio strong {
+  color: #222;
+}
+
+/* Two-column layout */
+.profile-columns {
+  display: flex;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 20px auto; /* center on page */
+  padding: 0 10px;
+}
+
+/* Left column (friends list) */
+.left-column {
+  flex: 1;
+  min-width: 250px; /* prevents shrinking too much */
+}
+
+/* Right column (posts) */
+.right-column {
+  flex: 2;
+  min-width: 300px;
+}
+
+/* Boxes inside right column */
+.box {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
