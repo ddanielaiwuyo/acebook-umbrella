@@ -1,30 +1,5 @@
 import { useState } from "react";
 import "./Feed.css";
-/**
- * Takes all posts from the database and renders them
- * using PostCard Component
- * */
-function Feed(props) {
-  const { posts } = props;
-  return (
-    <>
-      {posts.map((post) => (
-        <PostCard key={post._id} post={post} />
-      ))}
-    </>
-  );
-}
-
-// function CommentSection(props) {
-// 	return (
-// 		<>
-// 			<div className="comment-section">
-// 				<p>Comments will be displayed here</p>
-// 			</div>
-// 		</>
-// 	);
-// }
-//
 
 function LikeButton(props) {
   let { likeCount } = props;
@@ -54,6 +29,51 @@ function LikeButton(props) {
   );
 }
 
+// The comment section acts as a bottom-sheet, it slides from the bottom
+// of the screen and renders all the comments for a particular post.
+// By default the panel is hidden/closed and has a html-class of 'comments-panel'
+// When the user wants to see all the comments for a post, the class is switched to 'comments-panel open'
+// Other ways like creating a new page, or a dropdown affected UX or layout, in the way that I did it.
+// This is just a test version to get something working and when a final design is ready, this can be scrapped away
+function CommentSection(props) {
+  const { comments } = props;
+  const [showComments, setShowComments] = useState(false);
+
+  let showPanelClass = "comments-panel";
+  const toggleCommentSection = () => {
+    if (!showComments) {
+      setShowComments(true);
+    } else {
+      setShowComments(false);
+    }
+  };
+
+  if (showComments) {
+    showPanelClass = "comments-panel open";
+  }
+
+  return (
+    <>
+      <div
+        className="post-likes-icon comments-icon"
+        onClick={toggleCommentSection}
+      >
+        {" "}
+        Comments{" "}
+      </div>
+      <div className={showPanelClass}>
+        {comments.map((comment, index) => (
+          <div key={index} className="comment">
+            <p className="comment-owner">{comment.owner.name}</p>
+            <p className="comment-message">{comment.message}</p>
+          </div>
+        ))}
+        <button onClick={toggleCommentSection}>Close</button>
+      </div>
+    </>
+  );
+}
+
 function PostCard(props) {
   // TODO: Need to find a way for use to toggle comment section
   const { owner, content, likeCount, createdAt, comments } = props.post;
@@ -68,10 +88,28 @@ function PostCard(props) {
             <LikeButton likeCount={likeCount} />
           </div>
           <div className="post-likes-icon">{datePosted} </div>
-          <div className="post-likes-icon comments-icon">Comments</div>
+          <CommentSection comments={comments} />
         </div>
       </div>
     </>
   );
 }
+/**
+ * Takes all posts from the database and renders them
+ * using PostCard Component
+ * */
+function Feed(props) {
+  const { posts } = props;
+  console.log(posts);
+  return (
+    <>
+      <div className="feed-container">
+        {posts.map((post) => (
+          <PostCard key={post._id} post={post} />
+        ))}
+      </div>
+    </>
+  );
+}
+
 export default Feed;
