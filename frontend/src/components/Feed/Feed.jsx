@@ -56,10 +56,8 @@ function CommentSection(props) {
     <>
       <div
         className="post-likes-icon comments-icon"
-        onClick={toggleCommentSection}
-      >
-        {" "}
-        Comments{" "}
+        onClick={toggleCommentSection} >
+        Comments
       </div>
       <div className={showPanelClass}>
         {comments.map((comment, index) => (
@@ -75,7 +73,6 @@ function CommentSection(props) {
 }
 
 function PostCard(props) {
-  // TODO: Need to find a way for use to toggle comment section
   const { owner, content, likeCount, createdAt, comments } = props.post;
   let datePosted = new Date(createdAt).toDateString();
   return (
