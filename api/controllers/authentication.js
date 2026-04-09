@@ -10,7 +10,7 @@ async function createToken(req, res) {
     console.log("Auth Error: User not found");
     res.status(401).json({ message: "User not found" });
   } else if (user.password !== password) {
-    console.log("Auth Error: Passwords do not match");
+    console.log("Auth Error: Passwords do not match", user, password);
     res.status(401).json({ message: "Password incorrect" });
   } else {
     const token = generateToken(user.id);

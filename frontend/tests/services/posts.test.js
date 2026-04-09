@@ -30,7 +30,7 @@ describe("posts service", () => {
     test("rejects with an error if the status is not 200", async () => {
       fetch.mockResponseOnce(
         JSON.stringify({ message: "Something went wrong" }),
-        { status: 400 }
+        { status: 400 },
       );
 
       try {
