@@ -1,73 +1,155 @@
 // import { useState } from "react";
 import { FriendProfile } from "../../components/FriendProfile";
 import { RequestButtons } from "../../components/RequestButtons";
-import { AddButton } from "../../components/AddButton"
-
-const profiles = [
-	{
-		id: 1,
-		profileImg: "https://placeholder.com",
-		profileName: "Jay Wills",
-	},
-	{
-		id: 2,
-		profileImg: "https://placeholder.com",
-		profileName: "Sally Wally",
-	},
-	{
-		id: 3,
-		profileImg: "https://placeholder.com",
-		profileName: "Billy Bob",
-	},
-	{
-		id: 4,
-		profileImg: "https://placeholder.com",
-		profileName: "Jullie Briggs",
-	},
-	{
-		id: 5,
-		profileImg: "https://pravatar.cc",
-		profileName: "Sandy Woods",
-	},
-];
+import { AddButton } from "../../components/AddButton";
+import { RemoveButton } from "../../components/RemoveFriendButton";
+import {
+	getFriends,
+	getOtherUsers,
+	getFriendRequests,
+} from "../../services/friends";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function FriendsPage() {
+	const [friends, setFriends] = useState([]);
+	const [otherUsers, setOtherUsers] = useState([]);
+	const [friendRequests, setFriendRequests] = useState([]);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		const loggedIn = token !== null;
+		if (loggedIn) {
+			getFriends()
+				.then((data) => {
+					setFriends(data.friends);
+				})
+				.catch((err) => {
+					console.error(err);
+					navigate("/login");
+				});
+
+			getOtherUsers()
+				.then((data) => {
+					setOtherUsers(data.otherUsers);
+				})
+				.catch((err) => {
+					console.error(err);
+					navigate("/login");
+				});
+
+			getFriendRequests()
+				.then((data) => {
+					setFriendRequests(data.friendRequests);
+				})
+				.catch((err) => {
+					console.error(err);
+					navigate("/login");
+				});
+		}
+	}, [navigate]);
+
+	const token = localStorage.getItem("token");
+	if (!token) {
+		navigate("/login");
+		return;
+	}
+
+	function handleAddFriends(userId) {
+		setOtherUsers(otherUsers.filter((user) => user._id !== userId));
+	}
+
+	function handleRemoveFriends(userId) {
+		setFriends(friends.filter((user) => user._id !== userId));
+
+		getOtherUsers()
+			.then((data) => {
+				setOtherUsers(data.otherUsers);
+			})
+			.catch((err) => {
+				console.error(err);
+				navigate("/login");
+			});
+	}
+
+	function handleRequestAction(userId, actionType) {
+		setFriendRequests(
+			friendRequests.filter((request) => request.user._id !== userId),
+		);
+		if (actionType === "accept") {
+			getFriends()
+				.then((data) => {
+					setFriends(data.friends);
+				})
+				.catch((err) => {
+					console.error(err);
+					navigate("/login");
+				});
+		}
+
+		if (actionType === "delete") {
+			getOtherUsers()
+				.then((data) => {
+					setOtherUsers(data.otherUsers);
+				})
+				.catch((err) => {
+					console.error(err);
+					navigate("/login");
+				});
+		}
+	}
+
 	return (
 		<div>
 			<div>
 				<h1>Friend requests</h1>
-				{profiles.map((profile) => {
+				{friendRequests.map((friendRequest) => {
 					return (
 						<FriendProfile
-							key={profile.id}
-							profileImg={profile.profileImg}
-							profileName={profile.profileName}>
-							<RequestButtons />
+							key={friendRequest.user._id}
+							profileImg={
+								friendRequest.user.profileImg ||
+								"https://via.placeholder.com/150"
+							}
+							profileName={`${friendRequest.user.firstName} ${friendRequest.user.lastName}`}>
+							<RequestButtons
+								senderId={friendRequest.user._id}
+								onAction={handleRequestAction}
+							/>
 						</FriendProfile>
 					);
 				})}
 			</div>
 			<div>
 				<h1>People You may know</h1>
-				{profiles.map((profile) => {
+				{otherUsers.map((otherUser) => {
 					return (
 						<FriendProfile
-							key={profile.id}
-							profileImg={profile.profileImg}
-							profileName={profile.profileName}>
-							<AddButton />
+							key={otherUser._id}
+							profileImg={
+								otherUser.profileImg || "https://via.placeholder.com/150"
+							}
+							profileName={`${otherUser.firstName} ${otherUser.lastName}`}>
+							<AddButton userId={otherUser._id} onAdd={handleAddFriends} />
 						</FriendProfile>
 					);
 				})}
 			</div>
 			<div>
 				<h1>Your friends</h1>
-				{profiles.map((profile) => {
+				{friends.map((friend) => {
 					return (
 						<FriendProfile
-							key={profile.id}
-							profileImg={profile.profileImg}
-							profileName={profile.profileName}>
+							key={friend._id}
+							profileImg={
+								friend.profileImg || "https://via.placeholder.com/150"
+							}
+							profileName={`${friend.firstName} ${friend.lastName}`}>
+							<RemoveButton
+								userId={friend._id}
+								onRemove={handleRemoveFriends}
+							/>
 						</FriendProfile>
 					);
 				})}
