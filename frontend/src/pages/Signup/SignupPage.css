@@ -84,3 +84,7 @@
   color: rgb(255, 255, 255);
   /* font-size: 3rem; */
 }
+
+.errors {
+	color: red;
+}
