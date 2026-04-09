@@ -88,3 +88,6 @@
 .errors {
   color: red;
 }
+.already-registered a {
+  color: brown;
+}

@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 
 import { login } from "../../services/authentication";
 
 import { PreLoginButton } from "../../components/PreLoginButton";
 import { InputField } from "../../components/InputField";
+
+import { FaEnvelope, FaLock } from "react-icons/fa";
 
 import "./LoginPage.css";
 
@@ -13,6 +15,8 @@ export function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const message = location.state?.message;
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -36,14 +40,16 @@ export function LoginPage() {
     <div className="login-page">
       <div className="left-container">
         <div className="login-form">
-          <h1>Welcome back</h1>
           <p className="errors">{error}</p>
+          <h1>{message ? "Account Created" : "Welcome back"}</h1>
+          {message && <p className="success-message">{message}</p>}
           <form onSubmit={handleSubmit}>
             <InputField
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              icon={FaEnvelope}
             />
 
             <InputField
@@ -51,6 +57,7 @@ export function LoginPage() {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              icon={FaLock}
             />
             <div className="btn">
               <PreLoginButton type="submit">Log in</PreLoginButton>
