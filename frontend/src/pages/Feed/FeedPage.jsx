@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { getPosts } from "../../services/posts";
 import Post from "../../components/Post";
+import Feed from "../../components/Feed/Feed";
 import LogoutButton from "../../components/LogoutButton";
 
 export function FeedPage() {
@@ -33,13 +34,8 @@ export function FeedPage() {
 
   return (
     <>
-      <h2>Posts</h2>
-      <div className="feed" role="feed">
-        {posts.map((post) => (
-          <Post post={post} key={post._id} />
-        ))}
-      </div>
-      <LogoutButton />
+      <h2>Latest Posts</h2>
+      <Feed posts={posts} />
     </>
   );
 }
