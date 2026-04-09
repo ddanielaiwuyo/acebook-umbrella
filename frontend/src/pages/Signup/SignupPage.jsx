@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { signup } from "../../services/authentication";
+
 import { PreLoginButton } from "../../components/PreLoginButton";
+import { InputField } from "../../components/InputField";
 
 import "./SignupPage.css";
 
@@ -24,13 +26,13 @@ export function SignupPage() {
     }
   }
 
-  function handleEmailChange(event) {
-    setEmail(event.target.value);
-  }
+  // function handleEmailChange(event) {
+  //   setEmail(event.target.value);
+  // }
 
-  function handlePasswordChange(event) {
-    setPassword(event.target.value);
-  }
+  // function handlePasswordChange(event) {
+  //   setPassword(event.target.value);
+  // }
 
   return (
     <div className="signup-page">
@@ -38,28 +40,28 @@ export function SignupPage() {
         <div className="signup-form">
           <h1>Create your account</h1>
           <form onSubmit={handleSubmit}>
-            <input
+            <InputField
               type="text"
               placeholder="First Name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
             />
-            <input
+            <InputField
               type="text"
               placeholder="Surname"
               value={surname}
               onChange={(e) => setSurname(e.target.value)}
               required
             />
-            <input
+            <InputField
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <input
+            <InputField
               type="password"
               placeholder="Password"
               value={password}

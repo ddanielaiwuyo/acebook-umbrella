@@ -34,14 +34,14 @@
   gap: 1rem;
 }
 
-.signup-form input[type="text"],
+/* .signup-form input[type="text"],
 .signup-form input[type="email"],
 .signup-form input[type="password"] {
   padding: 0.9rem 1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
-}
+} */
 
 .right-container {
   flex: 6; /* 60% */
