@@ -109,8 +109,7 @@ export function FriendsPage() {
 						<FriendProfile
 							key={friendRequest.user._id}
 							profileImg={
-								friendRequest.user.profileImg ||
-								"https://via.placeholder.com/150"
+								`https://api.dicebear.com/7.x/adventurer/svg?seed=${friendRequest.user._id}&size=60`
 							}
 							profileName={`${friendRequest.user.firstName} ${friendRequest.user.lastName}`}>
 							<RequestButtons
@@ -128,7 +127,7 @@ export function FriendsPage() {
 						<FriendProfile
 							key={otherUser._id}
 							profileImg={
-								otherUser.profileImg || "https://via.placeholder.com/150"
+								`https://api.dicebear.com/7.x/adventurer/svg?seed=${otherUser._id}&size=60`
 							}
 							profileName={`${otherUser.firstName} ${otherUser.lastName}`}>
 							<AddButton userId={otherUser._id} onAdd={handleAddFriends} />
@@ -143,7 +142,7 @@ export function FriendsPage() {
 						<FriendProfile
 							key={friend._id}
 							profileImg={
-								friend.profileImg || "https://via.placeholder.com/150"
+								`https://api.dicebear.com/7.x/adventurer/svg?seed=${friend._id}&size=60`
 							}
 							profileName={`${friend.firstName} ${friend.lastName}`}>
 							<RemoveButton
