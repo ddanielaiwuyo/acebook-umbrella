@@ -63,7 +63,7 @@ function CommentSection(props) {
       <div className={showPanelClass}>
         {comments.map((comment, index) => (
           <div key={index} className="comment">
-            <p className="comment-owner">{comment.owner.name}</p>
+            <p className="comment-owner">{comment.owner?.name ?? "unkown"}</p>
             <p className="comment-message">{comment.message}</p>
           </div>
         ))}
@@ -79,7 +79,7 @@ function PostCard(props) {
   return (
     <>
       <div className="post-card-container">
-        <div className="post-title">{owner.name} </div>
+        <div className="post-title">{owner?.name?? "Unkown user"} </div>
         <div className="post-content">{content}</div>
         <div className="post-icon-container">
           <div className="post-likes-icon">

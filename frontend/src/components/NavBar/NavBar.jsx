@@ -26,7 +26,7 @@ function NavBar () {
         headers : {Authorization: `Bearer ${localStorage.getItem("token")}`}
         });
         const data = await response.json();
-        setResults(data.users);
+        setResults(data.users ?? []);
     }
 
     function handleResultClick(){
@@ -59,7 +59,7 @@ function NavBar () {
                                     to={`/profile/${user._id}`}
                                     onClick={handleResultClick}
                                 >
-                                    {user.email}
+                                    {user.name}
                                 </Link>
                             ))}
                         </div>

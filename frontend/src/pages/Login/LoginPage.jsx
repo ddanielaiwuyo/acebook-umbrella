@@ -29,7 +29,7 @@ export function LoginPage() {
 
       setError("");
       localStorage.setItem("token", token);
-      navigate("/feed", { replace: true }); // To prevent user to go to login page again if pressing bckspace;
+      navigate("/posts", { replace: true }); // To prevent user to go to login page again if pressing bckspace;
     } catch (err) {
       console.error(err);
       navigate("/login");

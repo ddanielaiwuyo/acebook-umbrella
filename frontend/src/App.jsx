@@ -30,15 +30,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/feed",
-    element: <FeedPage />,
+    element: <Layout><FeedPage /></Layout>,
   },
   {
     path: "/profile/:profile_id",
-    element: <ProfilePage />,
+    element: <Layout><ProfilePage /></Layout>,
   },
   {
     path: "/profile",
-    element: <ProfilePage />,
+    element: <Layout><ProfilePage /></Layout>,
   },
 ]);
 
