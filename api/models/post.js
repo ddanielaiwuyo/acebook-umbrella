@@ -1,26 +1,41 @@
 const mongoose = require("mongoose");
-const Comment = require("./comment");
+const { Schema, model, Types } = mongoose;
 
 // A Schema defines the "shape" of entries in a collection. This is similar to
 // defining the columns of an SQL Database.
-const PostSchema = new mongoose.Schema(
+const CommentSchema = new Schema(
   {
-    title: { type: String, required: true },
-    content: { type: String, required: true },
-    owner: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
-    likeCount: { type: Number, default: 0 },
+    username: { type: String, required: true, trim: true },
+    comment: { type: String, required: true },
   },
   { timestamps: true },
 );
 
+const PostSchema = new Schema(
+  {
+    owner: { 
+      type: Types.ObjectId, 
+      ref: "User", 
+      required: [true, "A post must have an owner"] 
+    },
+    message: { 
+      type: String, 
+      required: [true, "Post content cannot be empty"],
+      trim: true 
+    },
+    likeCounts: { 
+      type: Number, 
+      default: 0,
+      min: 0 
+    },
+    // Embedding the CommentSchema!
+    comments: [CommentSchema],
+  },
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } },
+);
+
 // We use the Schema to create the Post model. Models are classes which we can
 // use to construct entries in our Database.
-const Post = mongoose.model("Post", PostSchema);
+const Post = model("Post", PostSchema);
 
 module.exports = Post;
