@@ -15,7 +15,7 @@
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #c60808; /* Facebook blue border effect */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .profile-name {
