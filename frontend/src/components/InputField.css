@@ -3,9 +3,19 @@
   width: 100%;
 }
 
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: brown;
+  font-size: 1rem;
+}
 .input-field {
   width: 100%;
   padding: 0.9rem 1rem 0.9rem 2.8rem;
+  padding-right: 2.5rem;
 
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -29,4 +39,8 @@
 .input-field:focus {
   outline: none;
   border-color: black;
+}
+
+.password-toggle:hover {
+  color: black;
 }
