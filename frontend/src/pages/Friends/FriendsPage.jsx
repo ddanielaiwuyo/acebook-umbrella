@@ -15,6 +15,7 @@ export function FriendsPage() {
 	const [friends, setFriends] = useState([]);
 	const [otherUsers, setOtherUsers] = useState([]);
 	const [friendRequests, setFriendRequests] = useState([]);
+	const [errorMessage, setErrorMessage] = useState([]);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -23,7 +24,11 @@ export function FriendsPage() {
 		if (loggedIn) {
 			getFriends()
 				.then((data) => {
-					setFriends(data.friends);
+					if (data.ok) {
+						setFriends(data.friends);
+					} else {
+						setErrorMessage(data.message);
+					}
 				})
 				.catch((err) => {
 					console.error(err);
@@ -32,7 +37,11 @@ export function FriendsPage() {
 
 			getOtherUsers()
 				.then((data) => {
-					setOtherUsers(data.otherUsers);
+					if (data.ok) {
+						setOtherUsers(data.otherUsers);
+					} else {
+						setErrorMessage(data.message);
+					}
 				})
 				.catch((err) => {
 					console.error(err);
@@ -41,7 +50,11 @@ export function FriendsPage() {
 
 			getFriendRequests()
 				.then((data) => {
-					setFriendRequests(data.friendRequests);
+					if (data.ok) {
+						setFriendRequests(data.friendRequests);
+					} else {
+						setErrorMessage(data.message);
+					}
 				})
 				.catch((err) => {
 					console.error(err);
@@ -65,7 +78,11 @@ export function FriendsPage() {
 
 		getOtherUsers()
 			.then((data) => {
-				setOtherUsers(data.otherUsers);
+				if (data.ok) {
+					setOtherUsers(data.otherUsers);
+				} else {
+					setErrorMessage(data.message);
+				}
 			})
 			.catch((err) => {
 				console.error(err);
@@ -80,7 +97,11 @@ export function FriendsPage() {
 		if (actionType === "accept") {
 			getFriends()
 				.then((data) => {
-					setFriends(data.friends);
+					if (data.ok) {
+						setFriends(data.friends);
+					} else {
+						setErrorMessage(data.message);
+					}
 				})
 				.catch((err) => {
 					console.error(err);
@@ -91,7 +112,11 @@ export function FriendsPage() {
 		if (actionType === "delete") {
 			getOtherUsers()
 				.then((data) => {
-					setOtherUsers(data.otherUsers);
+					if (data.ok) {
+						setOtherUsers(data.otherUsers);
+					} else {
+						setErrorMessage(data.message);
+					}
 				})
 				.catch((err) => {
 					console.error(err);
@@ -108,9 +133,7 @@ export function FriendsPage() {
 					return (
 						<FriendProfile
 							key={friendRequest.user._id}
-							profileImg={
-								`https://api.dicebear.com/7.x/adventurer/svg?seed=${friendRequest.user._id}&size=60`
-							}
+							profileImg={`https://api.dicebear.com/7.x/adventurer/svg?seed=${friendRequest.user._id}&size=60`}
 							profileName={`${friendRequest.user.firstName} ${friendRequest.user.lastName}`}>
 							<RequestButtons
 								senderId={friendRequest.user._id}
@@ -126,9 +149,7 @@ export function FriendsPage() {
 					return (
 						<FriendProfile
 							key={otherUser._id}
-							profileImg={
-								`https://api.dicebear.com/7.x/adventurer/svg?seed=${otherUser._id}&size=60`
-							}
+							profileImg={`https://api.dicebear.com/7.x/adventurer/svg?seed=${otherUser._id}&size=60`}
 							profileName={`${otherUser.firstName} ${otherUser.lastName}`}>
 							<AddButton userId={otherUser._id} onAdd={handleAddFriends} />
 						</FriendProfile>
@@ -141,9 +162,7 @@ export function FriendsPage() {
 					return (
 						<FriendProfile
 							key={friend._id}
-							profileImg={
-								`https://api.dicebear.com/7.x/adventurer/svg?seed=${friend._id}&size=60`
-							}
+							profileImg={`https://api.dicebear.com/7.x/adventurer/svg?seed=${friend._id}&size=60`}
 							profileName={`${friend.firstName} ${friend.lastName}`}>
 							<RemoveButton
 								userId={friend._id}
