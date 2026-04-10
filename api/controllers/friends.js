@@ -25,9 +25,16 @@ async function addFriendRequest(req, res) {
 		await sender.save();
 		await receiver.save();
 
-		res.status(200).json({ message: "Friend request sent successfully" });
+		res
+			.status(200)
+			.json({ ok: true, message: "Friend request sent successfully" });
 	} catch (error) {
-		res.status(500).json({ message: error.message });
+		console.error("Error occured while trying to send friend request");
+		console.log(error, error.stack);
+		res.status(500).json({
+			ok: false,
+			message: "Sorry this service is down, please try again later",
+		});
 	}
 }
 
@@ -60,9 +67,16 @@ async function acceptFriendRequest(req, res) {
 		await sender.save();
 		await receiver.save();
 
-		res.status(200).json({ message: "Friend request accepted successfully" });
+		res
+			.status(200)
+			.json({ ok: true, message: "Friend request accepted successfully" });
 	} catch (error) {
-		res.status(500).json({ message: error.message });
+		console.error("Error occured while trying to accept friend request");
+		console.log(error, error.stack);
+		res.status(500).json({
+			ok: false,
+			message: "Sorry this service is down, please try again later",
+		});
 	}
 }
 
@@ -86,9 +100,16 @@ async function deleteFriendRequest(req, res) {
 		await sender.save();
 		await receiver.save();
 
-		res.status(200).json({ message: "Friend request deleted successfully" });
+		res
+			.status(200)
+			.json({ ok: true, message: "Friend request deleted successfully" });
 	} catch (error) {
-		res.status(500).json({ message: error.message });
+		console.error("Error occured while trying to delete friend request");
+		console.log(error, error.stack);
+		res.status(500).json({
+			ok: false,
+			message: "Sorry this service is down, please try again later",
+		});
 	}
 }
 
@@ -101,10 +122,17 @@ async function getFriendRequests(req, res) {
 		);
 		const userFriendrequests = user.receivedFriendRequests;
 		res.status(200).json({
+			ok: true,
+			message: "Friend requests retrieved successfully",
 			friendRequests: userFriendrequests,
 		});
 	} catch (error) {
-		res.status(500).json({ message: error.message });
+		console.error("Error occured while trying to get friend requests");
+		console.log(error, error.stack);
+		res.status(500).json({
+			ok: false,
+			message: "Sorry this service is down, please try again later",
+		});
 	}
 }
 
@@ -114,10 +142,17 @@ async function getFriends(req, res) {
 		const user = await User.findById(userId).populate("friends");
 		const userFriends = user.friends;
 		res.status(200).json({
+			ok: true,
+			message: "List of friends retrieved successfully",
 			friends: userFriends,
 		});
 	} catch (error) {
-		res.status(500).json({ message: error.message });
+		console.error("Error occured while trying to get list of friends");
+		console.log(error, error.stack);
+		res.status(500).json({
+			ok: false,
+			message: "Sorry this service is down, please try again later",
+		});
 	}
 }
 
@@ -144,10 +179,17 @@ async function getOtherUsers(req, res) {
 
 		const otherUsers = await User.find({ _id: { $nin: excludedIds } });
 		res.status(200).json({
+			ok: true,
+			message: "List of other users retrieved successfully",
 			otherUsers: otherUsers,
 		});
 	} catch (error) {
-		res.status(500).json({ message: error.message });
+		console.error("Error occured while trying to get list of other users");
+		console.log(error, error.stack);
+		res.status(500).json({
+			ok: false,
+			message: "Sorry this service is down, please try again later",
+		});
 	}
 }
 
@@ -167,9 +209,14 @@ async function removeFriends(req, res) {
 		await removerUser.save();
 		await removedUser.save();
 
-		res.status(200).json({ message: "Friend removed successfully" });
+		res.status(200).json({ ok: true, message: "Friend removed successfully" });
 	} catch (error) {
-		res.status(500).json({ message: error.message });
+		console.error("Error occured while trying to remove friend");
+		console.log(error, error.stack);
+		res.status(500).json({
+			ok: false,
+			message: "Sorry this service is down, please try again later",
+		});
 	}
 }
 
@@ -180,7 +227,7 @@ const FriendsController = {
 	getOtherUsers: getOtherUsers,
 	acceptFriendRequest: acceptFriendRequest,
 	deleteFriendRequest: deleteFriendRequest,
-	removeFriend: removeFriends
+	removeFriend: removeFriends,
 };
 
 module.exports = FriendsController;
