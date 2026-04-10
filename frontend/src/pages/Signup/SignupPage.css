@@ -85,6 +85,9 @@
   /* font-size: 3rem; */
 }
 
+.errors {
+  color: red;
+}
 .already-registered a {
   color: brown;
 }

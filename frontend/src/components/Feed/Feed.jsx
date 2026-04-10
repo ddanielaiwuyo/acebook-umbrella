@@ -56,7 +56,8 @@ function CommentSection(props) {
     <>
       <div
         className="post-likes-icon comments-icon"
-        onClick={toggleCommentSection} >
+        onClick={toggleCommentSection}
+      >
         Comments
       </div>
       <div className={showPanelClass}>
@@ -97,7 +98,6 @@ function PostCard(props) {
  * */
 function Feed(props) {
   const { posts } = props;
-  console.log(posts);
   return (
     <>
       <div className="feed-container">
