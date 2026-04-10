@@ -101,22 +101,7 @@ function CommentSection(props) {
 	);
 }
 
-// TODO:
-// So a post could be text or an image. To ensure that we can
-// accomodate both, we might need to update the Schema for Post
-// to be an enum. Something like this:
-// type Post = {
-//  contentType: enum["text", "image", "video"]
-//  content: String | jpeg | mp4
-// }
-// And then we can decide on how to render that on the DOM
-// if (contentType !== "text") {
-// 		<p>{content}</p>
-// } else {
-// 	<img src={content} />
-// }
-//
-const avatar_url = "https://api.dicebear.com/7.x/adventurer/svg?"
+const AVATAR_URL = "https://api.dicebear.com/7.x/adventurer/svg?"
 
 function PostCard(props) {
 	const { owner, content, likeCount, createdAt, comments } = props.post;
@@ -128,7 +113,7 @@ function PostCard(props) {
 		<>
 			<div className="post-card-container">
 				<div>
-					<MetaInfo firstName={owner.firstName} lastName={owner.lastName} profilePic={`${avatar_url}seed=${owner.firstName}&size=45`} />
+					<MetaInfo firstName={owner.firstName} lastName={owner.lastName} profilePic={`${AVATAR_URL}seed=${owner.firstName}&size=45`} />
 				</div>
 				<div className="post-content">
 					{content}
@@ -155,7 +140,6 @@ function Feed(props) {
 	return (
 		<>
 			<div className="feed-container">
-
 				<PopUp />
 				{posts.map((post) => (
 					<PostCard key={post._id} post={post} />

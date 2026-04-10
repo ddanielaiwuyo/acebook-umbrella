@@ -9,6 +9,7 @@ import LogoutButton from "../../components/LogoutButton";
 
 export function FeedPage() {
 	const [posts, setPosts] = useState([]);
+	const [error, setError] = useState("")
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -17,7 +18,13 @@ export function FeedPage() {
 		if (loggedIn) {
 			getPosts(token)
 				.then((data) => {
-					setPosts(data.posts);
+					console.log(data)
+					if (data.ok) {
+						setPosts(data.posts);
+						setError("")
+					} else {
+						setError(data.message)
+					}
 					// localStorage.setItem("token", data.token);
 				})
 				.catch((err) => {
@@ -33,9 +40,13 @@ export function FeedPage() {
 		return;
 	}
 
+	if (error.trim().length > 5) {
+		return <h2 className="error">{error}</h2>
+	}
 	return (
 		<>
 			<h2>Latest Posts</h2>
+			<p className="error">{error}</p>
 			<Feed posts={posts} />
 		</>
 	);

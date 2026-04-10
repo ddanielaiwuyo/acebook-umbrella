@@ -35,7 +35,7 @@ async function seedDatabase() {
 
   // Create users
   const sam = await User.create({
-    firstName:"Sam",
+    firstName: "Sam",
     lastName: "Lavin",
     email: "sam@example.com",
     password: hashedPassword,
