@@ -35,32 +35,38 @@ async function seedDatabase() {
 
   // Create users
   const sam = await User.create({
-    name: "Sam Lavin",
+    firstName:"Sam",
+    lastName: "Lavin",
     email: "sam@example.com",
     password: hashedPassword,
   });
   const john = await User.create({
-    name: "John Gjenset",
+    firstName: "John",
+    lastName: "Gjenset",
     email: "john@example.com",
     password: hashedPassword,
   });
   const tom = await User.create({
-    name: "Tom Delande",
+    firstName: "Tom",
+    lastName: "Delande",
     email: "tom@example.com",
     password: hashedPassword,
   });
   const paul = await User.create({
-    name: "Paul Mcpherson",
+    firstName: "Paul",
+    lastName: "Mcpherson",
     email: "paul@example.com",
     password: hashedPassword,
   });
   const nadia = await User.create({
-    name: "Nadia Neuwman",
+    firstName: "Nadia",
+    lastName: "Neuwman",
     email: "nadia@example.com",
     password: hashedPassword,
   });
   const billy = await User.create({
-    name: "Billy Campbell",
+    firstName: "Billy",
+    lastName: "Campbell",
     email: "billy@example.com",
     password: hashedPassword,
   });
