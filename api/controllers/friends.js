@@ -12,6 +12,12 @@ async function addFriendRequest(req, res) {
 		if (alreadySent) {
 			return res.status(400).json({ message: "Friend request already sent" });
 		}
+		const alreadyFriends = sender.friends.find(
+			(id) => id.toString() === receiverId,
+		);
+		if (alreadyFriends) {
+			return res.status(400).json({ message: "Already friends" });
+		}
 		sender.sentFriendRequests.push({
 			user: receiverId,
 			status: "pending",
@@ -46,12 +52,21 @@ async function acceptFriendRequest(req, res) {
 
 		const receiver = await User.findById(receiverId);
 		const sender = await User.findById(senderId);
+
 		const alreadyFriends = receiver.friends.find(
 			(id) => id.toString() === senderId,
 		);
 		if (alreadyFriends) {
 			return res.status(400).json({ message: "Already friends" });
 		}
+
+		const friendRequestExists = receiver.receivedFriendRequests.find(
+			(request) => request.user.toString() === senderId,
+		);
+		if (!friendRequestExists) {
+			return res.status(400).json({ message: "Friend request does not exist" });
+		}
+
 		receiver.friends.push(senderId);
 
 		sender.friends.push(receiverId);
@@ -88,6 +103,20 @@ async function deleteFriendRequest(req, res) {
 
 		const receiver = await User.findById(receiverId);
 		const sender = await User.findById(senderId);
+
+		const alreadyFriends = receiver.friends.find(
+			(id) => id.toString() === senderId,
+		);
+		if (alreadyFriends) {
+			return res.status(400).json({ message: "Already friends" });
+		}
+
+		const friendRequestExists = receiver.receivedFriendRequests.find(
+			(request) => request.user.toString() === senderId,
+		);
+		if (!friendRequestExists) {
+			return res.status(400).json({ message: "Friend request does not exist" });
+		}
 
 		sender.sentFriendRequests.pull({
 			user: receiverId,
@@ -201,6 +230,13 @@ async function removeFriends(req, res) {
 
 		const removerUser = await User.findById(removerId);
 		const removedUser = await User.findById(removedId);
+
+		const areFriends = removerUser.friends.find(
+			(id) => id.toString() === removedId,
+		);
+		if (!areFriends) {
+			return res.status(400).json({ message: "Users are not friends" });
+		}
 
 		removerUser.friends.pull(removedId);
 
