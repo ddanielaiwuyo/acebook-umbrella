@@ -13,7 +13,7 @@ const FriendList = ({ friends }) => {
             <img
               src={
                 friend.profilePic ||
-                `https://i.pravatar.cc/60?u=${friend._id}` // unique avatar per friend
+                `https://api.dicebear.com/7.x/adventurer/svg?seed=${friend.name}` 
               }
               alt={friend.name}
               width={60}
