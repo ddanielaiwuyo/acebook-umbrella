@@ -1,13 +1,15 @@
 import React from "react";
 import "./FriendList.css";
+import { useNavigate } from "react-router-dom";
 
 const FriendList = ({ friends }) => {
+  const navigate = useNavigate();
   return (
     <div className="friend-list">
       <h3>Friends</h3>
       <div className="friend-grid">
         {friends.map((friend) => (
-          <div key={friend._id} className="friend-item">
+          <div key={friend._id} className="friend-item" onClick={() => navigate(`/profile/${friend._id}`)} style={{ cursor: "pointer" }}>
             <img
               src={
                 friend.profilePic ||
