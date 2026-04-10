@@ -1,5 +1,6 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family:
+    "Montserrat", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -14,7 +15,6 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
   min-width: 320px;
   min-height: 100vh;
 }

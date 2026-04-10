@@ -57,7 +57,7 @@ If you haven't already, make sure you have node and NVM installed.
    ```
 5. Install an ESLint plugin for your editor, for example
    [ESLint for VSCode](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-6. Install MongoDB - pick the latest version available, at the time of writing this, it's @8.0. 
+6. Install MongoDB - pick the latest version available, at the time of writing this, it's @8.0.
    ```
    brew tap mongodb/brew
    brew install mongodb-community@8.0

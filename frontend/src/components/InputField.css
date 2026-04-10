@@ -1,0 +1,32 @@
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.9rem 1rem 0.9rem 2.8rem;
+
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  font-size: 1rem;
+  font-family: "Montserrat", sans-serif;
+
+  box-sizing: border-box;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+
+  color: brown;
+  font-size: 1rem;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: black;
+}
