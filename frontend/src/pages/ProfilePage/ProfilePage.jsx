@@ -5,9 +5,10 @@ import Intro from "../../components/Profile/Intro";
 import "./ProfilePage.css";
 
 export const ProfilePage = () => {
+	let username = "Aplha One"
   const [profileInfo] = useState({
     name: "Alpha One",
-    profilePic: "", // optional placeholder image
+    profilePic: "" || `https://api.dicebear.com/7.x/adventurer/svg?seed=${username}`, // optional placeholder image
     bio: "Incoming",
     location: "London, UK",
     work: "Frontend Developer at ACEBOOK",

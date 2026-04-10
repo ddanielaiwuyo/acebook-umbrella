@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   margin: auto;
-  width: 60%;
+  width: 50%;
   gap: 10px;
 }
 .post-card-container {
@@ -10,10 +10,9 @@
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 16px 20px;
-  /* margin: 12px 0; */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  /* max-width: 600px; */
   max-width: 100%;
+	/* border: 1px solid red; */
 }
 
 .post-title {
@@ -34,7 +33,8 @@
   border-top: 1px solid #f0f0f0;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+	gap: 4px;
   align-items: center;
   padding-top: 8px;
 }
@@ -69,8 +69,11 @@ button:hover {
   padding: 6px 10px;
   border-radius: 6px;
   transition:
-    background-color 0.2s,
-    color 0.2s;
+	background-color 0.2s,
+	color 0.2s;
+	display: flex;
+	gap: 4px;
+	align-items: center
 }
 
 .like-button:hover {
@@ -80,6 +83,7 @@ button:hover {
 
 .like-button:active {
   background-color: #ffe0e0;
+	margin: auto;
 }
 
 .comments-icon {
@@ -148,4 +152,37 @@ button:hover {
 
 .comments-panel button {
   margin-top: 5px;
+}
+
+.meta {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.profile-picture {
+	border: 1px solid lightgrey ;
+	border-radius: 100%;
+}
+
+/* AFTER */
+.post-content {
+  font-size: 15px;
+  color: #444444;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.post-content img {
+  display: block;
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.like-button {
 }
