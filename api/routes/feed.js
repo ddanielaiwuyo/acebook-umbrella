@@ -5,10 +5,10 @@ const Post = require("../models/post");
 async function getFeedPosts(req, res) {
   try {
     const posts = await Post.find()
-      .populate("owner", "name")
+      .populate("owner", "firstName lastName")
       .populate({
         path: "comments",
-        populate: { path: "owner", select: "name" },
+				populate: {path: "owner", select: "firstName lastName"},
       });
     return res.status(200).send({ posts: posts });
   } catch (err) {

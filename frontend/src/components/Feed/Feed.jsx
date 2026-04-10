@@ -1,16 +1,30 @@
 import { useState } from "react";
-import "./Feed.css";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
+import { MdOutlineAddCircle } from "react-icons/md";
+import "./Feed.css";
 
-function MetaInfo({ name, profilePic }) {
+function MetaInfo({ firstName, lastName, profilePic }) {
 	return (
 		<>
 			<div className="meta">
 				<img src={profilePic} className="profile-picture" />
-				<p className="post-title">{name}</p>
+				<p className="post-title">{firstName} {lastName}</p>
 			</div>
 		</>
 	)
+}
+
+function PopUp() {
+	return (<>
+		<div className="pop-up-container">
+			<IoChatbubbleEllipsesSharp style={{ width: 40, height: 40 }} />
+			<div className="prompt">Whats on your mind?</div>
+			<span className="add-post-icon">
+				<a href="#"> <MdOutlineAddCircle style={{ width: 30, height: 30 }} /> </a>
+			</span>
+		</div>
+	</>)
 }
 
 function LikeButton(props) {
@@ -53,7 +67,6 @@ function LikeButton(props) {
 function CommentSection(props) {
 	const { comments } = props;
 	const [showComments, setShowComments] = useState(false);
-
 	let showPanelClass = "comments-panel";
 	const toggleCommentSection = () => {
 		if (!showComments) {
@@ -78,7 +91,7 @@ function CommentSection(props) {
 			<div className={showPanelClass}>
 				{comments.map((comment, index) => (
 					<div key={index} className="comment">
-						<p className="comment-owner">{comment.owner.name}</p>
+						<p className="comment-owner">{comment.owner.firstName} {comment.owner.lastName}</p>
 						<p className="comment-message">{comment.message}</p>
 					</div>
 				))}
@@ -115,7 +128,7 @@ function PostCard(props) {
 		<>
 			<div className="post-card-container">
 				<div>
-					<MetaInfo name={owner.name} profilePic={`${avatar_url}seed=${owner.name}&size=45`} />
+					<MetaInfo firstName={owner.firstName} lastName={owner.lastName} profilePic={`${avatar_url}seed=${owner.firstName}&size=45`} />
 				</div>
 				<div className="post-content">
 					{content}
@@ -132,6 +145,7 @@ function PostCard(props) {
 		</>
 	);
 }
+
 /**
  * Takes all posts from the database and renders them
  * using PostCard Component
@@ -141,6 +155,8 @@ function Feed(props) {
 	return (
 		<>
 			<div className="feed-container">
+
+				<PopUp />
 				{posts.map((post) => (
 					<PostCard key={post._id} post={post} />
 				))}
