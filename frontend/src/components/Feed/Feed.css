@@ -12,7 +12,7 @@
   padding: 16px 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   max-width: 100%;
-	/* border: 1px solid red; */
+  /* border: 1px solid red; */
 }
 
 .post-title {
@@ -34,7 +34,7 @@
   display: flex;
   flex-direction: row;
   /* justify-content: space-around; */
-	gap: 4px;
+  gap: 4px;
   align-items: center;
   padding-top: 8px;
 }
@@ -69,11 +69,11 @@ button:hover {
   padding: 6px 10px;
   border-radius: 6px;
   transition:
-	background-color 0.2s,
-	color 0.2s;
-	display: flex;
-	gap: 4px;
-	align-items: center
+    background-color 0.2s,
+    color 0.2s;
+  display: flex;
+  gap: 4px;
+  align-items: center;
 }
 
 .like-button:hover {
@@ -83,7 +83,7 @@ button:hover {
 
 .like-button:active {
   background-color: #ffe0e0;
-	margin: auto;
+  margin: auto;
 }
 
 .comments-icon {
@@ -155,14 +155,14 @@ button:hover {
 }
 
 .meta {
-	display: flex;
-	align-items: center;
-	gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .profile-picture {
-	border: 1px solid lightgrey ;
-	border-radius: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 100%;
 }
 
 /* AFTER */
@@ -185,17 +185,16 @@ button:hover {
 }
 
 .pop-up-container {
-	display: flex;
-	border: 1px solid black;
-	border-radius: 20px;
-	padding: 8px;
-	gap: 4px;
-	justify-content: space-between;
-	width: 80%;
-	align-self: flex-start;
-	align-items: center;
+  display: flex;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 8px;
+  gap: 4px;
+  justify-content: space-between;
+  width: 80%;
+  align-self: flex-start;
+  align-items: center;
 }
 .prompt {
-	color: grey;
+  color: grey;
 }
-
