@@ -11,7 +11,7 @@ router.get("/:userId", async (req, res) => {
     // Gets user and adds the friends
     const user = await User.findById(userId).populate(
       "friends",
-      "name profilePic"
+      "name profilePic",
     );
 
     if (!user) {
@@ -36,7 +36,6 @@ router.get("/:userId", async (req, res) => {
       friends: user.friends,
       posts: posts,
     });
-
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
