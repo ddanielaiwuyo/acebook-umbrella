@@ -5,6 +5,13 @@ const UserSchema = new mongoose.Schema({
   lastName: { type: String, required: false },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  profilePic: { type: String },
+  bio: { type: String },
+  location: { type: String },
+  work: { type: String },
+  birthday: { type: String },
+  joined: { type: String },
+
   friends: [
     {
       type: mongoose.Schema.Types.ObjectId,

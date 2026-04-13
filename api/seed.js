@@ -39,37 +39,89 @@ async function seedDatabase() {
     lastName: "Lavin",
     email: "sam@example.com",
     password: hashedPassword,
+    bio: "Coding and Coffee",
+    location: "London",
+    work: "Software Engineer",
+    birthday: "1995-05-10",
+    joined: "2025",
+    profilePic: "",
   });
   const john = await User.create({
     firstName: "John",
     lastName: "Gjenset",
     email: "john@example.com",
     password: hashedPassword,
+    bio: "Hate Coding and Coffee",
+    location: "London",
+    work: "Not Software Engineer",
+    birthday: "1999-06-11",
+    joined: "2026",
+    profilePic: "",
   });
   const tom = await User.create({
     firstName: "Tom",
     lastName: "Delande",
     email: "tom@example.com",
     password: hashedPassword,
+    bio: "Loves Coding and Coffee",
+    location: "Seattle",
+    work: "Software Engineer",
+    birthday: "2000-05-10",
+    joined: "2024",
+    profilePic: "",
   });
   const paul = await User.create({
     firstName: "Paul",
     lastName: "Mcpherson",
     email: "paul@example.com",
     password: hashedPassword,
+    bio: "Coding",
+    location: "London",
+    work: "Systems Engineer",
+    birthday: "2003-05-10",
+    joined: "2023",
+    profilePic: "",
   });
   const nadia = await User.create({
     firstName: "Nadia",
     lastName: "Neuwman",
     email: "nadia@example.com",
     password: hashedPassword,
+    bio: "Incoming",
+    location: "Arizona",
+    work: "Frontend Engineer",
+    birthday: "2002-05-10",
+    joined: "2025",
+    profilePic: "",
   });
   const billy = await User.create({
     firstName: "Billy",
     lastName: "Campbell",
     email: "billy@example.com",
     password: hashedPassword,
+    bio: "Coding and Coding",
+    location: "Riyadh",
+    work: "Engineer",
+    birthday: "2006-05-10",
+    joined: "2023",
+    profilePic: "",
   });
+
+  // Friendships for testing
+  sam.friends = [john._id, nadia._id];
+  john.friends = [sam._id, tom._id];
+  tom.friends = [john._id];
+  paul.friends = [sam._id];
+  nadia.friends = [sam._id, billy._id];
+  billy.friends = [nadia._id];
+
+  // saves users after updating friends
+  await sam.save();
+  await john.save();
+  await tom.save();
+  await paul.save();
+  await nadia.save();
+  await billy.save();
 
   // // Post 1
   const post1 = await Post.create({
