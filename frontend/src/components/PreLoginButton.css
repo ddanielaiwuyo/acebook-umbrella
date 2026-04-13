@@ -1,22 +1,29 @@
 .prelogin-btn {
   display: inline-block;
-  width: 220px; /* long button */
+  width: 220px;
   padding: 1rem 0;
-  background-color: transparent;
-  color: black;
-  border: 2px solid black;
-  border-radius: 999px; /* pill-shaped */
+
+  color: white;
+  border: 2px solid white;
+  border-radius: 999px;
+
   text-align: center;
-  text-decoration: none;
   font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
   text-transform: uppercase;
-  font-size: 16px;
+
+  background: transparent;
+
+  transition: all 0.3s ease;
 }
 
 .prelogin-btn:hover {
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
+
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.6),
+    0 0 20px rgba(255, 255, 255, 0.4),
+    0 0 30px rgba(255, 255, 255, 0.2);
+
   transform: translateY(-3px);
 }
