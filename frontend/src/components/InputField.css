@@ -5,49 +5,25 @@
   width: 100%;
 }
 
-/* .input-field {
-  width: 100%;
-  padding: 0.9rem 1rem 0.9rem 2.8rem;
-  border: 1px solid #ccc;
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 8px;
-  font-size: 1rem;
-  font-family: "Montserrat", sans-serif;
-  box-sizing: border-box;
-  backdrop-filter: blur(8px);
-} */
-
 .input-field {
   width: 100%;
   padding: 0.9rem 1rem;
-  padding-left: 2.8rem; /* IMPORTANT for icon space */
-.password-toggle {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: brown;
-  font-size: 1rem;
-}
-.input-field {
-  width: 100%;
-  padding: 0.9rem 1rem 0.9rem 2.8rem;
-  padding-right: 2.5rem;
-
-  /* background: rgba(255, 255, 255, 0.1); */
-  background: transparent;
+  padding-left: 2.8rem;
+  padding-right: 2.8rem;
+  background: rgba(255, 255, 255, 0.1);
   border: 2px solid rgba(255, 255, 255, 0.8);
-
-  color: white;
   border-radius: 8px;
+  color: white;
   font-size: 1rem;
-
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
   outline: none;
-
-  /* backdrop-filter: blur(8px); */
 }
+
+.input-field:focus {
+  border-color: black;
+}
+
 .input-icon {
   position: absolute;
   top: 50%;
@@ -55,20 +31,22 @@
   transform: translateY(-50%);
   pointer-events: none;
   color: rgba(255, 255, 255, 0.7);
-  /* font-size: 1rem; */
-  /* padding-left: 2.8rem; */
 }
 
-.input-field:focus {
-  outline: none;
-  border-color: black;
-}
-
-<<<<<<< HEAD
 .input-field::placeholder {
   color: rgba(255, 255, 255, 0.6);
-=======
+}
+
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+}
+
 .password-toggle:hover {
   color: black;
->>>>>>> signup_and_login_pages_styling
 }
