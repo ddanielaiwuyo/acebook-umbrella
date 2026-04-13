@@ -22,8 +22,9 @@ app.use(bodyParser.json());
 // API Routes
 app.use("/users", usersRouter);
 app.use("/posts", tokenChecker, postsRouter);
-app.use("/feed", feedRouter);
-app.use("/profile", profileRouter);
+app.use("/feed", tokenChecker, feedRouter);
+app.use("/friends", tokenChecker, friendsRouter)
+app.use("/profile", tokenChecker, profileRouter);
 app.use("/tokens", authenticationRouter);
 
 // 404 Handler
