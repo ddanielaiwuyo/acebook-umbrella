@@ -23,10 +23,6 @@ const router = createBrowserRouter([
     element: <SignupPage />,
   },
   {
-    path: "/posts",
-    element: <FeedPage />,
-  },
-  {
     path: "/feed",
     element: <FeedPage />,
   },
