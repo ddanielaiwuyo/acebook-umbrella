@@ -22,6 +22,19 @@
   width: 100%;
   padding: 0.9rem 1rem;
   padding-left: 2.8rem; /* IMPORTANT for icon space */
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: brown;
+  font-size: 1rem;
+}
+.input-field {
+  width: 100%;
+  padding: 0.9rem 1rem 0.9rem 2.8rem;
+  padding-right: 2.5rem;
 
   /* background: rgba(255, 255, 255, 0.1); */
   background: transparent;
@@ -51,6 +64,11 @@
   border-color: black;
 }
 
+<<<<<<< HEAD
 .input-field::placeholder {
   color: rgba(255, 255, 255, 0.6);
+=======
+.password-toggle:hover {
+  color: black;
+>>>>>>> signup_and_login_pages_styling
 }
