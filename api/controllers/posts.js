@@ -43,9 +43,9 @@ const createComment = async (req, res) => {
     await comment.save();
 
     // Idk if we need a new token like in createPost ?? commented below
-    // const newToken = generateToken(req.user_id);
+    const newToken = generateToken(req.user_id);
 
-    res.status(201).json({ message: "Comment added!", comment });
+    res.status(201).json({ message: "Comment added!", comment, token: newToken });
   } catch (error) {
     res
       .status(400)
