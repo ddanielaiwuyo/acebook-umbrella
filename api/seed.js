@@ -33,7 +33,7 @@ async function seedDatabase() {
   const sam = await User.create({
     name: "Sam Lavin",
     email: "sam@example.com",
-    password: "password123",
+    password: hashedPassword,
     bio: "Coding and Coffee",
     location: "London",
     work: "Software Engineer",
@@ -44,7 +44,7 @@ async function seedDatabase() {
   const john = await User.create({
     name: "John Gjenset",
     email: "john@example.com",
-    password: "password123",
+    password: hashedPassword,
     bio: "Hate Coding and Coffee",
     location: "London",
     work: "Not Software Engineer",
@@ -55,7 +55,7 @@ async function seedDatabase() {
   const tom = await User.create({
     name: "Tom Delande",
     email: "tom@example.com",
-    password: "password123",
+    password: hashedPassword,
     bio: "Loves Coding and Coffee",
     location: "Seattle",
     work: "Software Engineer",
@@ -66,7 +66,7 @@ async function seedDatabase() {
   const paul = await User.create({
     name: "Paul Mcpherson",
     email: "paul@example.com",
-    password: "password123",
+    password: hashedPassword,
     bio: "Coding",
     location: "London",
     work: "Systems Engineer",
@@ -77,7 +77,7 @@ async function seedDatabase() {
   const nadia = await User.create({
     name: "Nadia Neuwman",
     email: "nadia@example.com",
-    password: "password123",
+    password: hashedPassword,
     bio: "Incoming",
     location: "Arizona",
     work: "Frontend Engineer",
@@ -88,7 +88,7 @@ async function seedDatabase() {
   const billy = await User.create({
     name: "Billy Campbell",
     email: "billy@example.com",
-    password: "password123",
+    password: hashedPassword,
     bio: "Coding and Coding",
     location: "Riyadh",
     work: "Engineer",
