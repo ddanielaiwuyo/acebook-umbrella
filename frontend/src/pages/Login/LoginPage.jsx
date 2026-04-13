@@ -38,43 +38,49 @@ export function LoginPage() {
 
   return (
     <div className="login-page">
-      <div className="left-container">
-        <div className="login-form">
-          <p className="errors">{error}</p>
-          <h1>{message ? "Account Created" : "Welcome back"}</h1>
-          {message && <p className="success-message">{message}</p>}
-          <form onSubmit={handleSubmit}>
-            <InputField
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              icon={FaEnvelope}
-            />
+      <video autoPlay muted loop className="bg-video">
+        <source src="home.mp4" type="video/mp4" />
+      </video>
+      <div className="overlay"></div>
+      <div className="content">
+        <div className="left-container">
+          <div className="login-form">
+            <p className="errors">{error}</p>
+            <h1>{message ? "Account Created" : "Welcome back"}</h1>
+            {message && <p className="success-message">{message}</p>}
+            <form onSubmit={handleSubmit}>
+              <InputField
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                icon={FaEnvelope}
+              />
 
-            <InputField
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              icon={FaLock}
-            />
-            <div className="btn">
-              <PreLoginButton type="submit">Log in</PreLoginButton>
-            </div>
-            <div className="not-registered">
-              <p>
-                Don't have an account yet?{" "}
-                <Link to="/signup">
-                  <strong>Sign up</strong>
-                </Link>{" "}
-                and start your journey.
-              </p>
-            </div>
-          </form>
+              <InputField
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                icon={FaLock}
+              />
+              <div className="btn">
+                <PreLoginButton type="submit">Log in</PreLoginButton>
+              </div>
+              <div className="not-registered">
+                <p>
+                  Don't have an account yet?{" "}
+                  <Link to="/signup">
+                    <strong>Sign up</strong>
+                  </Link>{" "}
+                  and start your journey.
+                </p>
+              </div>
+            </form>
+          </div>
         </div>
+        <div className="right-container"></div>
       </div>
-      <div className="right-container"></div>
     </div>
   );
 }

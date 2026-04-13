@@ -39,64 +39,65 @@ export function SignupPage() {
 
   return (
     <div className="signup-page">
-      <div className="left-container">
-        <div className="signup-form">
-          <h1>Create your account</h1>
-          <p className="errors"> {errors}</p>
-          <form onSubmit={handleSubmit}>
-            <InputField
-              type="text"
-              placeholder="First Name"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              icon={FaUser}
-              required
-            />
-            <InputField
-              type="text"
-              placeholder="Surname"
-              value={surname}
-              onChange={(e) => setSurname(e.target.value)}
-              icon={FaUser}
-              required
-            />
-            <InputField
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              icon={FaEnvelope}
-              required
-            />
-            <InputField
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              icon={FaLock}
-              required
-            />
-            <div className="btn">
-              <PreLoginButton type="submit">Sign Up</PreLoginButton>
-            </div>
-            <div className="already-registered">
-              <p>
-                Already registered?{" "}
-                <Link to="/login">
-                  <strong>Log in</strong>
-                </Link>{" "}
-                and continue your journey.
-              </p>
-            </div>
-          </form>
+      <video autoPlay muted loop className="bg-video">
+        <source src="home.mp4" type="video/mp4" />
+      </video>
+      <div className="overlay"></div>
+      <div className="content">
+        <div className="left-container">
+          <div className="signup-form">
+            <h1>Create your account</h1>
+            <p className="errors"> {errors}</p>
+            <form onSubmit={handleSubmit}>
+              <InputField
+                type="text"
+                placeholder="First Name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                icon={FaUser}
+                required
+              />
+              <InputField
+                type="text"
+                placeholder="Surname"
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)}
+                icon={FaUser}
+                required
+              />
+              <InputField
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                icon={FaEnvelope}
+                required
+              />
+              <InputField
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                icon={FaLock}
+                required
+              />
+              <div className="btn">
+                <PreLoginButton type="submit">Sign Up</PreLoginButton>
+              </div>
+              <div className="already-registered">
+                <p>
+                  Already registered?{" "}
+                  <Link to="/login">
+                    <strong>Log in</strong>
+                  </Link>{" "}
+                  and continue your journey.
+                </p>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
 
-      <div className="right-container">
-        <div className="greeter">
-          <h1>Start your Acebook journey today</h1>
-          <h2>Sign up in seconds and get connected.</h2>
-        </div>
+        <div className="right-container"></div>
       </div>
     </div>
   );
