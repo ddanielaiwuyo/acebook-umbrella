@@ -5,7 +5,6 @@ const UserSchema = new mongoose.Schema({
   lastName: { type: String, required: false },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  name: { type: String },
   profilePic: { type: String },
   bio: { type: String },
   location: { type: String },
@@ -45,7 +44,6 @@ const UserSchema = new mongoose.Schema({
       },
     },
   ],
-
 });
 
 const User = mongoose.model("User", UserSchema);

@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+.bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  min-width: 100%;
+  min-height: 100%;
+
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+
+  z-index: 0;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2); /* lighter than home */
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.login-page {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+}
+
+.left-container {
+  flex: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.login-form {
+  width: 80%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  color: white;
+}
+
+.login-form h1 {
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.right-container {
+  flex: 6;
+}
+
+.login-form .btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.not-registered a {
+  color: rgb(241, 152, 167);
+}

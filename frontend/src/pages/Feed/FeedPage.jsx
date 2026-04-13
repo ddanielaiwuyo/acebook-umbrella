@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { getPosts } from "../../services/posts";
 import Post from "../../components/Post";
@@ -8,6 +9,7 @@ import LogoutButton from "../../components/LogoutButton";
 
 export function FeedPage() {
   const [posts, setPosts] = useState([]);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,8 +18,14 @@ export function FeedPage() {
     if (loggedIn) {
       getPosts(token)
         .then((data) => {
-          setPosts(data.posts);
-          localStorage.setItem("token", data.token);
+          console.log(data);
+          if (data.ok) {
+            setPosts(data.posts);
+            setError("");
+          } else {
+            setError(data.message);
+          }
+          // localStorage.setItem("token", data.token);
         })
         .catch((err) => {
           console.error(err);
@@ -32,9 +40,13 @@ export function FeedPage() {
     return;
   }
 
+  if (error.trim().length > 5) {
+    return <h2 className="error">{error}</h2>;
+  }
   return (
     <>
       <h2>Latest Posts</h2>
+      <p className="error">{error}</p>
       <Feed posts={posts} />
     </>
   );

@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const User = require("./models/user.js");
 const Comment = require("./models/comment.js");
 const Post = require("./models/post.js");
+const bcrypt = require("bcrypt");
 // const { Post, Comment } = require("./models/new_post_schema.js");
 
 dotenv.config();
@@ -18,12 +19,15 @@ if (!CONNECTION_STRING) {
  * All posts are saved in the 'posts' collection in mongo to use for
  * dev and testing.
  * Test-Users:
- * 	sam@example.com, password123
- * 	john@example.com, password123
- * 	nadia@example.com, password123
+ * 	sam@example.com, password1234
+ * 	john@example.com, password1234
+ * 	nadia@example.com, password1234
  */
+
 async function seedDatabase() {
+  const hashedPassword = await bcrypt.hash("password1234", 10);
   await mongoose.connect(CONNECTION_STRING);
+
   // Clear all documents before reseeding
   await User.deleteMany({});
   await Post.deleteMany({});
@@ -31,7 +35,8 @@ async function seedDatabase() {
 
   // Create users
   const sam = await User.create({
-    name: "Sam Lavin",
+    firstName: "Sam",
+    lastName: "Lavin",
     email: "sam@example.com",
     password: hashedPassword,
     bio: "Coding and Coffee",
@@ -42,7 +47,8 @@ async function seedDatabase() {
     profilePic: "",
   });
   const john = await User.create({
-    name: "John Gjenset",
+    firstName: "John",
+    lastName: "Gjenset",
     email: "john@example.com",
     password: hashedPassword,
     bio: "Hate Coding and Coffee",
@@ -53,7 +59,8 @@ async function seedDatabase() {
     profilePic: "",
   });
   const tom = await User.create({
-    name: "Tom Delande",
+    firstName: "Tom",
+    lastName: "Delande",
     email: "tom@example.com",
     password: hashedPassword,
     bio: "Loves Coding and Coffee",
@@ -64,7 +71,8 @@ async function seedDatabase() {
     profilePic: "",
   });
   const paul = await User.create({
-    name: "Paul Mcpherson",
+    firstName: "Paul",
+    lastName: "Mcpherson",
     email: "paul@example.com",
     password: hashedPassword,
     bio: "Coding",
@@ -75,7 +83,8 @@ async function seedDatabase() {
     profilePic: "",
   });
   const nadia = await User.create({
-    name: "Nadia Neuwman",
+    firstName: "Nadia",
+    lastName: "Neuwman",
     email: "nadia@example.com",
     password: hashedPassword,
     bio: "Incoming",
@@ -86,7 +95,8 @@ async function seedDatabase() {
     profilePic: "",
   });
   const billy = await User.create({
-    name: "Billy Campbell",
+    firstName: "Billy",
+    lastName: "Campbell",
     email: "billy@example.com",
     password: hashedPassword,
     bio: "Coding and Coding",

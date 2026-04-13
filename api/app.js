@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const usersRouter = require("./routes/users");
 const postsRouter = require("./routes/posts");
+const friendsRouter = require("./routes/friends");
 const authenticationRouter = require("./routes/authentication");
 const feedRouter = require("./routes/feed");
 const profileRouter = require("./routes/profile");
