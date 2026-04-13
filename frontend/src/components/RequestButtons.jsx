@@ -1,3 +1,5 @@
+import './RequestButtons.css'
+
 import { acceptFriendRequest, deleteFriendRequest } from "../services/friends";
 
 export function RequestButtons(props) {
@@ -12,7 +14,7 @@ export function RequestButtons(props) {
 	}
 
 	return (
-		<div>
+		<div className='request-btns'>
 			<button onClick={handleAcceptButtonClick}>Accept</button>
 			<button onClick={handleDeleteButtonClick}>Delete</button>
 		</div>
