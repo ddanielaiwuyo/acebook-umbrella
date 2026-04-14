@@ -24,7 +24,7 @@ function PopUp() {
         <IoChatbubbleEllipsesSharp style={{ width: 40, height: 40 }} />
         <div className="prompt">Whats on your mind?</div>
         <span className="add-post-icon">
-          <a href="#">
+          <a href="/post">
             {" "}
             <MdOutlineAddCircle style={{ width: 30, height: 30 }} />{" "}
           </a>
