@@ -41,7 +41,7 @@ function NavBar() {
         setQuery("");
         setResults([]);
     }
-    
+
     useEffect(() => {
         function handleClickOutside(e) {
             if (profileRef.current && !profileRef.current.contains(e.target)) {
@@ -57,7 +57,7 @@ function NavBar() {
     return (
         <nav className="navbar">
             <div className="navbar-left">
-                <Link to={isLoggedIn ? "/posts" : "/"} className="navbar-logo-link">
+                <Link to={isLoggedIn ? "/feed" : "/"} className="navbar-logo-link">
                     <div className="navbar-logo">A</div>
                 </Link>
 
@@ -79,7 +79,7 @@ function NavBar() {
                                     className="search-result"
                                 >
                                     <FaUserCircle className="search-result-icon" />
-                                    {user.name || user.email}
+                                    {user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : user.email}
                                 </Link>
                             ))}
                         </div>
@@ -89,7 +89,7 @@ function NavBar() {
 
             {isLoggedIn && (
                 <div className="navbar-centre">
-                    <Link to="/posts" className={`nav-icon-link ${isActive("/posts") ? "active" : ""}`} title="Feed">
+                    <Link to="/feed" className={`nav-icon-link ${isActive("/feed") ? "active" : ""}`} title="Feed">
                         <FaHome />
                     </Link>
                     <Link to="/friends" className={`nav-icon-link ${isActive("/friends") ? "active" : ""}`} title="Friends">

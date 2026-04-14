@@ -1,48 +1,100 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
 import ProfileHeader from "../../components/Profile/ProfileHeader";
 import FriendList from "../../components/Profile/FriendList";
 import Intro from "../../components/Profile/Intro";
 import "./ProfilePage.css";
 
 export const ProfilePage = () => {
-  const [profileInfo] = useState({
-    name: "Alpha One",
-    profilePic: "", // optional placeholder image
-    bio: "Incoming",
-    location: "London, UK",
-    work: "Frontend Developer at ACEBOOK",
-    birthday: "January 1, 1990",
-    joined: "2026",
-    friends: [
-      { _id: "1", name: "Beta One", profilePic: "" },
-      { _id: "2", name: "Charlie One", profilePic: "" },
-    ],
-  });
+  const { profile_id } = useParams();
+  const navigate = useNavigate();
+  const [profileInfo, setProfileInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+ 
 
-  // Set isOwner true for now (in real app, compare with logged-in user)
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(!token) {
+      navigate("/login");
+      return;
+    }
+
+    if (!profile_id) {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    navigate(`/profile/${payload.sub}`, { replace: true });
+    return;
+  }
+
+    const fetchProfile = async () => {
+      try{
+          const res = await fetch(`http://localhost:3000/profile/${profile_id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const body = await res.json()
+
+          console.log(body); // delete this later - don't forget!
+
+          if (body.ok) {
+              setProfileInfo(body.data)
+          } else {
+              setErrorMessage(body.message)
+          }
+      } catch(err) {
+          console.error(err)
+          setErrorMessage("Service is down, please try again later")
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, [profile_id, navigate]);
+
+  if (loading) {
+    return <div>Loading profile...</div>;
+  }
+
+  if (errorMessage) {
+    return <div>{errorMessage}</div>;
+  }
+
+  if (!profileInfo) {
+    return <div>No profile found</div>;
+  }
+
   const isOwner = true;
 
   return (
     <div className="profile-page">
-      {/* Profile Header */}
+
       <ProfileHeader
-        name={profileInfo.name}
+        name={`${profileInfo.firstName} ${profileInfo.lastName}`}
         profilePic={profileInfo.profilePic}
         isOwner={isOwner}
       />
 
-      {/* Two-column layout */}
       <div className="profile-columns">
-        {/* Left column: Intro + Friends */}
+
         <div className="left-column">
           <Intro profileInfo={profileInfo} />
           <FriendList friends={profileInfo.friends} />
         </div>
 
-        {/* Right column: Posts placeholder */}
         <div className="right-column">
-          <div className="box">Posts (coming soon)</div>
+          <div className="box">
+            {profileInfo.posts?.map((post) => (
+              <div key={post._id}>
+                <h4>{post.title}</h4>
+                <p>{post.content}</p>
+              </div>
+            ))}
+          </div>
         </div>
+
       </div>
     </div>
   );

@@ -39,7 +39,12 @@ async function create(req, res) {
     }
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
-    const newUser = new User({ email: email, password: hashedPassword });
+    const newUser = new User({
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: hashedPassword,
+    });
     await newUser.save();
 
     console.info(`User with email: ${email} saved successfully`);

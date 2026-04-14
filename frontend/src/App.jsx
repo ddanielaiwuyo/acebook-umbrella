@@ -6,6 +6,7 @@ import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
 import { FeedPage } from "./pages/Feed/FeedPage";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
+import { FriendsPage } from "./pages/Friends/FriendsPage";
 
 import NavBar from "./components/NavBar/NavBar"
 import Layout from "./components/NavBar/Layout"
@@ -25,10 +26,6 @@ const router = createBrowserRouter([
     element: <Layout><SignupPage /></Layout>,
   },
   {
-    path: "/posts",
-    element: <Layout><FeedPage /></Layout>,
-  },
-  {
     path: "/feed",
     element: <Layout><FeedPage /></Layout>,
   },
@@ -39,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Layout><ProfilePage /></Layout>,
+  },
+  {
+    path: "/friends",
+    element: <Layout><FriendsPage /></Layout>,
   },
 ]);
 

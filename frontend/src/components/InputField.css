@@ -1,32 +1,52 @@
 .input-wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
   width: 100%;
 }
 
 .input-field {
   width: 100%;
-  padding: 0.9rem 1rem 0.9rem 2.8rem;
-
-  border: 1px solid #ccc;
+  padding: 0.9rem 1rem;
+  padding-left: 2.8rem;
+  padding-right: 2.8rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.8);
   border-radius: 8px;
-
+  color: white;
   font-size: 1rem;
   font-family: "Montserrat", sans-serif;
-
   box-sizing: border-box;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: black;
 }
 
 .input-icon {
   position: absolute;
   top: 50%;
-  left: 10px;
+  left: 1rem;
   transform: translateY(-50%);
-
-  color: brown;
-  font-size: 1rem;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.input-field:focus {
-  outline: none;
-  border-color: black;
+.input-field::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.password-toggle:hover {
+  color: black;
 }
