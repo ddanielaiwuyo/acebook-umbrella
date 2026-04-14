@@ -123,7 +123,13 @@ function PostCard(props) {
   return (
     <>
       <div className="post-card-container">
-        <div className="post-title">{owner.name} </div>
+        <div>
+          <MetaInfo
+            firstName={owner.firstName}
+            lastName={owner.lastName}
+            profilePic={`${AVATAR_URL}seed=${owner.firstName}&size=45`}
+          />
+        </div>
         <div className="post-content">{content}</div>
 
         <div className="post-icon-container">
