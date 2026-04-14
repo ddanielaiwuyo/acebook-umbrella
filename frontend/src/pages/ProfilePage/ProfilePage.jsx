@@ -20,6 +20,13 @@ export const ProfilePage = () => {
       navigate("/login");
       return;
     }
+
+    if (!profile_id) {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    navigate(`/profile/${payload.sub}`, { replace: true });
+    return;
+  }
+
     const fetchProfile = async () => {
       try{
           const res = await fetch(`http://localhost:3000/profile/${profile_id}`, {

@@ -70,8 +70,32 @@ function emailIsValid(email) {
   return false;
 }
 
+
+async function search(req, res) {
+  const {query} = req.query;
+
+  if (!query || query.trim() === ""){
+    return res.json({users: []});
+  }
+
+  try {
+    const users = await User.find({
+      email: {$regex: query, $options: "i"}
+    }).select("firstName lastName _id");
+
+    res.json({users});
+  }catch (err){
+    console.log(err);
+    res.status(500).json({message: "something went wrong"});
+  }
+
+}
+
+
+
 const UsersController = {
   create: create,
+  search: search,
 };
 
 module.exports = UsersController;
