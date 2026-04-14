@@ -32,5 +32,32 @@
 	display: flex;
 	align-items: center;
 	gap: 8px;
-    flex: 1;
+	flex: 1;
+}
+
+@media (max-width: 839px) {
+	.profile {
+		padding: 5px;
+		gap: 8px;
+	}
+
+	.profileimg {
+		height: 50px;
+		width: 50px;
+	}
+
+	.profilename {
+		font-size: 12px;
+	}
+}
+
+@media (max-width: 612px) {
+	.profileimg {
+		height: 35px;
+		width: 35px;
+	}
+
+	.profilename {
+		font-size: 8px;
+	}
 }

@@ -29,17 +29,6 @@
 	overflow: hidden;
 }
 
-#friend-requests h1 {
-	font-size: 30px;
-	font-weight: 700px;
-	color: #1c1e21;
-	padding: 16px;
-	padding-bottom: 10px;
-	margin: 0 0 16px 0;
-	border-bottom: 1px solid #e4e6eb;
-	flex-shrink: 0;
-}
-
 #other-users-and-friends {
 	display: flex;
 	gap: 40px;
@@ -68,13 +57,14 @@
 	overflow: hidden;
 }
 
+#friend-requests h1,
 #other-users h1,
 #your-friends h1 {
 	font-size: 30px;
 	font-weight: 700;
 	color: #1c1e21;
 	margin: 0 0 16px 0;
-	padding-bottom: 10px;
+	padding: 16px;
 	border-bottom: 1px solid #e4e6eb;
 	flex-shrink: 0;
 }
@@ -91,4 +81,50 @@
 	color: #65676b;
 	font-size: 16px;
 	padding: 20px 0;
+}
+
+@media (max-width: 778px) {
+	#friends-page {
+		padding: 10px;
+		gap: 20px;
+	}
+
+	#friend-requests,
+	#other-users,
+	#your-friends {
+		max-height: 35vh;
+		min-height: 60px;
+	}
+
+	#other-users-and-friends {
+		flex-direction: column;
+	}
+
+	#friend-requests h1,
+	#other-users h1,
+	#your-friends h1 {
+		font-size: 20px;
+	}
+
+	.removefriend-btn button,
+	.addfriend-btn button,
+	.requestfriend-btns button {
+		font-size: 8px;
+		padding: 4px 8px;
+	}
+}
+
+@media (max-width: 612px) {
+	#friend-requests h1,
+	#other-users h1,
+	#your-friends h1 {
+		font-size: 16px;
+	}
+
+		#friend-requests,
+	#other-users,
+	#your-friends {
+		max-height: 30vh;
+		min-height: 60px;
+	}
 }
