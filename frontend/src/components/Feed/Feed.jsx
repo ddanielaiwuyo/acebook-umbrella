@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Feed.css";
+import { createComment } from "../../services/posts";
 
 function LikeButton(props) {
   let { likeCount } = props;
@@ -36,38 +37,69 @@ function LikeButton(props) {
 // Other ways like creating a new page, or a dropdown affected UX or layout, in the way that I did it.
 // This is just a test version to get something working and when a final design is ready, this can be scrapped away
 function CommentSection(props) {
-  const { comments } = props;
+  const { comments, post_id, token } = props;
   const [showComments, setShowComments] = useState(false);
+  
+  // state for the input
+  const [newComment, setNewComment] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  let showPanelClass = "comments-panel";
-  const toggleCommentSection = () => {
-    if (!showComments) {
-      setShowComments(true);
-    } else {
-      setShowComments(false);
+  const toggleCommentSection = () => setShowComments(!showComments);
+
+  // handles submit
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (!newComment.trim()) return;
+
+    setIsSubmitting(true);
+    try {
+      const data = await createComment(token, post_id, newComment);
+      console.log("Comment added:", data);
+      
+      setNewComment("");
+      alert("Comment posted!"); 
+      
+    } catch (err) {
+      alert("Error posting comment: " + err.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  if (showComments) {
-    showPanelClass = "comments-panel open";
-  }
+  let showPanelClass = showComments ? "comments-panel open" : "comments-panel";
 
   return (
     <>
-      <div
-        className="post-likes-icon comments-icon"
-        onClick={toggleCommentSection}
-      >
-        Comments
+      <div className="post-likes-icon comments-icon" onClick={toggleCommentSection}>
+        Comments ({comments.length})
       </div>
+      
       <div className={showPanelClass}>
-        {comments.map((comment, index) => (
-          <div key={index} className="comment">
-            <p className="comment-owner">{comment.owner.name}</p>
-            <p className="comment-message">{comment.message}</p>
-          </div>
-        ))}
-        <button onClick={toggleCommentSection}>Close</button>
+        {/* this makes the comments a scrollable list of comments */}
+        <div className="comments-list">
+          {comments.map((comment, index) => (
+            <div key={index} className="comment">
+              <p className="comment-owner">{comment.owner.name}</p>
+              <p className="comment-message">{comment.message}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* the form for writing a new comment */}
+        <form onSubmit={handleCommentSubmit} className="comment-input-form">
+          <input 
+            type="text" 
+            placeholder="Write a comment..." 
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            disabled={isSubmitting}
+          />
+          <button type="submit" disabled={isSubmitting || !newComment.trim()}>
+            {isSubmitting ? "..." : "Post"}
+          </button>
+        </form>
+
+        <button onClick={toggleCommentSection} className="close-panel-btn">Close</button>
       </div>
     </>
   );
