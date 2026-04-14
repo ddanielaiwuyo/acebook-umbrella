@@ -81,7 +81,7 @@ async function search(req, res) {
   try {
     const users = await User.find({
       email: {$regex: query, $options: "i"}
-    }).select("name _id");
+    }).select("firstName lastName _id");
 
     res.json({users});
   }catch (err){
