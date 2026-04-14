@@ -13,14 +13,14 @@ const FriendList = ({ friends }) => {
             <img
               src={
                 friend.profilePic ||
-                `https://api.dicebear.com/7.x/adventurer/svg?seed=${friend.name}` 
+                `https://api.dicebear.com/7.x/adventurer/svg?seed=${friend.firstName}${friend.lastName}` 
               }
-              alt={friend.name}
+              alt={`${friend.firstName} ${friend.lastName}`}
               width={60}
               height={60}
               className="friend-avatar"
             />
-            <span>{friend.name}</span>
+            <span>{`${friend.firstName} ${friend.lastName}`}</span>
           </div>
         ))}
       </div>
