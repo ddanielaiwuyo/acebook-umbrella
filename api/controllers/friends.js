@@ -1,21 +1,27 @@
 const User = require("../models/user");
 
 async function addFriendRequest(req, res) {
-  try {
-    const senderId = req.user_id;
-    const receiverId = req.params.id;
-    const sender = await User.findById(senderId);
-    const receiver = await User.findById(receiverId);
-    const alreadySent = sender.sentFriendRequests.find(
-      (request) => request.user.toString() === receiverId,
-    );
-    if (alreadySent) {
-      return res.status(400).json({ message: "Friend request already sent" });
-    }
-    sender.sentFriendRequests.push({
-      user: receiverId,
-      status: "pending",
-    });
+	try {
+		const senderId = req.user_id;
+		const receiverId = req.params.id;
+		const sender = await User.findById(senderId);
+		const receiver = await User.findById(receiverId);
+		const alreadySent = sender.sentFriendRequests.find(
+			(request) => request.user.toString() === receiverId,
+		);
+		if (alreadySent) {
+			return res.status(400).json({ message: "Friend request already sent" });
+		}
+		const alreadyFriends = sender.friends.find(
+			(id) => id.toString() === receiverId,
+		);
+		if (alreadyFriends) {
+			return res.status(400).json({ message: "Already friends" });
+		}
+		sender.sentFriendRequests.push({
+			user: receiverId,
+			status: "pending",
+		});
 
     receiver.receivedFriendRequests.push({
       user: senderId,
@@ -44,15 +50,24 @@ async function acceptFriendRequest(req, res) {
     const receiverId = req.user_id;
     const senderId = req.params.id;
 
-    const receiver = await User.findById(receiverId);
-    const sender = await User.findById(senderId);
-    const alreadyFriends = receiver.friends.find(
-      (id) => id.toString() === senderId,
-    );
-    if (alreadyFriends) {
-      return res.status(400).json({ message: "Already friends" });
-    }
-    receiver.friends.push(senderId);
+		const receiver = await User.findById(receiverId);
+		const sender = await User.findById(senderId);
+
+		const alreadyFriends = receiver.friends.find(
+			(id) => id.toString() === senderId,
+		);
+		if (alreadyFriends) {
+			return res.status(400).json({ message: "Already friends" });
+		}
+
+		const friendRequestExists = receiver.receivedFriendRequests.find(
+			(request) => request.user.toString() === senderId,
+		);
+		if (!friendRequestExists) {
+			return res.status(400).json({ message: "Friend request does not exist" });
+		}
+
+		receiver.friends.push(senderId);
 
     sender.friends.push(receiverId);
 
@@ -89,9 +104,23 @@ async function deleteFriendRequest(req, res) {
     const receiver = await User.findById(receiverId);
     const sender = await User.findById(senderId);
 
-    sender.sentFriendRequests.pull({
-      user: receiverId,
-    });
+		const alreadyFriends = receiver.friends.find(
+			(id) => id.toString() === senderId,
+		);
+		if (alreadyFriends) {
+			return res.status(400).json({ message: "Already friends" });
+		}
+
+		const friendRequestExists = receiver.receivedFriendRequests.find(
+			(request) => request.user.toString() === senderId,
+		);
+		if (!friendRequestExists) {
+			return res.status(400).json({ message: "Friend request does not exist" });
+		}
+
+		sender.sentFriendRequests.pull({
+			user: receiverId,
+		});
 
     receiver.receivedFriendRequests.pull({
       user: senderId,
@@ -202,7 +231,14 @@ async function removeFriends(req, res) {
     const removerUser = await User.findById(removerId);
     const removedUser = await User.findById(removedId);
 
-    removerUser.friends.pull(removedId);
+		const areFriends = removerUser.friends.find(
+			(id) => id.toString() === removedId,
+		);
+		if (!areFriends) {
+			return res.status(400).json({ message: "Users are not friends" });
+		}
+
+		removerUser.friends.pull(removedId);
 
     removedUser.friends.pull(removerId);
 
