@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use("/users", usersRouter);
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/feed", tokenChecker, feedRouter);
-app.use("/friends", tokenChecker, friendsRouter)
+app.use("/friends", tokenChecker, friendsRouter);
 app.use("/profile", tokenChecker, profileRouter);
 app.use("/tokens", authenticationRouter);
 

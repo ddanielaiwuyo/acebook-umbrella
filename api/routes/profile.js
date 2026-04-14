@@ -39,7 +39,6 @@ router.get("/:userId", async (req, res) => {
         posts: posts,
       },
     });
-
   } catch (err) {
     console.error("Could not get user profile", err)
     console.error(err);

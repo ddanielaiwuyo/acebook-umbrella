@@ -29,10 +29,12 @@ async function seedDatabase() {
   await mongoose.connect(CONNECTION_STRING);
 
   // Clear all documents before reseeding
+  console.log("⚠️ Clearing database\n");
   await User.deleteMany({});
   await Post.deleteMany({});
   await Comment.deleteMany({});
 
+  console.log("🌪️  Seeding database\n");
   // Create users
   const sam = await User.create({
     firstName: "Sam",
@@ -286,11 +288,45 @@ async function seedDatabase() {
 }
 try {
   seedDatabase().then(
-    (success) => {
-      console.log("Success in creating dummy posts", success);
+    (_success) => {
+      console.log("✅ ☄️ Done seeding database...\n");
+      console.log("DUMMY DATA");
+      console.table([
+        {
+          fullName: "Sam Lavin",
+          email: "sam@example.com",
+          password: "password1234",
+        },
+        {
+          fullName: "John Gjenset ",
+          email: "john@example.com",
+          password: "password1234",
+        },
+        {
+          fullName: "Tom Delande",
+          email: "tom@example.com",
+          password: "password1234",
+        },
+        {
+          fullName: "Paul Mcpherson",
+          email: "paul@example.com",
+          password: "password1234",
+        },
+        {
+          fullName: "Nadia Neuwman",
+          email: "nadia@example.com",
+          password: "password1234",
+        },
+        {
+          fullName: "Billy Campbell",
+          email: "billy@example.com",
+          password: "password1234",
+        },
+      ]);
     },
     (err) => {
-      console.log("Error occured creating dummy posts", err);
+      console.error("⚠️ Oops, an error occured while seeding...");
+      console.error(err);
     },
   );
 } catch (err) {
