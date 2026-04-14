@@ -12,13 +12,21 @@
 }
 
 #friend-requests {
-	height: 400px;
+	min-height: 80px;
+	height: auto;
+	max-height: 450px;
 	position: sticky;
 	top: 0;
 	background-color: white;
 	z-index: 1;
-	padding: 16px;
-	border-bottom: 1px solid #e4e6eb;
+	padding: 20px;
+	margin: 0 16px 0 16px;
+	border-radius: 8px;
+	border: 1px solid #e4e6eb;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
 }
 
 #friend-requests h1 {
@@ -26,22 +34,13 @@
 	font-weight: 700px;
 	color: #1c1e21;
 	padding: 16px;
-    padding-bottom: 10px;
+	padding-bottom: 10px;
 	margin: 0 0 16px 0;
 	border-bottom: 1px solid #e4e6eb;
-}
-#other-users {
-	height: 400px;
-	flex: 1;
-}
-
-#your-friends {
-	height: 400px;
-	flex: 1;
+	flex-shrink: 0;
 }
 
 #other-users-and-friends {
-	/* border: 2px solid red; */
 	display: flex;
 	gap: 40px;
 	padding: 15px;
@@ -50,14 +49,23 @@
 .scrollable-section {
 	max-height: 500px;
 	overflow-y: auto;
+	padding-right: 12px;
 }
 
 #other-users,
 #your-friends {
+	min-height: 150px;
+	height: auto;
+	max-height: 400px;
+	flex: 1;
 	border: 1px solid #e4e6eb;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
 	padding: 16px;
 	background-color: white;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
 }
 
 #other-users h1,
@@ -68,6 +76,7 @@
 	margin: 0 0 16px 0;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #e4e6eb;
+	flex-shrink: 0;
 }
 
 .removefriend-btn button,
@@ -77,9 +86,9 @@
 	padding: 6px 12px;
 }
 
-.empty-section{
-    text-align: center;
-    color: #65676b;
-    font-size: 16px;
-    padding: 20px;
+.empty-section {
+	text-align: center;
+	color: #65676b;
+	font-size: 16px;
+	padding: 20px 0;
 }
