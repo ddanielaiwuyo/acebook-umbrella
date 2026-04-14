@@ -50,7 +50,6 @@ async function acceptFriendRequest(req, res) {
     const receiverId = req.user_id;
     const senderId = req.params.id;
 
-<<<<<<< HEAD
 		const receiver = await User.findById(receiverId);
 		const sender = await User.findById(senderId);
 
@@ -69,17 +68,6 @@ async function acceptFriendRequest(req, res) {
 		}
 
 		receiver.friends.push(senderId);
-=======
-    const receiver = await User.findById(receiverId);
-    const sender = await User.findById(senderId);
-    const alreadyFriends = receiver.friends.find(
-      (id) => id.toString() === senderId,
-    );
-    if (alreadyFriends) {
-      return res.status(400).json({ message: "Already friends" });
-    }
-    receiver.friends.push(senderId);
->>>>>>> e09058c1e3be2de52cf5a95da6e9c4b8d2b82ac4
 
     sender.friends.push(receiverId);
 
@@ -116,7 +104,6 @@ async function deleteFriendRequest(req, res) {
     const receiver = await User.findById(receiverId);
     const sender = await User.findById(senderId);
 
-<<<<<<< HEAD
 		const alreadyFriends = receiver.friends.find(
 			(id) => id.toString() === senderId,
 		);
@@ -134,11 +121,6 @@ async function deleteFriendRequest(req, res) {
 		sender.sentFriendRequests.pull({
 			user: receiverId,
 		});
-=======
-    sender.sentFriendRequests.pull({
-      user: receiverId,
-    });
->>>>>>> e09058c1e3be2de52cf5a95da6e9c4b8d2b82ac4
 
     receiver.receivedFriendRequests.pull({
       user: senderId,
@@ -249,7 +231,6 @@ async function removeFriends(req, res) {
     const removerUser = await User.findById(removerId);
     const removedUser = await User.findById(removedId);
 
-<<<<<<< HEAD
 		const areFriends = removerUser.friends.find(
 			(id) => id.toString() === removedId,
 		);
@@ -258,9 +239,6 @@ async function removeFriends(req, res) {
 		}
 
 		removerUser.friends.pull(removedId);
-=======
-    removerUser.friends.pull(removedId);
->>>>>>> e09058c1e3be2de52cf5a95da6e9c4b8d2b82ac4
 
     removedUser.friends.pull(removerId);
 
