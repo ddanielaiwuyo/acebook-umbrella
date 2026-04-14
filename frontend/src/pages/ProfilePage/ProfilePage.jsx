@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import ProfileHeader from "../../components/Profile/ProfileHeader";
 import FriendList from "../../components/Profile/FriendList";
@@ -8,28 +8,55 @@ import "./ProfilePage.css";
 
 export const ProfilePage = () => {
   const { profile_id } = useParams();
-
+  const navigate = useNavigate();
   const [profileInfo, setProfileInfo] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+ 
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(!token) {
+      navigate("/login");
+      return;
+    }
     const fetchProfile = async () => {
-      try {
-        const res = await fetch(`http://localhost:3000/profile/${profile_id}`);
-        const data = await res.json();
+      try{
+          const res = await fetch(`http://localhost:3000/profile/${profile_id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          const body = await res.json()
 
-        setProfileInfo(data);
+          console.log(body); // delete this later - don't forget!
+
+          if (body.ok) {
+              setProfileInfo(body.data)
+          } else {
+              setErrorMessage(body.message)
+          }
+      } catch(err) {
+          console.error(err)
+          setErrorMessage("Service is down, please try again later")
+      } finally {
         setLoading(false);
-      } catch (err) {
-        console.error("Error fetching profile:", err);
       }
     };
 
     fetchProfile();
-  }, [profile_id]);
+  }, [profile_id, navigate]);
 
-  if (loading || !profileInfo) {
+  if (loading) {
     return <div>Loading profile...</div>;
+  }
+
+  if (errorMessage) {
+    return <div>{errorMessage}</div>;
+  }
+
+  if (!profileInfo) {
+    return <div>No profile found</div>;
   }
 
   const isOwner = true;
@@ -38,7 +65,7 @@ export const ProfilePage = () => {
     <div className="profile-page">
 
       <ProfileHeader
-        name={profileInfo.name}
+        name={`${profileInfo.firstName} ${profileInfo.lastName}`}
         profilePic={profileInfo.profilePic}
         isOwner={isOwner}
       />
@@ -52,7 +79,7 @@ export const ProfilePage = () => {
 
         <div className="right-column">
           <div className="box">
-            {profileInfo.posts.map((post) => (
+            {profileInfo.posts?.map((post) => (
               <div key={post._id}>
                 <h4>{post.title}</h4>
                 <p>{post.content}</p>
