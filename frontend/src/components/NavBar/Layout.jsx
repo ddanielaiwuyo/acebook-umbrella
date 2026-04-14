@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 
 function Layout ({children}){
     const location = useLocation();
-    const hideNavbar = ["/login", "/signup"].includes(location.pathname);
+    const hideNavbar = ["/login", "/signup", "/"].includes(location.pathname);
 
 
 
