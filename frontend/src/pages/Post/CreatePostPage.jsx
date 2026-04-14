@@ -8,19 +8,29 @@ export function CreatePostPage() {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
+    console.log("POST BUTTON CLICKED"); //TEMP
+
     if (!content) return;
 
-  await fetch("http://localhost:3000/posts", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-    body: JSON.stringify({
-      title: "New Post",
-      content,
-    }),
-  });
+    const token = localStorage.getItem("token");
+    // console.log("TOKEN:", token); //TEMP
+
+    const response = await fetch("http://localhost:3000/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        title: "New Post",
+        content,
+      }),
+    });
+    console.log("RESPONSE:", response); //TEMP
+    if (response.ok) {
+      navigate("/feed");
+    } // Need to add error capture
+  };
 
   const handleCancel = () => {
     navigate("/feed");
