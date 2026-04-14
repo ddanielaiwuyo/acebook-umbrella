@@ -45,7 +45,9 @@ export function CreatePostPage() {
           onChange={(e) => setContent(e.target.value)}
           placeholder="Share what's on your mind"
         />
-        <button onClick={handleSubmit}>Post</button>
+        <button onClick={handleSubmit} disabled={!content.trim()}>
+          Post
+        </button>
         <button onClick={handleCancel}>Cancel</button>
       </div>
     </div>

@@ -47,3 +47,22 @@
 .create-post-card button:hover {
   background-color: brown;
 }
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #ccc;
+  color: #282323;
+}
+
+/* button:hover {
+  background-color: white;
+  color: black;
+
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.6),
+    0 0 20px rgba(255, 255, 255, 0.4),
+    0 0 30px rgba(255, 255, 255, 0.2);
+
+  transform: translateY(-3px);
+} */
