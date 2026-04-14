@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import { HomePage } from "./pages/Home/HomePage";
@@ -9,23 +9,26 @@ import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { FriendsPage } from "./pages/Friends/FriendsPage";
 import { CreatePostPage } from "./pages/Post/CreatePostPage.jsx";
 
+import NavBar from "./components/NavBar/NavBar"
+import Layout from "./components/NavBar/Layout"
+
 // docs: https://reactrouter.com/en/main/start/overview
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: <Layout><HomePage /></Layout>,
   },
   {
     path: "/login",
-    element: <LoginPage />,
+    element: <Layout><LoginPage /></Layout>,
   },
   {
     path: "/signup",
-    element: <SignupPage />,
+    element: <Layout><SignupPage /></Layout>,
   },
   {
     path: "/feed",
-    element: <FeedPage />,
+    element: <Layout><FeedPage /></Layout>,
   },
   {
     path: "/post",
@@ -33,15 +36,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/profile/:profile_id",
-    element: <ProfilePage />,
+    element: <Layout><ProfilePage /></Layout>,
   },
   {
     path: "/profile",
-    element: <ProfilePage />,
+    element: <Layout><ProfilePage /></Layout>,
   },
   {
     path: "/friends",
-    element: <FriendsPage />,
+    element: <Layout><FriendsPage /></Layout>,
   },
 ]);
 
@@ -54,3 +57,5 @@ function App() {
 }
 
 export default App;
+
+
