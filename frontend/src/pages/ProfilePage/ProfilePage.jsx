@@ -66,7 +66,9 @@ export const ProfilePage = () => {
     return <div>No profile found</div>;
   }
 
-  const isOwner = true;
+  const token = localStorage.getItem("token");
+  const payload = JSON.parse(atob(token.split(".")[1]));
+  const isOwner = payload.sub === profile_id;
 
   return (
     <div className="profile-page">

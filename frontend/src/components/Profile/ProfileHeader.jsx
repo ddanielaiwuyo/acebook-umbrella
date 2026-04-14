@@ -1,4 +1,3 @@
-import React from "react";
 import "./ProfileHeader.css";
 
 const ProfileHeader = ({ name, profilePic, isOwner }) => {
