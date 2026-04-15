@@ -5,6 +5,7 @@ const Post = require("../models/post");
 async function getFeedPosts(req, res) {
   try {
     const posts = await Post.find()
+      .sort({ createdAt: -1 })
       .populate("owner", "firstName lastName")
       .populate({
         path: "comments",

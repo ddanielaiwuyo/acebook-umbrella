@@ -18,7 +18,6 @@ export function FeedPage() {
     if (loggedIn) {
       getPosts(token)
         .then((data) => {
-          console.log(data);
           if (data.ok) {
             setPosts(data.posts);
             setError("");

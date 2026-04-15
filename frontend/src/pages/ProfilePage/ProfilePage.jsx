@@ -67,7 +67,9 @@ export const ProfilePage = () => {
 		return <div>No profile found</div>;
 	}
 
-	const isOwner = profileInfo._id.toString() === loggedInUserId?.toString();
+	const token = localStorage.getItem("token");
+	const payload = JSON.parse(atob(token.split(".")[1]));
+	const isOwner = payload.sub === profile_id;
 
 	return (
 		<div className="profile-page">
@@ -75,7 +77,6 @@ export const ProfilePage = () => {
 				name={`${profileInfo.firstName} ${profileInfo.lastName}`}
 				profilePic={profileInfo.profilePic}
 				isOwner={isOwner}
-				otherUserId={profileInfo._id}
 			/>
 
 			<div className="profile-columns">

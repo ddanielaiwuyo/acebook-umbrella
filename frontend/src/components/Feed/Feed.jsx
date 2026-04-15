@@ -3,6 +3,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
 import { MdOutlineAddCircle } from "react-icons/md";
 import "./Feed.css";
+import { createComment } from "../../services/posts";
 
 function MetaInfo({ firstName, lastName, profilePic }) {
   return (
@@ -24,7 +25,7 @@ function PopUp() {
         <IoChatbubbleEllipsesSharp style={{ width: 40, height: 40 }} />
         <div className="prompt">Whats on your mind?</div>
         <span className="add-post-icon">
-          <a href="#">
+          <a href="/post">
             {" "}
             <MdOutlineAddCircle style={{ width: 30, height: 30 }} />{" "}
           </a>
@@ -74,20 +75,37 @@ function LikeButton(props) {
 // Other ways like creating a new page, or a dropdown affected UX or layout, in the way that I did it.
 // This is just a test version to get something working and when a final design is ready, this can be scrapped away
 function CommentSection(props) {
-  const { comments } = props;
+  const { comments, post_id } = props;
   const [showComments, setShowComments] = useState(false);
-  let showPanelClass = "comments-panel";
-  const toggleCommentSection = () => {
-    if (!showComments) {
-      setShowComments(true);
-    } else {
-      setShowComments(false);
+  // <<<<<<< HEAD
+  // state for the input
+  const [newComment, setNewComment] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const toggleCommentSection = () => setShowComments(!showComments);
+
+  // submitting a comment
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (!newComment.trim()) return;
+
+    setIsSubmitting(true);
+    try {
+      const token = localStorage.getItem("token");
+      const data = await createComment(token, post_id, newComment);
+      comments.push(data.comment);
+      localStorage.setItem("token", data.token);
+
+      setNewComment("");
+    } catch (err) {
+      alert("Error posting comment: " + err.message);
+      console.log(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  if (showComments) {
-    showPanelClass = "comments-panel open";
-  }
+  let showPanelClass = showComments ? "comments-panel open" : "comments-panel";
 
   return (
     <>
@@ -95,18 +113,37 @@ function CommentSection(props) {
         className="post-likes-icon comments-icon"
         onClick={toggleCommentSection}
       >
-        Comments
+        Comments ({comments.length})
       </div>
+
       <div className={showPanelClass}>
         {comments.map((comment, index) => (
           <div key={index} className="comment">
             <p className="comment-owner">
-              {comment.owner.firstName} {comment.owner.lastName}
+              {/* To avoid React from breaking when a new comment is made */}
+              {comment.owner?.firstName ?? ""} {comment.owner?.lastName ?? ""}
             </p>
             <p className="comment-message">{comment.message}</p>
           </div>
         ))}
-        <button onClick={toggleCommentSection}>Close</button>
+
+        {/* the form for writing a new comment */}
+        <form onSubmit={handleCommentSubmit} className="comment-input-form">
+          <input
+            type="text"
+            placeholder="Write a comment..."
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            disabled={isSubmitting}
+          />
+          <button type="submit" disabled={isSubmitting || !newComment.trim()}>
+            {isSubmitting ? "..." : "Post"}
+          </button>
+        </form>
+
+        <button onClick={toggleCommentSection} className="close-panel-btn">
+          Close
+        </button>
       </div>
     </>
   );
@@ -116,6 +153,7 @@ const AVATAR_URL = "https://api.dicebear.com/7.x/adventurer/svg?";
 
 function PostCard(props) {
   const { owner, content, likeCount, createdAt, comments } = props.post;
+  const post_id = props.post._id;
   let datePosted = new Date(createdAt).toDateString();
   // <div className="post-content">
   // 	<img src={`${avatar_url}?seed=${owner.name}`} alt={owner.name} />
@@ -136,8 +174,8 @@ function PostCard(props) {
           <div className="post-likes-icon">
             <LikeButton likeCount={likeCount} />
           </div>
-          <CommentSection comments={comments} />
           <div className="post-likes-icon">{datePosted} </div>
+          <CommentSection comments={comments} post_id={post_id} />
         </div>
       </div>
     </>
@@ -155,7 +193,7 @@ function Feed(props) {
       <div className="feed-container">
         <PopUp />
         {posts.map((post) => (
-          <PostCard key={post._id} post={post} />
+          <PostCard key={post._id} post={post} post_id={post._id} />
         ))}
       </div>
     </>

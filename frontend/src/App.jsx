@@ -1,8 +1,8 @@
 import {
-	createBrowserRouter,
-	RouterProvider,
-	Routes,
-	Route,
+  createBrowserRouter,
+  RouterProvider,
+  Routes,
+  Route,
 } from "react-router-dom";
 
 import "./App.css";
@@ -14,6 +14,7 @@ import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { FriendsPage } from "./pages/Friends/FriendsPage";
 import { ConversationPage } from "./pages/Messages/ConversationPage";
 import { InboxPage } from "./pages/Messages/InboxPage";
+import { CreatePostPage } from "./pages/Post/CreatePostPage.jsx";
 
 import NavBar from "./components/NavBar/NavBar";
 import Layout from "./components/NavBar/Layout";
@@ -49,6 +50,14 @@ const router = createBrowserRouter([
 		element: (
 			<Layout>
 				<FeedPage />
+			</Layout>
+		),
+	},
+	{
+		path: "/post",
+		element: (
+			<Layout>
+				<CreatePostPage />
 			</Layout>
 		),
 	},

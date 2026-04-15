@@ -1,4 +1,3 @@
-import React from "react";
 import "./FriendList.css";
 import { useNavigate } from "react-router-dom";
 
@@ -9,11 +8,16 @@ const FriendList = ({ friends }) => {
       <h3>Friends</h3>
       <div className="friend-grid">
         {friends.map((friend) => (
-          <div key={friend._id} className="friend-item" onClick={() => navigate(`/profile/${friend._id}`)} style={{ cursor: "pointer" }}>
+          <div
+            key={friend._id}
+            className="friend-item"
+            onClick={() => navigate(`/profile/${friend._id}`)}
+            style={{ cursor: "pointer" }}
+          >
             <img
               src={
                 friend.profilePic ||
-                `https://api.dicebear.com/7.x/adventurer/svg?seed=${friend.firstName}${friend.lastName}` 
+                `https://api.dicebear.com/7.x/adventurer/svg?seed=${friend.firstName}${friend.lastName}`
               }
               alt={`${friend.firstName} ${friend.lastName}`}
               width={60}

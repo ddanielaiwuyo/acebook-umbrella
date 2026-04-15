@@ -24,7 +24,6 @@ if (!CONNECTION_STRING) {
  * 	john@example.com, password1234
  * 	nadia@example.com, password1234
  */
-
 async function seedDatabase() {
 	const hashedPassword = await bcrypt.hash("password1234", 10);
 	await mongoose.connect(CONNECTION_STRING);
@@ -318,50 +317,55 @@ async function seedDatabase() {
 
 	await mongoose.connection.close();
 }
-try {
-	seedDatabase().then(
-		(_success) => {
-			console.log("✅ ☄️ Done seeding database...\n");
-			console.log("DUMMY DATA");
-			console.table([
-				{
-					fullName: "Sam Lavin",
-					email: "sam@example.com",
-					password: "password1234",
-				},
-				{
-					fullName: "John Gjenset ",
-					email: "john@example.com",
-					password: "password1234",
-				},
-				{
-					fullName: "Tom Delande",
-					email: "tom@example.com",
-					password: "password1234",
-				},
-				{
-					fullName: "Paul Mcpherson",
-					email: "paul@example.com",
-					password: "password1234",
-				},
-				{
-					fullName: "Nadia Neuwman",
-					email: "nadia@example.com",
-					password: "password1234",
-				},
-				{
-					fullName: "Billy Campbell",
-					email: "billy@example.com",
-					password: "password1234",
-				},
-			]);
-		},
-		(err) => {
-			console.error("⚠️ Oops, an error occured while seeding...");
-			console.error(err);
-		},
-	);
-} catch (err) {
-	console.error(err);
-	console.error(err.stack);
+// Only auto-run if called directly (node seed.js), not when require'd
+if (require.main === module) {
+	try {
+		seedDatabase().then(
+			(_success) => {
+				console.log("✅ ☄️ Done seeding database...\n");
+				console.log("DUMMY DATA");
+				console.table([
+					{
+						fullName: "Sam Lavin",
+						email: "sam@example.com",
+						password: "password1234",
+					},
+					{
+						fullName: "John Gjenset ",
+						email: "john@example.com",
+						password: "password1234",
+					},
+					{
+						fullName: "Tom Delande",
+						email: "tom@example.com",
+						password: "password1234",
+					},
+					{
+						fullName: "Paul Mcpherson",
+						email: "paul@example.com",
+						password: "password1234",
+					},
+					{
+						fullName: "Nadia Neuwman",
+						email: "nadia@example.com",
+						password: "password1234",
+					},
+					{
+						fullName: "Billy Campbell",
+						email: "billy@example.com",
+						password: "password1234",
+					},
+				]);
+			},
+			(err) => {
+				console.error("⚠️ Oops, an error occured while seeding...");
+				console.error(err);
+			},
+		);
+	} catch (err) {
+		console.error(err);
+		console.error(err.stack);
+	}
 }
+
+module.exports = seedDatabase;
