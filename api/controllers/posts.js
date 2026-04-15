@@ -66,7 +66,6 @@ const createComment = async (req, res) => {
   
     const header = req.headers
     const splitHeaders = header.authorization.split(" ")[1]
-    console.log(splitHeaders);
     const result = decodeToken (splitHeaders)
     const user_id = result.sub
     const comment = new Comment({

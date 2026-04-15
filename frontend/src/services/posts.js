@@ -20,7 +20,7 @@ export async function getPosts(token) {
 }
 
 export async function createComment(token, post_id, message) {
-  const requestOptions ={
+  const requestOptions = {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -28,10 +28,9 @@ export async function createComment(token, post_id, message) {
     },
     body: JSON.stringify({
       post_id: post_id,
-      message: message
+      message: message,
     }),
   };
-console.log("I am here", token);
   const response = await fetch(`${BACKEND_URL}/posts/comments`, requestOptions);
 
   if (response.status !== 201) {
@@ -40,5 +39,5 @@ console.log("I am here", token);
   }
 
   const data = await response.json();
-  return data
+  return data;
 }
