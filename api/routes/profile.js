@@ -11,11 +11,11 @@ router.get("/:userId", async (req, res) => {
     // Gets user and adds the friends
     const user = await User.findById(userId).populate(
       "friends",
-      "firstName lastName profilePic"
+      "firstName lastName profilePic",
     );
 
     if (!user) {
-      return res.status(404).json({ok: false, message: "User not found" });
+      return res.status(404).json({ ok: false, message: "User not found" });
     }
 
     // Get the user's posts only
@@ -25,7 +25,9 @@ router.get("/:userId", async (req, res) => {
 
     //combined profile data of user only
     res.status(200).json({
-      ok: true, message: "OK", data: {
+      ok: true,
+      message: "OK",
+      data: {
         _id: user._id,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -40,9 +42,11 @@ router.get("/:userId", async (req, res) => {
       },
     });
   } catch (err) {
-    console.error("Could not get user profile", err)
+    console.error("Could not get user profile", err);
     console.error(err);
-    res.status(500).json({ok: false,  message: "Service is down, please try again later" });
+    res
+      .status(500)
+      .json({ ok: false, message: "Service is down, please try again later" });
   }
 });
 

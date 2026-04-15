@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const { connectToDatabase } = require("../db/db");
-const seedDatabase = require("../seed")
+const seedDatabase = require("../seed");
 
 beforeAll(async () => {
-	await seedDatabase()
-	await connectToDatabase();
+  await seedDatabase();
+  await connectToDatabase();
 });
 
 afterAll(async () => {
-	await mongoose.connection.close(true);
+  await mongoose.connection.close(true);
 });
