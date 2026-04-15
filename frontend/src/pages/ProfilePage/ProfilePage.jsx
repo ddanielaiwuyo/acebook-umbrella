@@ -12,40 +12,39 @@ export const ProfilePage = () => {
   const [profileInfo, setProfileInfo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
- 
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if(!token) {
+    if (!token) {
       navigate("/login");
       return;
     }
 
     if (!profile_id) {
-    const payload = JSON.parse(atob(token.split(".")[1]));
-    navigate(`/profile/${payload.sub}`, { replace: true });
-    return;
-  }
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      navigate(`/profile/${payload.sub}`, { replace: true });
+      return;
+    }
 
     const fetchProfile = async () => {
-      try{
-          const res = await fetch(`http://localhost:3000/profile/${profile_id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          const body = await res.json()
+      try {
+        const res = await fetch(`http://localhost:3000/profile/${profile_id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const body = await res.json();
 
-          console.log(body); // delete this later - don't forget!
+        console.log(body); // delete this later - don't forget!
 
-          if (body.ok) {
-              setProfileInfo(body.data)
-          } else {
-              setErrorMessage(body.message)
-          }
-      } catch(err) {
-          console.error(err)
-          setErrorMessage("Service is down, please try again later")
+        if (body.ok) {
+          setProfileInfo(body.data);
+        } else {
+          setErrorMessage(body.message);
+        }
+      } catch (err) {
+        console.error(err);
+        setErrorMessage("Service is down, please try again later");
       } finally {
         setLoading(false);
       }
@@ -72,7 +71,6 @@ export const ProfilePage = () => {
 
   return (
     <div className="profile-page">
-
       <ProfileHeader
         name={`${profileInfo.firstName} ${profileInfo.lastName}`}
         profilePic={profileInfo.profilePic}
@@ -80,7 +78,6 @@ export const ProfilePage = () => {
       />
 
       <div className="profile-columns">
-
         <div className="left-column">
           <Intro profileInfo={profileInfo} />
           <FriendList friends={profileInfo.friends} />
@@ -96,7 +93,6 @@ export const ProfilePage = () => {
             ))}
           </div>
         </div>
-
       </div>
     </div>
   );
