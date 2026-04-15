@@ -47,24 +47,22 @@ function CommentSection(props) {
 
   const toggleCommentSection = () => setShowComments(!showComments);
 
-  // handles submit
+  // submitting a comment 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     if (!newComment.trim()) return;
 
     setIsSubmitting(true);
     try {
-      const testNewComment = {
-        owner: {name: "Jim Bob"},
-        message: "Hi my name is Jim Bob"
-      }
-      comments.push(testNewComment);
-      const token = localStorage.getItem("token")
+      
+      const token = localStorage.getItem("token");
+      const data = await createComment(token, post_id, newComment);
+      comments.push(data.comment);
+      localStorage.setItem("token", data.token)
       // const data = await createComment(token, post_id, newComment);
-      console.log(token);
+      
       
       setNewComment("");
-      alert("Comment posted!"); 
       
     } catch (err) {
       alert("Error posting comment: " + err.message);
