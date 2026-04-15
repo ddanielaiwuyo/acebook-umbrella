@@ -23,53 +23,106 @@ if (!CONNECTION_STRING) {
  * 	john@example.com, password1234
  * 	nadia@example.com, password1234
  */
-
 async function seedDatabase() {
   const hashedPassword = await bcrypt.hash("password1234", 10);
   await mongoose.connect(CONNECTION_STRING);
 
   // Clear all documents before reseeding
+  console.log("⚠️ Clearing database\n");
   await User.deleteMany({});
   await Post.deleteMany({});
   await Comment.deleteMany({});
 
+  console.log("🌪️  Seeding database\n");
   // Create users
   const sam = await User.create({
-    firstName:"Sam",
+    firstName: "Sam",
     lastName: "Lavin",
     email: "sam@example.com",
     password: hashedPassword,
+    bio: "Coding and Coffee",
+    location: "London",
+    work: "Software Engineer",
+    birthday: "1995-05-10",
+    joined: "2025",
+    profilePic: "",
   });
   const john = await User.create({
     firstName: "John",
     lastName: "Gjenset",
     email: "john@example.com",
     password: hashedPassword,
+    bio: "Hate Coding and Coffee",
+    location: "London",
+    work: "Not Software Engineer",
+    birthday: "1999-06-11",
+    joined: "2026",
+    profilePic: "",
   });
   const tom = await User.create({
     firstName: "Tom",
     lastName: "Delande",
     email: "tom@example.com",
     password: hashedPassword,
+    bio: "Loves Coding and Coffee",
+    location: "Seattle",
+    work: "Software Engineer",
+    birthday: "2000-05-10",
+    joined: "2024",
+    profilePic: "",
   });
   const paul = await User.create({
     firstName: "Paul",
     lastName: "Mcpherson",
     email: "paul@example.com",
     password: hashedPassword,
+    bio: "Coding",
+    location: "London",
+    work: "Systems Engineer",
+    birthday: "2003-05-10",
+    joined: "2023",
+    profilePic: "",
   });
   const nadia = await User.create({
     firstName: "Nadia",
     lastName: "Neuwman",
     email: "nadia@example.com",
     password: hashedPassword,
+    bio: "Incoming",
+    location: "Arizona",
+    work: "Frontend Engineer",
+    birthday: "2002-05-10",
+    joined: "2025",
+    profilePic: "",
   });
   const billy = await User.create({
     firstName: "Billy",
     lastName: "Campbell",
     email: "billy@example.com",
     password: hashedPassword,
+    bio: "Coding and Coding",
+    location: "Riyadh",
+    work: "Engineer",
+    birthday: "2006-05-10",
+    joined: "2023",
+    profilePic: "",
   });
+
+  // Friendships for testing
+  sam.friends = [john._id, nadia._id];
+  john.friends = [sam._id, tom._id];
+  tom.friends = [john._id];
+  paul.friends = [sam._id];
+  nadia.friends = [sam._id, billy._id];
+  billy.friends = [nadia._id];
+
+  // saves users after updating friends
+  await sam.save();
+  await john.save();
+  await tom.save();
+  await paul.save();
+  await nadia.save();
+  await billy.save();
 
   // // Post 1
   const post1 = await Post.create({
@@ -232,16 +285,55 @@ async function seedDatabase() {
 
   await mongoose.connection.close();
 }
-try {
-  seedDatabase().then(
-    (success) => {
-      console.log("Success in creating dummy posts", success);
-    },
-    (err) => {
-      console.log("Error occured creating dummy posts", err);
-    },
-  );
-} catch (err) {
-  console.error(err);
-  console.error(err.stack);
+// Only auto-run if called directly (node seed.js), not when require'd
+if (require.main === module) {
+  try {
+    seedDatabase().then(
+      (_success) => {
+        console.log("✅ ☄️ Done seeding database...\n");
+        console.log("DUMMY DATA");
+        console.table([
+          {
+            fullName: "Sam Lavin",
+            email: "sam@example.com",
+            password: "password1234",
+          },
+          {
+            fullName: "John Gjenset ",
+            email: "john@example.com",
+            password: "password1234",
+          },
+          {
+            fullName: "Tom Delande",
+            email: "tom@example.com",
+            password: "password1234",
+          },
+          {
+            fullName: "Paul Mcpherson",
+            email: "paul@example.com",
+            password: "password1234",
+          },
+          {
+            fullName: "Nadia Neuwman",
+            email: "nadia@example.com",
+            password: "password1234",
+          },
+          {
+            fullName: "Billy Campbell",
+            email: "billy@example.com",
+            password: "password1234",
+          },
+        ]);
+      },
+      (err) => {
+        console.error("⚠️ Oops, an error occured while seeding...");
+        console.error(err);
+      },
+    );
+  } catch (err) {
+    console.error(err);
+    console.error(err.stack);
+  }
 }
+
+module.exports = seedDatabase;

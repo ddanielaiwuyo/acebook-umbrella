@@ -1,9 +1,17 @@
+import "./FriendProfile.css";
+
 export function FriendProfile(props) {
 	return (
 		<div className="profile">
-			<img src={props.profileImg} alt={`Profile picture of ${props.profileName}`} />
-            <p>{props.profileName}</p>
-            {props.children}
+			<div className="profile-info">
+				<img
+					src={props.profileImg}
+					alt={`Profile picture of ${props.profileName}`}
+					className="profileimg"
+				/>
+				<p className="profilename">{props.profileName}</p>
+			</div>
+			{props.children}
 		</div>
 	);
 }

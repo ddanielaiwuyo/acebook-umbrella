@@ -1,6 +1,39 @@
 import { useState } from "react";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { IoChatbubbleEllipsesSharp } from "react-icons/io5";
+import { MdOutlineAddCircle } from "react-icons/md";
 import "./Feed.css";
 import { createComment } from "../../services/posts";
+
+function MetaInfo({ firstName, lastName, profilePic }) {
+  return (
+    <>
+      <div className="meta">
+        <img src={profilePic} className="profile-picture" />
+        <p className="post-title">
+          {firstName} {lastName}
+        </p>
+      </div>
+    </>
+  );
+}
+
+function PopUp() {
+  return (
+    <>
+      <div className="pop-up-container">
+        <IoChatbubbleEllipsesSharp style={{ width: 40, height: 40 }} />
+        <div className="prompt">Whats on your mind?</div>
+        <span className="add-post-icon">
+          <a href="/post">
+            {" "}
+            <MdOutlineAddCircle style={{ width: 30, height: 30 }} />{" "}
+          </a>
+        </span>
+      </div>
+    </>
+  );
+}
 
 function LikeButton(props) {
   let { likeCount } = props;
@@ -23,7 +56,12 @@ function LikeButton(props) {
     <>
       <div>
         <button className="like-button post-likes-icon" onClick={handleClick}>
-          Likes {likes}
+          {liked ? (
+            <FaHeart color="red" style={{ width: 20, height: 20 }} />
+          ) : (
+            <FaRegHeart style={{ width: 20, height: 20 }} />
+          )}
+          <span className="like-count"> {likes} </span>
         </button>
       </div>
     </>
@@ -69,6 +107,12 @@ function CommentSection(props) {
       console.log(err)
     } finally {
       setIsSubmitting(false);
+  let showPanelClass = "comments-panel";
+  const toggleCommentSection = () => {
+    if (!showComments) {
+      setShowComments(true);
+    } else {
+      setShowComments(false);
     }
   };
 
@@ -111,15 +155,27 @@ function CommentSection(props) {
   );
 }
 
+const AVATAR_URL = "https://api.dicebear.com/7.x/adventurer/svg?";
+
 function PostCard(props) {
   const { owner, content, likeCount, createdAt, comments } = props.post;
   const post_id = props.post._id;
   let datePosted = new Date(createdAt).toDateString();
+  // <div className="post-content">
+  // 	<img src={`${avatar_url}?seed=${owner.name}`} alt={owner.name} />
+  // </div>
   return (
     <>
       <div className="post-card-container">
-        <div className="post-title">{owner.name} </div>
+        <div>
+          <MetaInfo
+            firstName={owner.firstName}
+            lastName={owner.lastName}
+            profilePic={`${AVATAR_URL}seed=${owner.firstName}&size=45`}
+          />
+        </div>
         <div className="post-content">{content}</div>
+
         <div className="post-icon-container">
           <div className="post-likes-icon">
             <LikeButton likeCount={likeCount} />
@@ -131,6 +187,7 @@ function PostCard(props) {
     </>
   );
 }
+
 /**
  * Takes all posts from the database and renders them
  * using PostCard Component
@@ -140,6 +197,7 @@ function Feed(props) {
   return (
     <>
       <div className="feed-container">
+        <PopUp />
         {posts.map((post) => (
           <PostCard key={post._id} post={post} post_id={post._id} />
         ))}
