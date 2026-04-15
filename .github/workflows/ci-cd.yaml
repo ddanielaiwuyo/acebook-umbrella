@@ -1,0 +1,31 @@
+name: CI/CD Pipeline
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+permissions:
+  contents: read
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Installing Node 
+        uses: actions/setup-node@v3
+        with: 
+          node-version: '22'
+      - name: Running API tests
+        working-directory: ./api
+        env:
+          MONGODB_URL: mongodb://localhost:27017/acebook_test
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        run: | 
+          npm install 
+          npm test
