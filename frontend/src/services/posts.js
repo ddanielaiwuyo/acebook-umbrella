@@ -31,10 +31,11 @@ export async function createComment(token, post_id, message) {
       message: message
     }),
   };
-
+console.log("I am here", token);
   const response = await fetch(`${BACKEND_URL}/posts/comments`, requestOptions);
 
   if (response.status !== 201) {
+    console.log(response.body);
     throw new Error("Unable to create comment");
   }
 

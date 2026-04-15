@@ -37,8 +37,9 @@ function LikeButton(props) {
 // Other ways like creating a new page, or a dropdown affected UX or layout, in the way that I did it.
 // This is just a test version to get something working and when a final design is ready, this can be scrapped away
 function CommentSection(props) {
-  const { comments, post_id, token } = props;
+  const { comments, post_id } = props;
   const [showComments, setShowComments] = useState(false);
+  console.log(comments, post_id);
   
   // state for the input
   const [newComment, setNewComment] = useState("");
@@ -53,14 +54,21 @@ function CommentSection(props) {
 
     setIsSubmitting(true);
     try {
-      const data = await createComment(token, post_id, newComment);
-      console.log("Comment added:", data);
+      const testNewComment = {
+        owner: {name: "Jim Bob"},
+        message: "Hi my name is Jim Bob"
+      }
+      comments.push(testNewComment);
+      const token = localStorage.getItem("token")
+      // const data = await createComment(token, post_id, newComment);
+      console.log(token);
       
       setNewComment("");
       alert("Comment posted!"); 
       
     } catch (err) {
       alert("Error posting comment: " + err.message);
+      console.log(err)
     } finally {
       setIsSubmitting(false);
     }
@@ -107,6 +115,7 @@ function CommentSection(props) {
 
 function PostCard(props) {
   const { owner, content, likeCount, createdAt, comments } = props.post;
+  const post_id = props.post._id;
   let datePosted = new Date(createdAt).toDateString();
   return (
     <>
@@ -118,7 +127,7 @@ function PostCard(props) {
             <LikeButton likeCount={likeCount} />
           </div>
           <div className="post-likes-icon">{datePosted} </div>
-          <CommentSection comments={comments} />
+          <CommentSection comments={comments} post_id={post_id}/>
         </div>
       </div>
     </>
@@ -134,7 +143,7 @@ function Feed(props) {
     <>
       <div className="feed-container">
         {posts.map((post) => (
-          <PostCard key={post._id} post={post} />
+          <PostCard key={post._id} post={post} post_id={post._id} />
         ))}
       </div>
     </>
