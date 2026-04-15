@@ -1,6 +1,6 @@
 import './RequestButtons.css'
 
-import { acceptFriendRequest, deleteFriendRequest } from "../services/friends";
+import { acceptFriendRequest, deleteFriendRequest } from "../../services/friends";
 
 export function RequestButtons(props) {
   async function handleAcceptButtonClick() {

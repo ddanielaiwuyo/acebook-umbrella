@@ -1,4 +1,4 @@
-import { removeFriend } from "../services/friends";
+import { removeFriend } from "../../services/friends";
 
 export function RemoveButton(props) {
   async function handleClick() {
