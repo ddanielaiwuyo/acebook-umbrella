@@ -6,11 +6,23 @@ async function addFriendRequest(req, res) {
 		const receiverId = req.params.id;
 		const sender = await User.findById(senderId);
 		const receiver = await User.findById(receiverId);
+
+		if (!sender || !receiver) {
+			return res.status(404).json({ ok: false, message: "User not found" })
+		}
+
+
 		const alreadySent = sender.sentFriendRequests.find(
 			(request) => request.user.toString() === receiverId,
 		);
 		if (alreadySent) {
 			return res.status(400).json({ message: "Friend request already sent" });
+		}
+		const alreadyFriends = sender.friends.find(
+			(id) => id.toString() === receiverId,
+		);
+		if (alreadyFriends) {
+			return res.status(400).json({ message: "Already friends" });
 		}
 		sender.sentFriendRequests.push({
 			user: receiverId,
@@ -46,12 +58,25 @@ async function acceptFriendRequest(req, res) {
 
 		const receiver = await User.findById(receiverId);
 		const sender = await User.findById(senderId);
+
+		if (!sender || !receiver) {
+			return res.status(404).json({ ok: false, message: "User not found" })
+		}
+
 		const alreadyFriends = receiver.friends.find(
 			(id) => id.toString() === senderId,
 		);
 		if (alreadyFriends) {
 			return res.status(400).json({ message: "Already friends" });
 		}
+
+		const friendRequestExists = receiver.receivedFriendRequests.find(
+			(request) => request.user.toString() === senderId,
+		);
+		if (!friendRequestExists) {
+			return res.status(400).json({ message: "Friend request does not exist" });
+		}
+
 		receiver.friends.push(senderId);
 
 		sender.friends.push(receiverId);
@@ -89,6 +114,24 @@ async function deleteFriendRequest(req, res) {
 		const receiver = await User.findById(receiverId);
 		const sender = await User.findById(senderId);
 
+		if (!sender || !receiver) {
+			return res.status(404).json({ ok: false, message: "User not found" })
+		}
+
+		const alreadyFriends = receiver.friends.find(
+			(id) => id.toString() === senderId,
+		);
+		if (alreadyFriends) {
+			return res.status(400).json({ message: "Already friends" });
+		}
+
+		const friendRequestExists = receiver.receivedFriendRequests.find(
+			(request) => request.user.toString() === senderId,
+		);
+		if (!friendRequestExists) {
+			return res.status(400).json({ message: "Friend request does not exist" });
+		}
+
 		sender.sentFriendRequests.pull({
 			user: receiverId,
 		});
@@ -120,6 +163,11 @@ async function getFriendRequests(req, res) {
 		const user = await User.findById(userId).populate(
 			"receivedFriendRequests.user",
 		);
+
+		if (!userId || !user) {
+			return res.status(404).json({ ok: false, message: "User not found" })
+		}
+
 		const userFriendrequests = user.receivedFriendRequests;
 		res.status(200).json({
 			ok: true,
@@ -140,6 +188,10 @@ async function getFriends(req, res) {
 	try {
 		const userId = req.user_id;
 		const user = await User.findById(userId).populate("friends");
+		if (!userId || !user) {
+			return res.status(404).json({ ok: false, message: "User not found" })
+		}
+
 		const userFriends = user.friends;
 		res.status(200).json({
 			ok: true,
@@ -162,6 +214,11 @@ async function getOtherUsers(req, res) {
 	try {
 		const userId = req.user_id;
 		const user = await User.findById(userId);
+
+		if (!userId || !user) {
+			return res.status(404).json({ ok: false, message: "User not found" })
+		}
+
 		const userFriendsId = user.friends;
 		const userSentRequestId = user.sentFriendRequests.map(
 			(request) => request.user,
@@ -202,6 +259,17 @@ async function removeFriends(req, res) {
 		const removerUser = await User.findById(removerId);
 		const removedUser = await User.findById(removedId);
 
+		if (!removerUser || !removedUser) {
+			return res.status(404).json({ ok: false, message: "User not found" })
+		}
+
+		const areFriends = removerUser.friends.find(
+			(id) => id.toString() === removedId,
+		);
+		if (!areFriends) {
+			return res.status(400).json({ message: "Users are not friends" });
+		}
+
 		removerUser.friends.pull(removedId);
 
 		removedUser.friends.pull(removerId);
@@ -212,7 +280,7 @@ async function removeFriends(req, res) {
 		res.status(200).json({ ok: true, message: "Friend removed successfully" });
 	} catch (error) {
 		console.error("Error occured while trying to remove friend");
-		console.log(error, error.stack);
+		console.log(error);
 		res.status(500).json({
 			ok: false,
 			message: "Sorry this service is down, please try again later",

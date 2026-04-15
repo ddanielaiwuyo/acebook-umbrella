@@ -5,7 +5,7 @@ const { generateToken, decodeToken } = require("../lib/token");
 // get all posts refactored for errors
 const getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().sort({ createdAt: -1 });
     const token = generateToken(req.user_id);
     res.status(200).json({ posts: posts, token: token });
   } catch (error) {
@@ -16,17 +16,46 @@ const getAllPosts = async (req, res) => {
 };
 
 // create a post (refactored for errors)
+// const createPost = async (req, res) => {
+//   try {
+//     const post = new Post(req.body);
+//     await post.save();
+
+//     const newToken = generateToken(req.user_id);
+//     res.status(201).json({ message: "Post created", token: newToken });
+//   } catch (error) {
+//     res
+//       .status(400)
+//       .json({ message: "Error creating post!", error: error.message });
+//   }
+// };
 const createPost = async (req, res) => {
   try {
-    const post = new Post(req.body);
-    await post.save();
+    const { title, content } = req.body;
 
-    const newToken = generateToken(req.user_id);
-    res.status(201).json({ message: "Post created", token: newToken });
+    const post = await Post.create({
+      title,
+      content,
+      owner: req.user_id,
+      likeCount: 0,
+    });
+
+    const populatedPost = await Post.findById(post._id)
+      .populate("owner")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "owner",
+          model: "User",
+        },
+      });
+
+    res.status(201).json(populatedPost);
   } catch (error) {
-    res
-      .status(400)
-      .json({ message: "Error creating post!", error: error.message });
+    res.status(400).json({
+      message: "Error creating post!",
+      error: error.message,
+    });
   }
 };
 
