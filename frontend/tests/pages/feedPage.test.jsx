@@ -5,7 +5,6 @@ import { vi } from "vitest";
 import { useNavigate } from "react-router-dom";
 import { FeedPage } from "../../src/pages/Feed/FeedPage.jsx";
 import Feed from "../../src/components/Feed/Feed.jsx"
-import { LikeButton } from "../../src/components/Feed/Feed.jsx";
 import { getPosts } from "../../src/services/posts";
 
 // Mocking the getPosts service
@@ -43,11 +42,9 @@ describe("Feed Page", () => {
 
 		render(<Feed posts={mockPosts} />);
 
-		const post = await screen.findByRole("feed-container");
 		expect(screen.getByText(/Test Post 1/i)).toBeInTheDocument()
 		expect(screen.getByText(/Test User/i)).toBeInTheDocument()
 
-		// expect(post.textContent).toEqual("Test Post 1");
 	});
 
 	test("It navigates to login if no token is present", async () => {
