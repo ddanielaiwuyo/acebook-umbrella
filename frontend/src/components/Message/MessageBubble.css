@@ -1,0 +1,47 @@
+.bubble-me,
+.bubble-them {
+	padding: 0px 12px;
+    max-width: 70%;
+	height: auto;
+	word-break: break-all;
+	overflow-wrap: break-word;
+	margin: 8px;
+	height: auto;
+}
+
+.bubble-me {
+	background-color: #8b1a1a;
+	color: #fff;
+	border-radius: 18px 18px 0 18px;
+}
+
+.bubble-them {
+	background-color: #2e1515;
+	color: #f0d0d0;
+	border-radius: 18px 18px 18px 0;
+}
+.content {
+	text-align: left;
+	height: auto;
+}
+
+.date {
+	font-size: 11px;
+	color: #8e8e93;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+.bubble-me-container {
+	align-items: flex-end;
+}
+
+.bubble-them-container {
+	align-items: flex-start;
+}
+
+.bubble-them-container,
+.bubble-me-container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
