@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const NotificationsController = require("../controllers/notifications");
-console.log(NotificationsController);
 
 router.get("/", NotificationsController.getNotifications);
 router.get("/unread-count", NotificationsController.getUnreadCount);
