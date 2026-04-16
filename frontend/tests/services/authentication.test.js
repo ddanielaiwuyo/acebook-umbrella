@@ -7,6 +7,15 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 // Mock fetch function
 createFetchMock(vi).enableMocks();
+// To prevent stderr messages from application obscuring test results
+beforeEach(() => {
+	vi.spyOn(console, 'error').mockImplementation(() => { })
+})
+
+afterEach(() => {
+	vi.restoreAllMocks()
+})
+
 
 describe("authentication service", () => {
 	describe("login", () => {
