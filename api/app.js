@@ -8,6 +8,7 @@ const friendsRouter = require("./routes/friends");
 const authenticationRouter = require("./routes/authentication");
 const feedRouter = require("./routes/feed");
 const profileRouter = require("./routes/profile");
+const notificationsRouter = require("./routes/notifications")
 const messagesRouter = require("./routes/messages")
 const tokenChecker = require("./middleware/tokenChecker");
 
@@ -27,6 +28,7 @@ app.use("/posts", tokenChecker, postsRouter);
 app.use("/feed", tokenChecker, feedRouter);
 app.use("/friends", tokenChecker, friendsRouter);
 app.use("/profile", tokenChecker, profileRouter);
+app.use("/notifications", tokenChecker, notificationsRouter)
 app.use("/messages", tokenChecker, messagesRouter)
 app.use("/tokens", authenticationRouter);
 

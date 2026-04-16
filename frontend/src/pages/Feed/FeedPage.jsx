@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { getPosts } from "../../services/posts";
@@ -11,6 +11,7 @@ export function FeedPage() {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -32,6 +33,23 @@ export function FeedPage() {
         });
     }
   }, [navigate]);
+
+
+  useEffect(() => {
+    if (location.state?.highlightPostId && posts.length > 0) {
+        setTimeout(() => {
+            const postElement = document.getElementById(location.state.highlightPostId);
+            if (postElement) {
+                postElement.scrollIntoView({ behavior: "smooth", block: "center" });
+                postElement.classList.add("highlighted-post");
+                setTimeout(() => postElement.classList.remove("highlighted-post"), 3000);
+            } else {
+                console.log("Post element not found, ID:", location.state.highlightPostId);
+            }
+        }, 100);
+    }
+}, [location.state, posts]);
+
 
   const token = localStorage.getItem("token");
   if (!token) {

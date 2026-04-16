@@ -1,266 +1,253 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
 
 .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: white;
-  height: 56px;
-  padding: 0 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  font-family: "Montserrat", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    height: 56px;
+    padding: 0 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    font-family: "Montserrat", sans-serif;
 }
 
 /* ── Left ── */
 .navbar-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
 }
 
 .navbar-logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: brown;
-  color: white;
-  font-size: 1.4rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: opacity 0.2s;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: brown;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
 }
 
 .navbar-logo-link:hover .navbar-logo {
-  opacity: 0.85;
+    opacity: 0.85;
 }
 
 /* Search */
 .navbar-search-wrapper {
-  position: relative;
+    position: relative;
 }
 
 .navbar-search {
-  background-color: #f0e8e8;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
-  font-size: 0.875rem;
-  font-family: "Montserrat", sans-serif;
-  width: 280px;
-  outline: none;
-  color: #333;
-  transition:
-    background-color 0.2s,
-    width 0.3s;
+    background-color: #f0e8e8;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    font-family: "Montserrat", sans-serif;
+    width: 280px;
+    outline: none;
+    color: #333;
+    transition: background-color 0.2s, width 0.3s;
 }
 
 .navbar-search:focus {
-  background-color: #e8d8d8;
-  width: 320px;
+    background-color: #e8d8d8;
+    width: 320px;
 }
 
 .navbar-search::placeholder {
-  color: #a07070;
+    color: #a07070;
 }
 
 .search-dropdown {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  min-width: 280px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
-  z-index: 200;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 280px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    z-index: 200;
 }
 
 .search-result {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  font-size: 0.875rem;
-  color: #333;
-  text-decoration: none;
-  transition: background-color 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    font-size: 0.875rem;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.15s;
 }
 
 .search-result:hover {
-  background-color: #f0e8e8;
-  color: brown;
+    background-color: #f0e8e8;
+    color: brown;
 }
 
 .search-result-icon {
-  font-size: 1.2rem;
-  color: #a07070;
-  flex-shrink: 0;
+    font-size: 1.2rem;
+    color: #a07070;
+    flex-shrink: 0;
 }
 
 /* ── Centre ── */
 .navbar-centre {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  flex: 1;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex: 1;
+    justify-content: center;
 }
 
 .nav-icon-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100px;
-  height: 48px;
-  font-size: 1.4rem;
-  color: #888;
-  text-decoration: none;
-  border-bottom: 3px solid transparent;
-  transition:
-    color 0.2s,
-    border-color 0.2s;
-  border-radius: 8px 8px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    width: 100px;
+    height: 48px;
+    font-size: 1.4rem;
+    color: #888;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    border-radius: 8px 8px 0 0;
 }
 
 .nav-icon-link:hover {
-  color: brown;
-  background-color: #f0e8e8;
+    color: brown;
+    background-color: #f0e8e8;
 }
 
 .nav-icon-link.active {
-  color: brown;
-  border-bottom: 3px solid brown;
+    color: brown;
+    border-bottom: 3px solid brown;
 }
 
 /* ── Right ── */
 .navbar-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-  justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    justify-content: flex-end;
 }
 
 /* Profile menu */
 .profile-menu-wrapper {
-  position: relative;
+    position: relative;
 }
 
 .navbar-avatar-btn {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: #888;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  border-radius: 50%;
-  padding: 4px;
-  transition:
-    color 0.2s,
-    background-color 0.2s;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #888;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    padding: 4px;
+    transition: color 0.2s, background-color 0.2s;
 }
 
 .navbar-avatar-btn:hover {
-  color: brown;
-  background-color: #f0e8e8;
+    color: brown;
+    background-color: #f0e8e8;
 }
 
 .profile-dropdown {
-  position: absolute;
-  top: calc(100% + 10px);
-  right: 0;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
-  min-width: 200px;
-  overflow: hidden;
-  z-index: 200;
-  animation: dropdownFade 0.15s ease;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    overflow: hidden;
+    z-index: 200;
+    animation: dropdownFade 0.15s ease;
 }
 
 @keyframes dropdownFade {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .profile-dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  font-family: "Montserrat", sans-serif;
-  color: #333;
-  text-decoration: none;
-  background: none;
-  border: none;
-  width: 100%;
-  cursor: pointer;
-  transition:
-    background-color 0.15s,
-    color 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    color: #333;
+    text-decoration: none;
+    background: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
 }
 
 .profile-dropdown-item:hover {
-  background-color: #f0e8e8;
-  color: brown;
+    background-color: #f0e8e8;
+    color: brown;
 }
 
 .profile-dropdown-item.logout {
-  color: #c0392b;
+    color: #c0392b;
 }
 
 .profile-dropdown-item.logout:hover {
-  background-color: #fdecea;
-  color: #a93226;
+    background-color: #fdecea;
+    color: #a93226;
 }
 
 .dropdown-icon {
-  font-size: 1rem;
-  flex-shrink: 0;
+    font-size: 1rem;
+    flex-shrink: 0;
 }
 
 .profile-dropdown-divider {
-  height: 1px;
-  background-color: #f0e8e8;
-  margin: 4px 0;
+    height: 1px;
+    background-color: #f0e8e8;
+    margin: 4px 0;
 }
 
 /* Auth links (logged out) */
 .navbar-auth-link {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: brown;
-  text-decoration: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  transition: background-color 0.2s;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: brown;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
 }
 
 .navbar-auth-link:hover {
-  background-color: #f0e8e8;
+    background-color: #f0e8e8;
 }
 
 .navbar-auth-link.primary {
-  background-color: brown;
-  color: white;
+    background-color: brown;
+    color: white;
 }
 
 .navbar-auth-link.primary:hover {
-  background-color: #8b2500;
+    background-color: #8b2500;
 }

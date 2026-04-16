@@ -198,3 +198,13 @@ button:hover {
 .prompt {
 	color: grey;
 }
+
+.highlighted-post {
+    animation: highlightFade 3s ease;
+    border-radius: 8px;
+}
+
+@keyframes highlightFade {
+    0%   { box-shadow: 0 0 0 3px #3498db; }
+    100% { box-shadow: none; }
+}

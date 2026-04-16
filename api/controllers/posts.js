@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const Comment = require("../models/comment");
+const Notification = require("../models/notification");
 const { generateToken, decodeToken } = require("../lib/token");
 
 // get all posts refactored for errors
@@ -77,6 +78,23 @@ const createComment = async (req, res) => {
     await Post.findByIdAndUpdate(post_id, {
         $push: { comments: comment._id }
     });
+
+    try {
+      const post = await Post.findById(post_id);
+      if (post && post.owner.toString() !== user_id.toString()) {
+        await Notification.create({
+          recipient: post.owner,
+          sender: user_id,
+          type: "comment",
+          post: post_id,
+        });
+      }
+    } catch (notifErr) {
+      console.error("Failed to create comment notification", notifErr);
+    }
+
+
+
 
     // Idk if we need a new token like in createPost ?? commented below
     const newToken = generateToken(user_id);

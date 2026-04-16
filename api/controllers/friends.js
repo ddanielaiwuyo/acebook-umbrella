@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Notification = require("../models/notification");
 
 async function addFriendRequest(req, res) {
 	try {
@@ -36,6 +37,16 @@ async function addFriendRequest(req, res) {
 
 		await sender.save();
 		await receiver.save();
+
+		try {
+    		await Notification.create({
+				recipient: receiverId,
+				sender: senderId,
+				type: "friend_request",
+    		});
+		} catch (notifErr) {
+    		console.error("Failed to create friend request notification", notifErr);
+	}
 
 		res
 			.status(200)
