@@ -59,6 +59,7 @@
 
 .box {
   background: #fff;
+  border: 2px solid brown;
   padding: 15px;
   border-radius: 12px;
   margin-bottom: 15px;
