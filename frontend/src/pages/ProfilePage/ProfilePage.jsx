@@ -88,7 +88,6 @@ export const ProfilePage = () => {
 					<div className="box">
 						{profileInfo.posts?.map((post) => (
 							<div key={post._id}>
-								<h4>{post.title}</h4>
 								<p>{post.content}</p>
 							</div>
 						))}
