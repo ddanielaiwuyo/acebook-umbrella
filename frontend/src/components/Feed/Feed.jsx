@@ -185,21 +185,6 @@ function PostCard(props) {
  * using PostCard Component
  * */
 function Feed(props) {
-	// <<<<<<< HEAD
-	//   const { posts } = props;
-	//   return (
-	//     <>
-	//       <div className="feed-container">
-	//         <PopUp />
-	//         {posts.map((post) => (
-	//           <div id ={post._id} key={post._id}>
-	//             <PostCard key={post._id} post={post} post_id={post._id} />
-	//           </div>
-	//         ))}
-	//       </div>
-	//     </>
-	//   );
-	// =======
 	const { posts } = props;
 	return (
 		<>
@@ -211,7 +196,6 @@ function Feed(props) {
 			</div>
 		</>
 	);
-	// >>>>>>> 35ade320798fa74784747a319a8ada4e053d48ae
 }
 
 export default Feed;
