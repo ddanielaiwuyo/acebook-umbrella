@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { FaHome, FaUserFriends, FaBell, FaUserCircle, FaSignOutAlt, FaUser } from "react-icons/fa";
+import { FaHome, FaUserFriends, FaBell, FaUserCircle, FaSignOutAlt, FaUser, FaRegComment } from "react-icons/fa";
 import "./NavBar.css";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
@@ -145,8 +145,15 @@ function NavBar() {
                             )}
                         </div>
                     </button>
+                    <Link
+                        to="/messages"
+                        className={`nav-icon-link ${isActive("/messages") ? "active" : ""}`}
+                        title="Messages"
+                    >
+                        <FaRegComment />
+                    </Link>
                 </div>
-            )}
+)}
 
             <div className="navbar-right">
                 {isLoggedIn ? (

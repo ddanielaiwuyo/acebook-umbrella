@@ -12,94 +12,112 @@ import { SignupPage } from "./pages/Signup/SignupPage";
 import { FeedPage } from "./pages/Feed/FeedPage";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { FriendsPage } from "./pages/Friends/FriendsPage";
+import { ConversationPage } from "./pages/Messages/ConversationPage";
+import { InboxPage } from "./pages/Messages/InboxPage";
 import { CreatePostPage } from "./pages/Post/CreatePostPage.jsx";
 
 import NavBar from "./components/NavBar/NavBar";
 import Layout from "./components/NavBar/Layout";
 import { NotificationsPage } from "./pages/Notifications/NotificationsPage.jsx";
 
+
 // docs: https://reactrouter.com/en/main/start/overview
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <Layout>
-        <HomePage />
-      </Layout>
-    ),
-  },
-  {
-    path: "/login",
-    element: (
-      <Layout>
-        <LoginPage />
-      </Layout>
-    ),
-  },
-  {
-    path: "/signup",
-    element: (
-      <Layout>
-        <SignupPage />
-      </Layout>
-    ),
-  },
-  {
-    path: "/feed",
-    element: (
-      <Layout>
-        <FeedPage />
-      </Layout>
-    ),
-  },
-  {
-    path: "/post",
-    element: (
-      <Layout>
-        <CreatePostPage />
-      </Layout>
-    ),
-  },
-  {
-    path: "/profile/:profile_id",
-    element: (
-      <Layout>
-        <ProfilePage />
-      </Layout>
-    ),
-  },
-  {
-    path: "/profile",
-    element: (
-      <Layout>
-        <ProfilePage />
-      </Layout>
-    ),
-  },
-  {
-    path: "/friends",
-    element: (
-      <Layout>
-        <FriendsPage />
-      </Layout>
-    ),
-  },
+	{
+		path: "/",
+		element: (
+			<Layout>
+				<HomePage />
+			</Layout>
+		),
+	},
+	{
+		path: "/login",
+		element: (
+			<Layout>
+				<LoginPage />
+			</Layout>
+		),
+	},
+	{
+		path: "/signup",
+		element: (
+			<Layout>
+				<SignupPage />
+			</Layout>
+		),
+	},
+	{
+		path: "/feed",
+		element: (
+			<Layout>
+				<FeedPage />
+			</Layout>
+		),
+	},
+	{
+		path: "/post",
+		element: (
+			<Layout>
+				<CreatePostPage />
+			</Layout>
+		),
+	},
+	{
+		path: "/profile/:profile_id",
+		element: (
+			<Layout>
+				<ProfilePage />
+			</Layout>
+		),
+	},
+	{
+		path: "/profile",
+		element: (
+			<Layout>
+				<ProfilePage />
+			</Layout>
+		),
+	},
+	{
+		path: "/friends",
+		element: (
+			<Layout>
+				<FriendsPage />
+			</Layout>
+		),
+	},
+	{
+		path: "/messages",
+		element: (
+			<Layout>
+				<InboxPage />
+			</Layout>
+		),
+	},
+	{
+		path: "/messages/:id",
+		element: (
+			<Layout>
+				<ConversationPage />
+			</Layout>
+		),
+	},
+  
   {
     path: "/notifications",
-    element: (
-      <Layout>
-        <NotificationsPage />
-      </Layout>
-    ),
+    element: <Layout><NotificationsPage /></Layout>,
   },
+
+
 ]);
 
 function App() {
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+	return (
+		<>
+			<RouterProvider router={router} />
+		</>
+	);
 }
 
 export default App;

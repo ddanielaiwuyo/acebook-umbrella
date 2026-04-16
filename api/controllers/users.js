@@ -78,9 +78,27 @@ async function search(req, res) {
 	}
 
 	try {
-		const users = await User.find({
-			email: { $regex: query, $options: "i" },
-		}).select("firstName lastName _id");
+        const parts = query.trim().split(/\s+/);
+        
+        let searchCondition;
+        if (parts.length >= 2) {
+            searchCondition = {
+                $and: [
+                    { firstName: { $regex: parts[0], $options: "i" } },
+                    { lastName: { $regex: parts[parts.length - 1], $options: "i" } },
+                ]
+            };
+        } else {
+            searchCondition = {
+                $or: [
+                    { firstName: { $regex: query, $options: "i" } },
+                    { lastName: { $regex: query, $options: "i" } },
+                ]
+            };
+        }
+
+        const users = await User.find(searchCondition).select("firstName lastName _id");
+
 
 		res.status(200).json({ ok: false, message: "OK", users });
 	} catch (err) {

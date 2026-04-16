@@ -1,115 +1,115 @@
 .feed-container {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  width: 50%;
-  gap: 10px;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	width: 50%;
+	gap: 10px;
 }
 .post-card-container {
   background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
+  border: 2px solid brown;
+  border-radius: 20px;
   padding: 16px 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
   max-width: 100%;
   /* border: 1px solid red; */
 }
 
 .post-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 700;
+	color: #1a1a1a;
+	margin-bottom: 8px;
 }
 
 .post-content {
-  font-size: 15px;
-  color: #444444;
-  line-height: 1.5;
-  margin-bottom: 12px;
+	font-size: 15px;
+	color: #444444;
+	line-height: 1.5;
+	margin-bottom: 12px;
 }
 
 .post-icon-container {
-  border-top: 1px solid #f0f0f0;
-  display: flex;
-  flex-direction: row;
-  /* justify-content: space-around; */
-  gap: 4px;
-  align-items: center;
-  padding-top: 8px;
+	border-top: 1px solid #f0f0f0;
+	display: flex;
+	flex-direction: row;
+	/* justify-content: space-around; */
+	gap: 4px;
+	align-items: center;
+	padding-top: 8px;
 }
 
 .post-likes-icon {
-  font-size: 13px;
-  color: #888888;
+	font-size: 13px;
+	color: #888888;
 }
 
 button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
-  color: #888888;
-  padding: 10px 20px;
-  border-radius: 6px;
-  border: 1px solid black;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 13px;
+	color: #888888;
+	padding: 10px 20px;
+	border-radius: 6px;
+	border: 1px solid black;
 }
 
 button:hover {
-  background-color: rgb(55, 51, 51);
-  color: white;
+	background-color: rgb(55, 51, 51);
+	color: white;
 }
 
 .like-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
-  color: #888888;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition:
-    background-color 0.2s,
-    color 0.2s;
-  display: flex;
-  gap: 4px;
-  align-items: center;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-size: 13px;
+	color: #888888;
+	padding: 6px 10px;
+	border-radius: 6px;
+	transition:
+		background-color 0.2s,
+		color 0.2s;
+	display: flex;
+	gap: 4px;
+	align-items: center;
 }
 
 .like-button:hover {
-  background-color: #fff0f0;
-  color: #e05555;
+	background-color: #fff0f0;
+	color: #e05555;
 }
 
 .like-button:active {
-  background-color: #ffe0e0;
-  margin: auto;
+	background-color: #ffe0e0;
+	margin: auto;
 }
 
 .comments-icon {
-  cursor: pointer;
-  padding: 6px 10px;
-  border-radius: 6px;
-  transition:
-    background-color 0.2s,
-    color 0.2s;
+	cursor: pointer;
+	padding: 6px 10px;
+	border-radius: 6px;
+	transition:
+		background-color 0.2s,
+		color 0.2s;
 }
 
 .comments-icon:hover {
-  background-color: #f0f4ff;
-  color: #4a6cf7;
+	background-color: #f0f4ff;
+	color: #4a6cf7;
 }
 
 .overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 99;
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.4);
+	z-index: 99;
 }
 
 .overlay.open {
-  display: block;
+	display: block;
 }
 
 .comments-panel {
@@ -119,7 +119,7 @@ button:hover {
   right: 0;
   height: 60vh;
   margin: auto;
-  border: 1px solid gold;
+  border: 2px solid rgb(208, 168, 158);
   max-width: 70%;
   background: white;
   border-radius: 20px 20px 0 0;
@@ -130,73 +130,73 @@ button:hover {
 }
 
 .comments-panel.open {
-  transform: translateY(0);
+	transform: translateY(0);
 }
 
 .comment {
-  border-bottom: 1px solid #f0f0f0;
-  padding: 10px 0;
+	border-bottom: 1px solid #f0f0f0;
+	padding: 10px 0;
 }
 
 .comment-owner {
-  font-size: 13px;
-  color: #1a1a1a;
-  font-weight: bold;
+	font-size: 13px;
+	color: #1a1a1a;
+	font-weight: bold;
 }
 
 .comment p {
-  font-size: 13px;
-  color: #444444;
-  margin: 4px 0 0 0;
+	font-size: 13px;
+	color: #444444;
+	margin: 4px 0 0 0;
 }
 
 .comments-panel button {
-  margin-top: 5px;
+	margin-top: 5px;
 }
 
 .meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
 .profile-picture {
-  border: 1px solid lightgrey;
-  border-radius: 100%;
+	border: 1px solid lightgrey;
+	border-radius: 100%;
 }
 
 /* AFTER */
 .post-content {
-  font-size: 15px;
-  color: #444444;
-  line-height: 1.5;
-  margin-bottom: 12px;
-  word-wrap: break-word;
-  white-space: pre-wrap;
+	font-size: 15px;
+	color: #444444;
+	line-height: 1.5;
+	margin-bottom: 12px;
+	word-wrap: break-word;
+	white-space: pre-wrap;
 }
 
 .post-content img {
-  display: block;
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-top: 8px;
+	display: block;
+	width: 100%;
+	max-height: 400px;
+	object-fit: cover;
+	border-radius: 8px;
+	margin-top: 8px;
 }
 
 .pop-up-container {
-  display: flex;
-  border: 1px solid black;
-  border-radius: 20px;
-  padding: 8px;
-  gap: 4px;
-  justify-content: space-between;
-  width: 80%;
-  align-self: flex-start;
-  align-items: center;
+	display: flex;
+	border: 1px solid black;
+	border-radius: 20px;
+	padding: 8px;
+	gap: 4px;
+	justify-content: space-between;
+	width: 80%;
+	align-self: center;
+	align-items: center;
 }
 .prompt {
-  color: grey;
+	color: grey;
 }
 
 .highlighted-post {
@@ -205,6 +205,6 @@ button:hover {
 }
 
 @keyframes highlightFade {
-    0%   { box-shadow: 0 0 0 3px brown; }
+    0%   { box-shadow: 0 0 0 3px #3498db; }
     100% { box-shadow: none; }
 }
