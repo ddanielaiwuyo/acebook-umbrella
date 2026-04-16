@@ -29,3 +29,20 @@ jobs:
         run: | 
           npm install 
           npm test
+
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Installing Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+      - name: Running frontend tests
+        working-directory: ./frontend
+        env:
+          VITE_BACKEND_URL: http://localhost:3000
+        run: |
+          npm install
+          npm test

@@ -14,7 +14,7 @@ export function HomePage() {
 
       <div className="welcome-content">
         <h3>Connect. Share. Discover.</h3>
-        <h1>Welcome to Acebook</h1>
+        <h1 data-testid="welcome-header">Welcome to Acebook</h1>
 
         <p className="tagline">
           Connect with friends, share moments, and build meaningful connections.
