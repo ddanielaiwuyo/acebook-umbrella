@@ -22,6 +22,17 @@ global.localStorage = {
 // Mock fetch function
 createFetchMock(vi).enableMocks();
 
+
+// To prevent stderr messages from application obscuring test results
+beforeEach(() => {
+	vi.spyOn(console, 'error').mockImplementation(() => { })
+})
+
+afterEach(() => {
+	vi.restoreAllMocks()
+})
+
+
 describe("friends service", () => {
 	describe("addFriend", () => {
 		test("includes a token with its request", async () => {
