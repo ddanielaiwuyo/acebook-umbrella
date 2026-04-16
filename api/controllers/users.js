@@ -10,19 +10,21 @@ async function create(req, res) {
 		const { firstName, lastName, email, password } = req.body;
 		if (!email || !password) {
 			res.status(400).json({
+				ok: false,
 				message: "Invalid credentials, must contain email and password ",
 			});
 			return;
 		}
 
 		if (!emailIsValid(email)) {
-			res.status(400).json({ message: "Invalid email address" });
+			res.status(400).json({ ok: false, message: "Invalid email address" });
 			return;
 		}
 
 		if (password.trim().length < PASSWORD_MIN_LENGTH) {
 			console.log("password too short", password, password.length);
 			res.status(400).json({
+				ok: false,
 				message: `Password too short, must be at least ${PASSWORD_MIN_LENGTH}`,
 			});
 			return;
@@ -34,7 +36,7 @@ async function create(req, res) {
 			console.log(`User with email: ${email} already exists `);
 			res
 				.status(409)
-				.json({ message: `User with email ${email} already exists` });
+				.json({ ok: false, message: `User with email ${email} already exists` });
 			return;
 		}
 
@@ -45,10 +47,11 @@ async function create(req, res) {
 			email: email,
 			password: hashedPassword,
 		});
+
 		await newUser.save();
 
 		console.info(`User with email: ${email} saved successfully`);
-		res.status(201).json({ message: "Created successfully" });
+		res.status(201).json({ ok: true, message: "Created successfully" });
 	} catch (err) {
 		console.error("Could not create user");
 		console.error(err);

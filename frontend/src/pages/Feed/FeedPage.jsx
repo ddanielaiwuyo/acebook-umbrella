@@ -39,14 +39,14 @@ export function FeedPage() {
     return;
   }
 
-  if (error.trim().length > 5) {
+  if (error && error.length > 5) {
     return <h2 className="error">{error}</h2>;
   }
   return (
     <>
       <h2>Latest Posts</h2>
       <p className="error">{error}</p>
-      <Feed posts={posts} />
+      <Feed posts={posts}  />
     </>
   );
 }
