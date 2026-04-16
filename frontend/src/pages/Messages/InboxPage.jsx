@@ -67,7 +67,7 @@ export function InboxPage() {
 			{conversations?.length === 0 && (
 				<div className="inbox-empty">
 					<div className="inbox-empty-illustration">
-						<FaCommentDots className="inbox-empty-icon" />cx
+						<FaCommentDots className="inbox-empty-icon" />
 						<div className="inbox-empty-bubbles">
 							<span className="bubble bubble-1"></span>
 							<span className="bubble bubble-2"></span>
