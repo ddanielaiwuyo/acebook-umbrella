@@ -1,0 +1,10 @@
+.request-btns {
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 778px) {
+  .request-btns {
+    gap: 1px;
+  }
+}

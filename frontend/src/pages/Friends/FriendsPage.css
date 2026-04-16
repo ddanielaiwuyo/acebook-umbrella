@@ -1,130 +1,131 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
 
 #friends-page {
-	padding: 20px;
-	display: flex;
-	flex-direction: column;
-	gap: 40px;
-	height: 100vh;
-	width: 100%;
-	box-sizing: border-box;
-	font-family: "Montserrat", sans-serif;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 
 #friend-requests {
-	min-height: 80px;
-	height: auto;
-	max-height: 450px;
-	position: sticky;
-	top: 0;
-	background-color: white;
-	z-index: 1;
-	padding: 20px;
-	margin: 0 16px 0 16px;
-	border-radius: 8px;
-	border: 1px solid #e4e6eb;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
+  min-height: 80px;
+  height: auto;
+  max-height: 450px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1;
+  padding: 20px;
+  margin: 0 16px 0 16px;
+  border-radius: 8px;
+  border: 2px solid rgb(208, 168, 158);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 #other-users-and-friends {
-	display: flex;
-	gap: 40px;
-	padding: 15px;
+  display: flex;
+  gap: 40px;
+  padding: 15px;
 }
 
 .scrollable-section {
-	max-height: 500px;
-	overflow-y: auto;
-	padding-right: 12px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 12px;
 }
 
 #other-users,
 #your-friends {
-	min-height: 150px;
-	height: auto;
-	max-height: 400px;
-	flex: 1;
-	border: 1px solid #e4e6eb;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-	border-radius: 8px;
-	padding: 16px;
-	background-color: white;
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
+  min-height: 150px;
+  height: auto;
+  max-height: 400px;
+  flex: 1;
+  border: 1px solid #e4e6eb;
+  box-shadow: 0 7px 3px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgb(208, 168, 158);
+  border-radius: 8px;
+  padding: 16px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 #friend-requests h1,
 #other-users h1,
 #your-friends h1 {
-	font-size: 30px;
-	font-weight: 700;
-	color: #1c1e21;
-	margin: 0 0 16px 0;
-	padding: 16px;
-	border-bottom: 1px solid #e4e6eb;
-	flex-shrink: 0;
+  font-size: 30px;
+  font-weight: 700;
+  color: #1c1e21;
+  margin: 0 0 16px 0;
+  padding: 16px;
+  border-bottom: 1px solid rgb(252, 238, 238);
+  flex-shrink: 0;
 }
 
 .removefriend-btn button,
 .addfriend-btn button,
 .requestfriend-btns button {
-	font-size: 13px;
-	padding: 6px 12px;
+  font-size: 13px;
+  padding: 6px 12px;
 }
 
 .empty-section {
-	text-align: center;
-	color: #65676b;
-	font-size: 16px;
-	padding: 20px 0;
+  text-align: center;
+  color: #65676b;
+  font-size: 16px;
+  padding: 20px 0;
 }
 
 @media (max-width: 778px) {
-	#friends-page {
-		padding: 10px;
-		gap: 20px;
-	}
+  #friends-page {
+    padding: 10px;
+    gap: 20px;
+  }
 
-	#friend-requests,
-	#other-users,
-	#your-friends {
-		max-height: 35vh;
-		min-height: 60px;
-	}
+  #friend-requests,
+  #other-users,
+  #your-friends {
+    max-height: 35vh;
+    min-height: 60px;
+  }
 
-	#other-users-and-friends {
-		flex-direction: column;
-	}
+  #other-users-and-friends {
+    flex-direction: column;
+  }
 
-	#friend-requests h1,
-	#other-users h1,
-	#your-friends h1 {
-		font-size: 20px;
-	}
+  #friend-requests h1,
+  #other-users h1,
+  #your-friends h1 {
+    font-size: 20px;
+  }
 
-	.removefriend-btn button,
-	.addfriend-btn button,
-	.requestfriend-btns button {
-		font-size: 8px;
-		padding: 4px 8px;
-	}
+  .removefriend-btn button,
+  .addfriend-btn button,
+  .requestfriend-btns button {
+    font-size: 8px;
+    padding: 4px 8px;
+  }
 }
 
 @media (max-width: 612px) {
-	#friend-requests h1,
-	#other-users h1,
-	#your-friends h1 {
-		font-size: 16px;
-	}
+  #friend-requests h1,
+  #other-users h1,
+  #your-friends h1 {
+    font-size: 16px;
+  }
 
-		#friend-requests,
-	#other-users,
-	#your-friends {
-		max-height: 30vh;
-		min-height: 60px;
-	}
+  #friend-requests,
+  #other-users,
+  #your-friends {
+    max-height: 30vh;
+    min-height: 60px;
+  }
 }

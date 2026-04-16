@@ -18,11 +18,6 @@ export function FeedPage() {
     if (loggedIn) {
       getPosts(token)
         .then((data) => {
-          // console.log(data);
-          console.log(
-            "POST ORDER:",
-            data.posts.map((p) => p.createdAt),
-          );
           if (data.ok) {
             setPosts(data.posts);
             setError("");

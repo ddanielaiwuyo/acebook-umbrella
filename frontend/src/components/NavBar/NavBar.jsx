@@ -1,12 +1,22 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import { FaHome, FaUserFriends, FaBell, FaUserCircle, FaSignOutAlt, FaUser } from "react-icons/fa";
+import {
+	FaHome,
+	FaUserFriends,
+	FaBell,
+	FaUserCircle,
+	FaSignOutAlt,
+	FaUser,
+	FaRegComment,
+} from "react-icons/fa";
 import "./NavBar.css";
 
 function NavBar() {
 	const navigate = useNavigate();
 	const location = useLocation();
-	const isLoggedIn = localStorage.getItem("token") !== null && localStorage.getItem("token") !== "undefined";
+	const isLoggedIn =
+		localStorage.getItem("token") !== null &&
+		localStorage.getItem("token") !== "undefined";
 	const [query, setQuery] = useState("");
 	const [results, setResults] = useState([]);
 	const [profileOpen, setProfileOpen] = useState(false);
@@ -27,9 +37,12 @@ function NavBar() {
 		}
 
 		try {
-			const response = await fetch(`http://localhost:3000/users/search?query=${value}`, {
-				headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
-			});
+			const response = await fetch(
+				`http://localhost:3000/users/search?query=${value}`,
+				{
+					headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+				},
+			);
 			const data = await response.json();
 			setResults(data.users ?? []);
 		} catch (err) {
@@ -54,8 +67,6 @@ function NavBar() {
 
 	const isActive = (path) => location.pathname === path;
 
-	// NOTE Added # to the Link< to{/notifications#} /> to avoid navigating to the error page, 
-	// after Notifications Page is ready, remove the #
 	return (
 		<nav className="navbar">
 			<div className="navbar-left">
@@ -73,15 +84,16 @@ function NavBar() {
 					/>
 					{results.length > 0 && (
 						<div className="search-dropdown">
-							{results.map(user => (
+							{results.map((user) => (
 								<Link
 									key={user._id}
 									to={`/profile/${user._id}`}
 									onClick={handleResultClick}
-									className="search-result"
-								>
+									className="search-result">
 									<FaUserCircle className="search-result-icon" />
-									{user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : user.email}
+									{user.firstName && user.lastName
+										? `${user.firstName} ${user.lastName}`
+										: user.email}
 								</Link>
 							))}
 						</div>
@@ -91,14 +103,29 @@ function NavBar() {
 
 			{isLoggedIn && (
 				<div className="navbar-centre">
-					<Link to="/feed" className={`nav-icon-link ${isActive("/feed") ? "active" : ""}`} title="Feed">
+					<Link
+						to="/feed"
+						className={`nav-icon-link ${isActive("/feed") ? "active" : ""}`}
+						title="Feed">
 						<FaHome />
 					</Link>
-					<Link to="/friends" className={`nav-icon-link ${isActive("/friends") ? "active" : ""}`} title="Friends">
+					<Link
+						to="/friends"
+						className={`nav-icon-link ${isActive("/friends") ? "active" : ""}`}
+						title="Friends">
 						<FaUserFriends />
 					</Link>
-					<Link to="/notifications#" className={`nav-icon-link ${isActive("/notifications#") ? "active" : ""}`} title="Notifications">
+					<Link
+						to="/notifications"
+						className={`nav-icon-link ${isActive("/notifications") ? "active" : ""}`}
+						title="Notifications">
 						<FaBell />
+					</Link>
+					<Link
+						to="/messages"
+						className={`nav-icon-link ${isActive("/messages") ? "active" : ""}`}
+						title="Messages">
+						<FaRegComment />
 					</Link>
 				</div>
 			)}
@@ -107,9 +134,8 @@ function NavBar() {
 					<div className="profile-menu-wrapper" ref={profileRef}>
 						<button
 							className="navbar-avatar-btn"
-							onClick={() => setProfileOpen(prev => !prev)}
-							title="Account"
-						>
+							onClick={() => setProfileOpen((prev) => !prev)}
+							title="Account">
 							<FaUserCircle />
 						</button>
 
@@ -118,16 +144,14 @@ function NavBar() {
 								<Link
 									to="/profile"
 									className="profile-dropdown-item"
-									onClick={() => setProfileOpen(false)}
-								>
+									onClick={() => setProfileOpen(false)}>
 									<FaUser className="dropdown-icon" />
 									Profile
 								</Link>
 								<div className="profile-dropdown-divider" />
 								<button
 									className="profile-dropdown-item logout"
-									onClick={handleLogout}
-								>
+									onClick={handleLogout}>
 									<FaSignOutAlt className="dropdown-icon" />
 									Sign out
 								</button>
@@ -136,8 +160,12 @@ function NavBar() {
 					</div>
 				) : (
 					<>
-						<Link to="/login" className="navbar-auth-link">Log in</Link>
-						<Link to="/signup" className="navbar-auth-link primary">Sign up</Link>
+						<Link to="/login" className="navbar-auth-link">
+							Log in
+						</Link>
+						<Link to="/signup" className="navbar-auth-link primary">
+							Sign up
+						</Link>
 					</>
 				)}
 			</div>

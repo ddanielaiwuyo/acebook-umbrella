@@ -1,8 +1,8 @@
 // import { useState } from "react";
-import { FriendProfile } from "../../components/FriendProfile";
-import { RequestButtons } from "../../components/RequestButtons";
-import { AddButton } from "../../components/AddButton";
-import { RemoveButton } from "../../components/RemoveFriendButton";
+import { FriendProfile } from "../../components/Friends/FriendProfile";
+import { RequestButtons } from "../../components/Friends/RequestButtons";
+import { AddButton } from "../../components/Friends/AddButton";
+import { RemoveButton } from "../../components/Friends/RemoveFriendButton";
 import {
   getFriends,
   getOtherUsers,
@@ -127,79 +127,82 @@ export function FriendsPage() {
     }
   }
 
-	return (
-		<div id="friends-page">
-			<div id="friend-requests">
-				<h1>Friend requests</h1>
-				<div className="scrollable-section">
-					{friendRequests?.map((friendRequest) => {
-						return (
-							<FriendProfile
-								key={friendRequest.user._id}
-								profileImg={`https://api.dicebear.com/7.x/adventurer/svg?seed=${friendRequest.user._id}&size=60`}
-								profileName={`${friendRequest.user.firstName} ${friendRequest.user.lastName}`}>
-								<div className="requestfriend-btns">
-									<RequestButtons
-										senderId={friendRequest.user._id}
-										onAction={handleRequestAction}
-									/>
-								</div>
-							</FriendProfile>
-						);
-					})}
-					{friendRequests?.length === 0 && (
-						<p className="empty-section">No friend requests right now</p>
-					)}
-				</div>
-			</div>
-			<div id="other-users-and-friends">
-				<div id="other-users">
-					<h1>People You may know</h1>
-					<div className="scrollable-section">
-						{otherUsers?.map((otherUser) => {
-							return (
-								<FriendProfile
-									key={otherUser._id}
-									profileImg={`https://api.dicebear.com/7.x/adventurer/svg?seed=${otherUser._id}&size=60`}
-									profileName={`${otherUser.firstName} ${otherUser.lastName}`}>
-									<div className="addfriend-btn">
-										<AddButton
-											userId={otherUser._id}
-											onAdd={handleAddFriends}
-										/>
-									</div>
-								</FriendProfile>
-							);
-						})}
-						{otherUsers?.length === 0 && (
-							<p className="empty-section">No suggestions right now</p>
-						)}
-					</div>
-				</div>
-				<div id="your-friends" className="scrollable-section">
-					<h1>Your friends</h1>
-					<div className="scrollable-section">
-						{friends?.map((friend) => {
-							return (
-								<FriendProfile
-									key={friend._id}
-									profileImg={`https://api.dicebear.com/7.x/adventurer/svg?seed=${friend._id}&size=60`}
-									profileName={`${friend.firstName} ${friend.lastName}`}>
-									<div className="removefriend-btn">
-										<RemoveButton
-											userId={friend._id}
-											onRemove={handleRemoveFriends}
-										/>
-									</div>
-								</FriendProfile>
-							);
-						})}
-						{friends?.length === 0 && (
-							<p className="empty-section">No friends yet</p>
-						)}
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+  return (
+    <div id="friends-page">
+      <div id="friend-requests">
+        <h1>Friend requests</h1>
+        <div className="scrollable-section">
+          {friendRequests?.map((friendRequest) => {
+            return (
+              <FriendProfile
+                key={friendRequest.user._id}
+                profileImg={`https://api.dicebear.com/7.x/adventurer/svg?seed=${friendRequest.user._id}&size=60`}
+                profileName={`${friendRequest.user.firstName} ${friendRequest.user.lastName}`}
+              >
+                <div className="requestfriend-btns">
+                  <RequestButtons
+                    senderId={friendRequest.user._id}
+                    onAction={handleRequestAction}
+                  />
+                </div>
+              </FriendProfile>
+            );
+          })}
+          {friendRequests?.length === 0 && (
+            <p className="empty-section">No friend requests right now</p>
+          )}
+        </div>
+      </div>
+      <div id="other-users-and-friends">
+        <div id="other-users">
+          <h1>People You may know</h1>
+          <div className="scrollable-section">
+            {otherUsers?.map((otherUser) => {
+              return (
+                <FriendProfile
+                  key={otherUser._id}
+                  profileImg={`https://api.dicebear.com/7.x/adventurer/svg?seed=${otherUser._id}&size=60`}
+                  profileName={`${otherUser.firstName} ${otherUser.lastName}`}
+                >
+                  <div className="addfriend-btn">
+                    <AddButton
+                      userId={otherUser._id}
+                      onAdd={handleAddFriends}
+                    />
+                  </div>
+                </FriendProfile>
+              );
+            })}
+            {otherUsers?.length === 0 && (
+              <p className="empty-section">No suggestions right now</p>
+            )}
+          </div>
+        </div>
+        <div id="your-friends" className="scrollable-section">
+          <h1>Your friends</h1>
+          <div className="scrollable-section">
+            {friends?.map((friend) => {
+              return (
+                <FriendProfile
+                  key={friend._id}
+                  profileImg={`https://api.dicebear.com/7.x/adventurer/svg?seed=${friend._id}&size=60`}
+                  profileName={`${friend.firstName} ${friend.lastName}`}
+                >
+                  <div className="removefriend-btn">
+                    <RemoveButton
+                      userId={friend._id}
+                      onRemove={handleRemoveFriends}
+                    />
+                  </div>
+                </FriendProfile>
+              );
+            })}
+            {friends?.length === 0 && (
+              <p className="empty-section">No friends yet</p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

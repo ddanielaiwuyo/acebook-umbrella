@@ -2,69 +2,96 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
-import { useNavigate } from "react-router-dom";
-import { login } from "../../src/services/authentication";
-
+import "@testing-library/jest-dom"; //requires installation (npm install @testing-library/jest-dom)
 import { LoginPage } from "../../src/pages/Login/LoginPage";
 
-// Mocking React Router's useNavigate function
-vi.mock("react-router-dom", () => {
-  const navigateMock = vi.fn();
-  const useNavigateMock = () => navigateMock; // Create a mock function for useNavigate
-  return { useNavigate: useNavigateMock };
-});
+const mockNavigate = vi.fn();
+const mockLogin = vi.fn();
 
-// Mocking the login service
-vi.mock("../../src/services/authentication", () => {
-  const loginMock = vi.fn();
-  return { login: loginMock };
-});
+// Mock router
+vi.mock("react-router-dom", () => ({
+  useNavigate: () => mockNavigate,
+  useLocation: () => ({ state: {} }),
+  Link: ({ children }) => children, // simple mock
+}));
 
-// Reusable function for filling out login form
+// Mock auth service
+vi.mock("../../src/services/authentication", () => ({
+  login: (...args) => mockLogin(...args),
+}));
+
+// Helper
 async function completeLoginForm() {
   const user = userEvent.setup();
 
-  const emailInputEl = screen.getByLabelText("Email:");
-  const passwordInputEl = screen.getByLabelText("Password:");
-  const submitButtonEl = screen.getByRole("submit-button");
+  const inputs = screen.getAllByRole("textbox");
 
-  await user.type(emailInputEl, "test@email.com");
-  await user.type(passwordInputEl, "1234");
-  await user.click(submitButtonEl);
+  await user.type(inputs[0], "test@email.com");
+  await user.type(screen.getByPlaceholderText(/password/i), "1234");
+
+  await user.click(screen.getByRole("button", { name: /log in/i }));
 }
 
 describe("Login Page", () => {
   beforeEach(() => {
-    vi.resetAllMocks();
+    vi.clearAllMocks();
+    // mock localStorage
+    global.localStorage = {
+      setItem: vi.fn(),
+    };
   });
 
   test("allows a user to login", async () => {
+    mockLogin.mockResolvedValue({
+      token: "abc",
+      message: "Success",
+      status: 200,
+    });
+
     render(<LoginPage />);
 
     await completeLoginForm();
 
-    expect(login).toHaveBeenCalledWith("test@email.com", "1234");
+    expect(mockLogin).toHaveBeenCalledWith("test@email.com", "1234");
   });
 
-  test("navigates to /posts on successful login", async () => {
-    render(<LoginPage />);
+  test("navigates to /feed on successful login", async () => {
+    mockLogin.mockResolvedValue({
+      token: "abc",
+      message: "Success",
+      status: 200,
+    });
 
-    login.mockResolvedValue("secrettoken123");
-    const navigateMock = useNavigate();
+    render(<LoginPage />);
 
     await completeLoginForm();
 
-    expect(navigateMock).toHaveBeenCalledWith("/posts");
+    expect(mockNavigate).toHaveBeenCalledWith("/feed", {
+      replace: true,
+    });
   });
 
-  test("navigates to /login on unsuccessful login", async () => {
-    render(<LoginPage />);
+  test("shows error if status is not 200", async () => {
+    mockLogin.mockResolvedValue({
+      token: null,
+      message: "Invalid credentials",
+      status: 401,
+    });
 
-    login.mockRejectedValue(new Error("Error logging in"));
-    const navigateMock = useNavigate();
+    render(<LoginPage />);
 
     await completeLoginForm();
 
-    expect(navigateMock).toHaveBeenCalledWith("/login");
+    expect(screen.getByText(/invalid credentials/i)).toBeInTheDocument();
+  });
+
+  test("navigates to /login on error", async () => {
+    mockLogin.mockRejectedValue(new Error("fail"));
+
+    render(<LoginPage />);
+
+    await completeLoginForm();
+
+    expect(mockNavigate).toHaveBeenCalledWith("/login");
   });
 });

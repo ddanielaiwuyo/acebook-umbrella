@@ -1,4 +1,4 @@
-import { addFriend } from "../services/friends";
+import { addFriend } from "../../services/friends";
 
 export function AddButton(props) {
   async function handleClick() {
