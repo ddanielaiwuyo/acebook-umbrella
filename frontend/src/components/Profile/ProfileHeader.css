@@ -50,6 +50,6 @@
 }
 
 
-.edit-profile-btn:hover {
+.edit-profile-btn:hover, .message-btn:hover {
   background-color: #ff0000;
 }
