@@ -1,8 +1,8 @@
 // import { useState } from "react";
-import { FriendProfile } from "../../components/FriendProfile";
-import { RequestButtons } from "../../components/RequestButtons";
-import { AddButton } from "../../components/AddButton";
-import { RemoveButton } from "../../components/RemoveFriendButton";
+import { FriendProfile } from "../../components/Friends/FriendProfile";
+import { RequestButtons } from "../../components/Friends/RequestButtons";
+import { AddButton } from "../../components/Friends/AddButton";
+import { RemoveButton } from "../../components/Friends/RemoveFriendButton";
 import {
   getFriends,
   getOtherUsers,
