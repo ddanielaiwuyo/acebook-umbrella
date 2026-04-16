@@ -1,178 +1,194 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
-import {
-  FaHome,
-  FaUserFriends,
-  FaBell,
-  FaUserCircle,
-  FaSignOutAlt,
-  FaUser,
-} from "react-icons/fa";
+import { FaHome, FaUserFriends, FaBell, FaUserCircle, FaSignOutAlt, FaUser } from "react-icons/fa";
 import "./NavBar.css";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 function NavBar() {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const isLoggedIn =
-    localStorage.getItem("token") !== null &&
-    localStorage.getItem("token") !== "undefined";
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
-  const [profileOpen, setProfileOpen] = useState(false);
-  const profileRef = useRef(null);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const isLoggedIn = localStorage.getItem("token") !== null && localStorage.getItem("token") !== "undefined";
+    const [query, setQuery] = useState("");
+    const [results, setResults] = useState([]);
+    const [profileOpen, setProfileOpen] = useState(false);
+    const [unreadCount, setUnreadCount] = useState(0);
+    const profileRef = useRef(null);
 
-  function handleLogout() {
-    localStorage.removeItem("token");
-    navigate("/");
-  }
+    const fetchUnreadCount = async () => {
+        try {
+            const response = await fetch(`${BACKEND_URL}/notifications/unread-count`, {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+            });
+            const data = await response.json();
+            setUnreadCount(data.count ?? 0);
+        } catch (err) {
+            console.error("Failed to fetch unread count", err);
+        }
+    };
 
-  async function handleSearch(e) {
-    const value = e.target.value;
-    setQuery(value);
+    // Poll for unread count every 30 seconds
+    useEffect(() => {
+        if (!isLoggedIn) return;
+        fetchUnreadCount();
+        const interval = setInterval(fetchUnreadCount, 30000);
+        return () => clearInterval(interval);
+    }, [isLoggedIn]);
 
-    if (value.trim() === "") {
-      setResults([]);
-      return;
+    function handleLogout() {
+        localStorage.removeItem("token");
+        navigate("/");
     }
 
-    try {
-      const response = await fetch(
-        `http://localhost:3000/users/search?query=${value}`,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        },
-      );
-      const data = await response.json();
-      setResults(data.users ?? []);
-    } catch (err) {
-      setResults([]);
+    async function handleSearch(e) {
+        const value = e.target.value;
+        setQuery(value);
+
+        if (value.trim() === "") {
+            setResults([]);
+            return;
+        }
+
+        try {
+            const response = await fetch(`${BACKEND_URL}/users/search?query=${value}`, {
+                headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+            });
+            const data = await response.json();
+            setResults(data.users ?? []);
+        } catch (err) {
+            setResults([]);
+        }
     }
-  }
 
-  function handleResultClick() {
-    setQuery("");
-    setResults([]);
-  }
-
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (profileRef.current && !profileRef.current.contains(e.target)) {
-        setProfileOpen(false);
-      }
+    function handleResultClick() {
+        setQuery("");
+        setResults([]);
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
-  const isActive = (path) => location.pathname === path;
+    function handleNotificationsClick() {
+        fetchUnreadCount();
+        navigate("/notifications");
+    }
 
-  // NOTE Added # to the Link< to{/notifications#} /> to avoid navigating to the error page,
-  // after Notifications Page is ready, remove the #
-  return (
-    <nav className="navbar">
-      <div className="navbar-left">
-        <Link to={isLoggedIn ? "/feed" : "/"} className="navbar-logo-link">
-          <div className="navbar-logo">A</div>
-        </Link>
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if (profileRef.current && !profileRef.current.contains(e.target)) {
+                setProfileOpen(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
 
-        <div className="navbar-search-wrapper">
-          <input
-            className="navbar-search"
-            type="text"
-            placeholder="Search Acebook"
-            value={query}
-            onChange={handleSearch}
-          />
-          {results.length > 0 && (
-            <div className="search-dropdown">
-              {results.map((user) => (
-                <Link
-                  key={user._id}
-                  to={`/profile/${user._id}`}
-                  onClick={handleResultClick}
-                  className="search-result"
-                >
-                  <FaUserCircle className="search-result-icon" />
-                  {user.firstName && user.lastName
-                    ? `${user.firstName} ${user.lastName}`
-                    : user.email}
+    const isActive = (path) => location.pathname === path;
+
+    return (
+        <nav className="navbar">
+            <div className="navbar-left">
+                <Link to={isLoggedIn ? "/feed" : "/"} className="navbar-logo-link">
+                    <div className="navbar-logo">A</div>
                 </Link>
-              ))}
+
+                <div className="navbar-search-wrapper">
+                    <input
+                        className="navbar-search"
+                        type="text"
+                        placeholder="Search Acebook"
+                        value={query}
+                        onChange={handleSearch}
+                    />
+                    {results.length > 0 && (
+                        <div className="search-dropdown">
+                            {results.map(user => (
+                                <Link
+                                    key={user._id}
+                                    to={`/profile/${user._id}`}
+                                    onClick={handleResultClick}
+                                    className="search-result"
+                                >
+                                    <FaUserCircle className="search-result-icon" />
+                                    {user.firstName && user.lastName
+                                        ? `${user.firstName} ${user.lastName}`
+                                        : user.email}
+                                </Link>
+                            ))}
+                        </div>
+                    )}
+                </div>
             </div>
-          )}
-        </div>
-      </div>
 
-      {isLoggedIn && (
-        <div className="navbar-centre">
-          <Link
-            to="/feed"
-            className={`nav-icon-link ${isActive("/feed") ? "active" : ""}`}
-            title="Feed"
-          >
-            <FaHome />
-          </Link>
-          <Link
-            to="/friends"
-            className={`nav-icon-link ${isActive("/friends") ? "active" : ""}`}
-            title="Friends"
-          >
-            <FaUserFriends />
-          </Link>
-          <Link
-            to="/notifications#"
-            className={`nav-icon-link ${isActive("/notifications#") ? "active" : ""}`}
-            title="Notifications"
-          >
-            <FaBell />
-          </Link>
-        </div>
-      )}
-      <div className="navbar-right">
-        {isLoggedIn ? (
-          <div className="profile-menu-wrapper" ref={profileRef}>
-            <button
-              className="navbar-avatar-btn"
-              onClick={() => setProfileOpen((prev) => !prev)}
-              title="Account"
-            >
-              <FaUserCircle />
-            </button>
-
-            {profileOpen && (
-              <div className="profile-dropdown">
-                <Link
-                  to="/profile"
-                  className="profile-dropdown-item"
-                  onClick={() => setProfileOpen(false)}
-                >
-                  <FaUser className="dropdown-icon" />
-                  Profile
-                </Link>
-                <div className="profile-dropdown-divider" />
-                <button
-                  className="profile-dropdown-item logout"
-                  onClick={handleLogout}
-                >
-                  <FaSignOutAlt className="dropdown-icon" />
-                  Sign out
-                </button>
-              </div>
+            {isLoggedIn && (
+                <div className="navbar-centre">
+                    <Link
+                        to="/feed"
+                        className={`nav-icon-link ${isActive("/feed") ? "active" : ""}`}
+                        title="Feed"
+                    >
+                        <FaHome />
+                    </Link>
+                    <Link
+                        to="/friends"
+                        className={`nav-icon-link ${isActive("/friends") ? "active" : ""}`}
+                        title="Friends"
+                    >
+                        <FaUserFriends />
+                    </Link>
+                    <button
+                        className={`nav-icon-link ${isActive("/notifications") ? "active" : ""}`}
+                        onClick={handleNotificationsClick}
+                        title="Notifications"
+                    >
+                        <div className="nav-icon-wrapper">
+                            <FaBell />
+                            {unreadCount > 0 && (
+                                <span className="notification-badge">{unreadCount}</span>
+                            )}
+                        </div>
+                    </button>
+                </div>
             )}
-          </div>
-        ) : (
-          <>
-            <Link to="/login" className="navbar-auth-link">
-              Log in
-            </Link>
-            <Link to="/signup" className="navbar-auth-link primary">
-              Sign up
-            </Link>
-          </>
-        )}
-      </div>
-    </nav>
-  );
+
+            <div className="navbar-right">
+                {isLoggedIn ? (
+                    <div className="profile-menu-wrapper" ref={profileRef}>
+                        <button
+                            className="navbar-avatar-btn"
+                            onClick={() => setProfileOpen(prev => !prev)}
+                            title="Account"
+                        >
+                            <FaUserCircle />
+                        </button>
+
+                        {profileOpen && (
+                            <div className="profile-dropdown">
+                                <Link
+                                    to="/profile"
+                                    className="profile-dropdown-item"
+                                    onClick={() => setProfileOpen(false)}
+                                >
+                                    <FaUser className="dropdown-icon" />
+                                    Profile
+                                </Link>
+                                <div className="profile-dropdown-divider" />
+                                <button
+                                    className="profile-dropdown-item logout"
+                                    onClick={handleLogout}
+                                >
+                                    <FaSignOutAlt className="dropdown-icon" />
+                                    Sign out
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <>
+                        <Link to="/login" className="navbar-auth-link">Log in</Link>
+                        <Link to="/signup" className="navbar-auth-link primary">Sign up</Link>
+                    </>
+                )}
+            </div>
+        </nav>
+    );
 }
 
 export default NavBar;

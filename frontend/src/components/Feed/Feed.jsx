@@ -193,7 +193,9 @@ function Feed(props) {
       <div className="feed-container">
         <PopUp />
         {posts.map((post) => (
-          <PostCard key={post._id} post={post} post_id={post._id} />
+          <div id ={post._id} key={post._id}>
+            <PostCard key={post._id} post={post} post_id={post._id} />
+          </div>
         ))}
       </div>
     </>

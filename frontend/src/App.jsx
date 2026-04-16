@@ -16,6 +16,7 @@ import { CreatePostPage } from "./pages/Post/CreatePostPage.jsx";
 
 import NavBar from "./components/NavBar/NavBar";
 import Layout from "./components/NavBar/Layout";
+import { NotificationsPage } from "./pages/Notifications/NotificationsPage.jsx";
 
 // docs: https://reactrouter.com/en/main/start/overview
 const router = createBrowserRouter([
@@ -80,6 +81,14 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <FriendsPage />
+      </Layout>
+    ),
+  },
+  {
+    path: "/notifications",
+    element: (
+      <Layout>
+        <NotificationsPage />
       </Layout>
     ),
   },
